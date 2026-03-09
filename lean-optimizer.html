@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lean-optimizer — Todd Espy</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="layout">
+        <main class="content">
+            <div class="banner">
+                <h1>lean-optimizer</h1>
+                <p>Parallel Optimization Engine for Algorithmic Trading</p>
+            </div>
+
+            <p>
+                Detailed project write-up coming soon. For an overview, see the
+                <a class="contact-link" href="index.html">main portfolio page</a>.
+            </p>
+
+        </main>
+
+        <aside class="sidebar" id="contact">
+            <h2>Contact</h2>
+            <p>Feel free to reach out:</p>
+            <ul style="list-style: none; padding-left: 0;">
+                <li><strong>Email:</strong> <span id="email"></span></li>
+                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/"
+                        target="_blank">linkedin.com/in/toddespy</a></li>
+            </ul>
+
+            <h2 style="margin-top: 2rem;">Certifications</h2>
+            <div class="cert-badges">
+                <img src="images/aws-certified-ai-practitioner-early-adopter600x600.png"
+                    alt="AWS Certified AI Practitioner" width="180" />
+                <img src="images/aws-certified-machine-learning-engineer-associate-e.png"
+                    alt="AWS Certified ML Engineer" width="180" />
+                <img src="images/aws-certified-cloud-practitioner.png" alt="AWS Certified Cloud Practitioner"
+                    width="160" />
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        (function () {
+            var u = "todd.espy", d = "gmail.com", e = u + "@" + d;
+            var s = document.getElementById("email");
+            if (s) s.innerHTML = '<a href="mailto:' + e + '">' + e + '</a>';
+        })();
+    </script>
+</body>
+
+</html>

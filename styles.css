@@ -50,11 +50,6 @@ h2 {
     box-sizing: border-box;
 }
 
-#training-time-chart {
-    width: 100% !important;
-    height: 500px;
-}
-
 @media (max-width: 1024px) {
     .layout {
         flex-direction: column;
@@ -93,9 +88,9 @@ p {
     margin-bottom: 2rem;
 }
 
-.private {
-    font-style: italic;
-    color: #b00;
+.repo-note {
+    font-size: 0.95rem;
+    color: #555;
 }
 
 .contact-link {

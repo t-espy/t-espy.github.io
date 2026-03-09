@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todd Espy Projects</title>
+    <title>Todd Espy — Quantitative Infrastructure & AI Engineering</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -13,100 +13,74 @@
         <main class="content">
             <div class="banner">
                 <h1>Todd Espy</h1>
-                <p>Selected Work in AI & Machine Learning</p>
+                <p>Quantitative Infrastructure & AI Engineering</p>
             </div>
 
             <p>
-                I'm honing my expertise in AI engineering, with a focus on building practical, high-performance systems
-                for real-world applications. The projects featured here highlight that trajectory — from GPU-accelerated
-                pipelines for financial
-                forecasting and model experimentation, to full-stack Retrieval-Augmented Generation systems integrating
-                Amazon Bedrock, vector search, and modern web tooling. Each reflects a commitment to production-quality
-                engineering, scalable architecture, and meaningful end-to-end integration.
-            </p>
-            <p>
-                Each project reflects a balance of clean architecture, computational efficiency, and real-world
-                applicability.
+                Quantitative Infrastructure Engineer and AI/ML practitioner with 30+ years of software development
+                experience. M.S. Electrical Engineering, Duke University. Early career research in fuzzy logic and
+                genetic algorithms published at IEEE and NASA conferences — the same class of algorithms now
+                running in production in my systematic trading infrastructure. After a decade building
+                mission-critical enterprise systems at Verizon, I returned full-time in 2025 to quantitative
+                research and AI engineering: designing and implementing a production-grade parallel optimization
+                engine for QuantConnect LEAN, building full-stack AI applications on AWS Bedrock, and shipping a
+                live SaaS product from zero. I build systems that are robust, well-tested, and honest about what
+                they can and can't do.
             </p>
 
             <div class="project">
                 <h2>
-                    <a class="contact-link" href="stock-price-predictor.html">Stock Price Predictor – GPU-Accelerated
-                        Forecasting Pipeline</a>
+                    <a class="contact-link" href="lean-optimizer.html">lean-optimizer — Parallel Optimization Engine
+                        for Algorithmic Trading</a>
                 </h2>
                 <p>
-                    Built as a high-performance experimentation and inference platform, the Stock Price Predictor
-                    enables end-to-end development of predictive models using 5-minute OHLCV data.
-                    It supports streamlined data ingestion, feature engineering, and GPU-accelerated training, with
-                    ensemble logic that merges both XGBoost and LSTM outputs.
+                    Production-grade parallel optimization engine for QuantConnect LEAN algorithmic trading
+                    strategies. Implements compile-once C# caching, a warm Docker worker pool with persistent .NET
+                    harness processes, and a multi-stage search pipeline: Latin Hypercube Sampling &rarr;
+                    Bayesian/Optuna TPE &rarr; incremental Genetic Algorithm &rarr; Local Grid &rarr; Walk-Forward
+                    validation. Reduces per-evaluation time from ~3.1s to ~0.8s (2.83x speedup); estimated
+                    42,000x faster than exhaustive search over the full parameter space. 141 passing tests.
+                    Running on a DGX Spark (20-core, 128GB) with a custom LEAN Docker image. The GA stage uses the
+                    same class of algorithm developed at Togai InfraLogic in 1991 — now running in production 34
+                    years later.
                 </p>
-                <p>
-                    The platform integrates CuPy and TensorFlow for optimized resource use, and applies vectorbt-based
-                    backtesting to evaluate generated signals.
-                    Grid search runs on GPU to fine-tune hyperparameters with maximum efficiency.
-                </p>
-                <p>
-                    This workflow demonstrates modular code structure,
-                    performance-aware design, automated logging, and the integration of inference outputs into trading
-                    signal logic.
-                </p>
-                <!--<p class="private">🔒 This project is in a private repository. <a
-                        href="https://www.linkedin.com/in/toddespy/" target="_blank">Message me on LinkedIn for
-                        access.</a></p>-->
-            </div>
-            <div class="project">
-                <h2>
-                    <a class="contact-link" href="rag-project.html">RAG Project</a>
-                </h2>
-                <p>
-                    A full-stack Retrieval-Augmented Generation demo featuring Python + FastAPI for the API, React +
-                    Vite for the UI, Amazon Bedrock (Titan models) for embeddings and text generation, and FAISS for
-                    local vector search. The repository includes scripts to extract and chunk documents placed in
-                    datastore/ and to build the FAISS index using Bedrock embeddings. You can run the stack locally with
-                    Docker or deploy it to AWS via manual scripts or a CloudFormation template, with the deployed UI
-                    calling the Bedrock-backed API to answer questions. </p>
-            </div>
-            <div class="project">
-                <h2>
-                    <a class="contact-link" href="ai_healthcare_doc_app.html">Real-Time Clinical Documentation
-                        Assistant</a>
-                </h2>
-                <p>
-                    This standalone web application streamlines the clinical documentation process by integrating
-                    cutting-edge speech recognition and AI technologies. It captures real-time transcriptions of
-                    clinical encounters using Deepgram’s cloud-based automatic speech recognition (ASR) engine. The raw
-                    transcriptions are then transformed into clear, human-readable clinical reports via
-                    ChatGPT, ensuring accuracy and HIPAA-aligned language. Finally, the structured data is
-                    seamlessly inserted into an EHR database using Better EHR, enabling efficient, end-to-end
-                    documentation workflows for healthcare providers. </p>
-                <p>I provided technical leadership and mentoring on this project.</p>
+                <p class="repo-note"><em>Repository going public soon.</em></p>
             </div>
 
             <div class="project">
-                <h2>
-                    <a class="contact-link" href="continue_prompt_engineer.html">Continue Prompt Engineer</a>
-                </h2>
+                <h2>Route Forge — SaaS Multi-Stop Route Planning</h2>
                 <p>
-                    Continue Prompt Engineer is a Python-based tool that analyzes Git repositories to extract coding
-                    patterns and generate multi-shot prompt templates compatible with the Continue VS Code extension.
-                    Designed to preserve project-specific styles and idioms, it automatically clones a given repository,
-                    inspects Python code, and outputs structured prompt templates with consistent examples. These
-                    templates help enhance developer productivity by aligning AI completions with real-world codebases.
-                    The tool supports custom output locations, verbose logging, and integrates with spaCy for natural
-                    language analysis.
+                    End-to-end design, development, and deployment of Route Forge
+                    (<a class="contact-link" href="https://www.route-forge.com" target="_blank">route-forge.com</a>),
+                    a SaaS web application for multi-stop route planning. Built on Next.js, React, Tailwind,
+                    Supabase PostgreSQL, and Stripe, hosted on Vercel with automated GitHub Actions CI/CD.
+                    Architected as a three-app system — planner, storefront, and API/auth — using the Backend for
+                    Frontend (BFF) pattern with cross-subdomain authentication for security and scalability.
+                    Demonstrates full production deployment from zero: payments, auth, SEO setup, and go-to-market
+                    infrastructure.
                 </p>
             </div>
-            <footer>
-                <p>More projects and demos coming soon.</p>
-            </footer>
+
+            <div class="project">
+                <h2>Local Agentic Code Generation — LangGraph + Docker Model Runner</h2>
+                <p>
+                    Local agentic code generation pipeline built on LangGraph, orchestrating DeepSeek R1 and Qwen3
+                    Coder Next served via Docker Model Runner on a DGX Spark (20-core, 128GB). The pipeline uses
+                    DeepSeek R1 for reasoning and planning, Qwen3 Coder for code generation, and LangGraph for
+                    agent orchestration — producing deployable web application scaffolding end-to-end without
+                    external API dependencies. Demonstrates GPU-accelerated local LLM inference as a development
+                    force multiplier: the same hardware stack and containerization approach powers the
+                    lean-optimizer parallel optimization engine.
+                </p>
+            </div>
+
         </main>
 
-        <!--<div class="sidebar" id="sidebar-container"></div>-->
         <aside class="sidebar" id="contact">
             <h2>Contact</h2>
             <p>Feel free to reach out:</p>
             <ul style="list-style: none; padding-left: 0;">
-                <li><strong>Email:</strong> <span id="email">[loading...]</span></li>
+                <li><strong>Email:</strong> <span id="email"></span></li>
                 <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/"
                         target="_blank">linkedin.com/in/toddespy</a></li>
             </ul>
@@ -121,11 +95,15 @@
                     width="160" />
             </div>
         </aside>
-
-
     </div>
 
-    <script src="scripts.js"></script>
+    <script>
+        (function () {
+            var u = "todd.espy", d = "gmail.com", e = u + "@" + d;
+            var s = document.getElementById("email");
+            if (s) s.innerHTML = '<a href="mailto:' + e + '">' + e + '</a>';
+        })();
+    </script>
 </body>
 
 </html>
