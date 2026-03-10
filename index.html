@@ -61,20 +61,23 @@
                     Architected as a three-app system — planner, storefront, and API/auth — using the Backend for
                     Frontend (BFF) pattern with cross-subdomain authentication for security and scalability.
                     Demonstrates full production deployment from zero: payments, auth, SEO setup, and go-to-market
-                    infrastructure.
+                    infrastructure. Built using AI coding assistants throughout — GitHub Copilot, Amazon Q Developer,
+                    and OpenAI Codex — demonstrating AI-accelerated full-stack development from architecture through
+                    deployment.
                 </p>
             </div>
 
             <div class="project">
                 <h2>Local Agentic Code Generation — LangGraph + Docker Model Runner</h2>
                 <p>
-                    Local agentic code generation pipeline built on LangGraph, orchestrating DeepSeek R1 and Qwen3
-                    Coder Next served via Docker Model Runner on a DGX Spark (20-core, 128GB). The pipeline uses
-                    DeepSeek R1 for reasoning and planning, Qwen3 Coder for code generation, and LangGraph for
-                    agent orchestration — producing deployable web application scaffolding end-to-end without
-                    external API dependencies. Demonstrates GPU-accelerated local LLM inference as a development
-                    force multiplier: the same hardware stack and containerization approach powers the
-                    lean-optimizer parallel optimization engine.
+                    Local agentic code generation pipeline that addresses a known failure mode of AI coding tools:
+                    context window breakdown on complex, multi-file tasks. Rather than prompting a single model with an
+                    ever-growing context, the pipeline uses LangGraph to decompose development work into discrete,
+                    bounded agent nodes — DeepSeek R1 for reasoning and planning, Qwen3 Coder Next for code generation —
+                    with an automated build-fix-regenerate loop that recovers from generation failures without human
+                    intervention. Served via Docker Model Runner on a DGX Spark (20-core, 128GB), with no external API
+                    dependencies. Produces deployable Next.js App Router projects from a natural-language spec. The same
+                    hardware stack and containerization approach powers the lean-optimizer parallel optimization engine.
                 </p>
             </div>
 
