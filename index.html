@@ -35,16 +35,18 @@
                 </h2>
                 <p>
                     Production-grade parallel optimization engine for QuantConnect LEAN algorithmic trading
-                    strategies. Implements compile-once C# caching, a warm Docker worker pool with persistent .NET
-                    harness processes, and a multi-stage search pipeline: Latin Hypercube Sampling &rarr;
-                    Bayesian/Optuna TPE &rarr; incremental Genetic Algorithm &rarr; Local Grid &rarr; Walk-Forward
-                    validation. Reduces per-evaluation time from ~3.1s to ~0.8s (2.83x speedup); estimated
-                    42,000x faster than exhaustive search over the full parameter space. 141 passing tests.
-                    Running on a DGX Spark (20-core, 128GB) with a custom LEAN Docker image. The GA stage uses the
-                    same class of algorithm developed at Togai InfraLogic in 1991 — now running in production 34
-                    years later.
+                    strategies. Compiles a C# strategy once, spins up a pool of warm Docker containers with
+                    persistent .NET harness processes, and searches the parameter space via a multi-stage pipeline
+                    (LHS &rarr; Bayesian/Optuna TPE &rarr; incremental Genetic Algorithm &rarr; Local Grid).
+                    Measured head-to-head against LEAN CLI's built-in grid search on a 679,140-point parameter
+                    space: the GA converged in 611 evaluations (1,112x fewer) at 1.8x higher throughput per
+                    worker — completing in under 3 minutes what grid search would take ~88 hours. 153 passing
+                    tests. Running on a DGX Spark (20-core, 128GB). The GA stage uses the same class of algorithm
+                    developed at Togai InfraLogic.
                 </p>
-                <p class="repo-note"><em>Repository going public soon.</em></p>
+                <p class="repo-note">
+                    <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank">github.com/t-espy/lean-optimizer-public</a>
+                </p>
             </div>
 
             <div class="project">

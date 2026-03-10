@@ -17,9 +17,126 @@
             </div>
 
             <p>
-                Detailed project write-up coming soon. For an overview, see the
-                <a class="contact-link" href="index.html">main portfolio page</a>.
+                <a class="contact-link" href="index.html">&larr; Back to portfolio</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank">View on GitHub</a>
             </p>
+
+            <h2>Overview</h2>
+            <p>
+                lean-optimizer is a production-grade parallel optimization engine for
+                <a class="contact-link" href="https://www.quantconnect.com/lean" target="_blank">QuantConnect LEAN</a>
+                algorithmic trading strategies. It compiles a C# strategy once, spins up a pool of warm Docker
+                containers with persistent .NET harness processes, and searches the parameter space via a
+                configurable multi-stage pipeline.
+            </p>
+
+            <h2>Measured Performance</h2>
+            <p>
+                Head-to-head comparison against LEAN CLI's built-in <code>lean optimize --strategy "grid search"</code>
+                on a 7-parameter space (679,140 grid points), 15 parallel workers, same strategy, same data:
+            </p>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>LEAN CLI Grid Search</th>
+                    <th>lean-optimizer (GA)</th>
+                </tr>
+                <tr>
+                    <td><strong>Search strategy</strong></td>
+                    <td>Exhaustive grid (all 679,140 points)</td>
+                    <td>Incremental genetic algorithm</td>
+                </tr>
+                <tr>
+                    <td><strong>Evaluations</strong></td>
+                    <td>679,140</td>
+                    <td>611</td>
+                </tr>
+                <tr>
+                    <td><strong>Throughput (15 workers)</strong></td>
+                    <td>2.15 evals/sec</td>
+                    <td>3.82 evals/sec</td>
+                </tr>
+                <tr>
+                    <td><strong>Wall time</strong></td>
+                    <td>~88 hours (extrapolated from 1,772 evals in 825s)</td>
+                    <td>2 min 40 sec</td>
+                </tr>
+                <tr>
+                    <td><strong>Search efficiency</strong></td>
+                    <td>1x</td>
+                    <td>1,112x fewer evaluations</td>
+                </tr>
+            </table>
+            <p>
+                The two advantages are independent and compound: the persistent harness yields ~1.8x higher
+                throughput per worker, and the GA's directed search converges in 1,112x fewer evaluations.
+                Combined: what takes LEAN CLI's grid search an estimated ~88 hours completes in under 3 minutes.
+            </p>
+
+            <h2>Architecture</h2>
+            <p>The pipeline searches the parameter space via a configurable sequence of stages:</p>
+            <ol>
+                <li><strong>Latin Hypercube Sampling (LHS)</strong> — space-filling initial exploration</li>
+                <li><strong>Bayesian Optimization (Optuna TPE)</strong> — directed search with batch ask/tell</li>
+                <li><strong>Incremental Genetic Algorithm</strong> — population-based refinement with worst
+                    replacement and early stopping</li>
+                <li><strong>Local Grid Search</strong> — Chebyshev-distance neighborhood refinement around top
+                    candidates</li>
+            </ol>
+            <p>
+                Stages can be enabled or disabled independently. The GA can run standalone or seeded from
+                prior stages. All stages share a common <code>BatchRunner</code> interface and deduplication cache.
+            </p>
+
+            <h2>Persistent Harness</h2>
+            <p>
+                The core innovation is the persistent .NET harness. Each Docker container runs a long-lived
+                <code>dotnet /Harness/LeanHarness.dll</code> process that reads JSON requests from stdin, runs
+                backtests with full LEAN state reset between runs, and writes JSON responses to stdout. This
+                eliminates per-eval .NET startup, assembly loading, and LEAN engine initialization overhead.
+            </p>
+            <p>
+                The harness uses LEAN's regression test reset sequence:
+                <code>Config.Reset()</code>, <code>Composer.Instance.Reset()</code>,
+                <code>SymbolCache.Clear()</code> — the same sequence LEAN's own test suite uses to run
+                multiple backtests in one process. <code>Console.Out</code> is redirected to stderr so LEAN's
+                trace/debug output doesn't corrupt the JSON protocol.
+            </p>
+
+            <h2>Key Design Decisions</h2>
+            <ul>
+                <li><strong>Compile-once</strong> — Strategy source files are content-hashed. If the hash matches
+                    a cached build, compilation is skipped. Never compile per-evaluation.</li>
+                <li><strong>Warm workers</strong> — <code>WorkerPool</code> starts N long-lived Docker containers
+                    at init. Workers are acquired/released via a blocking queue — never create/destroy containers
+                    per backtest.</li>
+                <li><strong>Incremental GA</strong> — Uses worst-replacement, not generational. Children only enter
+                    the population if they beat the current worst member. Best fitness is monotonically
+                    non-decreasing.</li>
+                <li><strong>Checkpoint/resume</strong> — Atomic JSON checkpoints after each stage. Resume with
+                    <code>--resume</code> to skip completed stages and reuse their results.</li>
+                <li><strong>Injected stages</strong> — All stages implement <code>OptimizationStage</code> and
+                    receive a <code>BatchRunner</code> callable. Stages never touch Docker, workers, or
+                    compilation directly.</li>
+            </ul>
+
+            <h2>Background</h2>
+            <p>
+                The genetic algorithm at the core of lean-optimizer is the same class of algorithm I developed at
+                Togai InfraLogic in the early 1990s, where my research in fuzzy logic and genetic algorithms was
+                published at IEEE and NASA conferences. Three decades later, the same optimization principles run
+                in production against live market data.
+            </p>
+
+            <h2>Tech Stack</h2>
+            <ul>
+                <li>Python 3.12, Optuna, NumPy, SciPy</li>
+                <li>C# / .NET 9.0 (LEAN engine, persistent harness)</li>
+                <li>Docker (warm container pool, read-only data mounts)</li>
+                <li>NVIDIA DGX Spark (20-core, 128GB)</li>
+                <li>153 passing tests (pytest)</li>
+            </ul>
 
         </main>
 
