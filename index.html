@@ -35,9 +35,11 @@
                 </h2>
                 <p>
                     Production-grade parallel optimization engine for QuantConnect LEAN algorithmic trading
-                    strategies. Compiles a C# strategy once, spins up a pool of warm Docker containers with
-                    persistent .NET harness processes, and searches the parameter space via a multi-stage pipeline
-                    (LHS &rarr; Bayesian/Optuna TPE &rarr; incremental Genetic Algorithm &rarr; Local Grid).
+                    strategies. Compiles a C# strategy once, spins up a pool of warm Docker containers with persistent
+                    .NET harness
+                    processes, and searches the parameter space using an incremental genetic algorithm. Additional
+                    pipeline stages (LHS,
+                    Bayesian/Optuna TPE, Local Grid) are available and configurable.
                     Measured head-to-head against LEAN CLI's built-in grid search on a 679,140-point parameter
                     space: the GA converged in 611 evaluations (1,112x fewer) at 1.8x higher throughput per
                     worker — completing in under 3 minutes what grid search would take ~88 hours. 153 passing
@@ -45,7 +47,8 @@
                     developed at Togai InfraLogic.
                 </p>
                 <p class="repo-note">
-                    <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank">github.com/t-espy/lean-optimizer-public</a>
+                    <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public"
+                        target="_blank">github.com/t-espy/lean-optimizer-public</a>
                 </p>
             </div>
 
