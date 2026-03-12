@@ -129,3 +129,47 @@ table td {
     max-width: 100%;
     height: auto;
 }
+
+/* ── Stat row ──────────────────────────────────────────── */
+.stats {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 0.75rem 0;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 0.72rem;
+    color: #777;
+    letter-spacing: 0.05em;
+}
+
+/* ── Tags ──────────────────────────────────────────────── */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.75rem 0;
+}
+
+.tag {
+    background: #f0f0f0;
+    color: #555;
+    font-size: 0.72rem;
+    font-family: 'Courier New', monospace;
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}

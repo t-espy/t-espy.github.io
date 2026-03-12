@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todd Espy — Quantitative Infrastructure & AI Engineering</title>
+    <title>Todd Espy — Senior Software Architect & AI/ML Engineer</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -13,19 +13,28 @@
         <main class="content">
             <div class="banner">
                 <h1>Todd Espy</h1>
-                <p>Quantitative Infrastructure & AI Engineering</p>
+                <p>Senior Software Architect & AI/ML Engineer</p>
             </div>
 
             <p>
-                Quantitative Infrastructure Engineer and AI/ML practitioner with 20+ years of software development
-                experience. M.S. Electrical Engineering, Duke University. Early career research in fuzzy logic and
-                genetic algorithms published at IEEE and NASA conferences. After a decade building mission-critical
-                enterprise systems at Verizon, I returned full-time in 2025 to quantitative research and AI engineering:
-                designing and implementing a production-grade parallel optimization engine for QuantConnect LEAN,
-                building a multi-agent code generation pipeline on LangGraph with locally-hosted LLMs, and shipping a
-                live SaaS product from zero. I build systems that are robust, well-tested, and honest about what they
-                can and can't do.
+                Senior architect with deep production roots in enterprise systems — contact center
+                platforms, distributed middleware, large-scale integrations. Started in AI before
+                the hardware existed to support it: fuzzy logic and genetic algorithms, published
+                at IEEE and NASA conferences. Picked up a couple of patents in speech recognition
+                along the way. Currently focused on algorithmic trading infrastructure and
+                multi-agent AI pipelines, both running on local hardware.
             </p>
+            <p>
+                Twelve years at Verizon as technical lead on large-scale, mission-critical systems:
+                IVR consolidation for Kaiser Permanente (100K calls/hour), Dialogflow CX chatbot
+                deployments for state government agencies, mobile SDK development, and enterprise
+                tooling adopted organization-wide.
+            </p>
+            <p>
+                M.S. Electrical Engineering, Duke University.
+            </p>
+
+            <h2>Open Source Projects</h2>
 
             <div class="project">
                 <h2>
@@ -33,17 +42,40 @@
                         for Algorithmic Trading</a>
                 </h2>
                 <p>
-                    Production-grade parallel optimization engine for QuantConnect LEAN algorithmic trading
-                    strategies. Compiles a C# strategy once, spins up a pool of warm Docker containers with persistent
-                    .NET harness
-                    processes, and searches the parameter space using an incremental genetic algorithm. Additional
-                    pipeline stages (LHS,
+                    Production-grade parallel optimization engine for QuantConnect LEAN algorithmic
+                    trading strategies. Compiles a C# strategy once, spins up a pool of warm Docker
+                    containers with persistent .NET harness processes, and searches the parameter space
+                    using an incremental genetic algorithm. Additional pipeline stages (LHS,
                     Bayesian/Optuna TPE, Local Grid) are available and configurable.
-                    Measured head-to-head against LEAN CLI's built-in grid search on a 679,140-point parameter
-                    space: the GA converged in 611 evaluations (1,112x fewer) at 1.8x higher throughput per
-                    worker — completing in under 3 minutes what grid search would take ~88 hours. 177 passing
-                    tests. Running on a DGX Spark (20-core, 128GB).
                 </p>
+                <p>
+                    Measured head-to-head against LEAN CLI's built-in grid search on a 679,140-point
+                    parameter space: the GA converged in 611 evaluations at 1.8x higher throughput per
+                    worker — completing in under 3 minutes what grid search would take ~88 hours.
+                </p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-value">1,112x</span>
+                        <span class="stat-label">fewer evaluations</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">&lt;3 min</span>
+                        <span class="stat-label">vs ~88 hr grid search</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">177</span>
+                        <span class="stat-label">passing tests</span>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">C# / .NET</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Optuna</span>
+                    <span class="tag">Genetic Algorithm</span>
+                    <span class="tag">QuantConnect LEAN</span>
+                    <span class="tag">DGX Spark</span>
+                </div>
                 <p class="repo-note">
                     <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public"
                         target="_blank">github.com/t-espy/lean-optimizer-public</a>
@@ -56,17 +88,26 @@
                         target="_blank">langgraph-factory — Multi-Agent Code Generation with Local LLMs</a>
                 </h2>
                 <p>
-                    Reference implementation of a multi-agent code generation pipeline using LangGraph and
-                    locally-hosted LLMs via Docker Model Runner. Demonstrates how to decompose complex, multi-file
-                    code generation into discrete agent nodes — a foreman model (gpt-oss 20B) handles architecture
-                    planning and code review, while a coder model (Qwen3 Coder 80B) handles file generation and
-                    fixes — with an automated build-fix-regenerate loop that recovers from failures without human
-                    intervention. Includes mechanical error recovery (deterministic fixes without LLM calls), spin
-                    detection, and failure-informed regeneration. Produces buildable Next.js App Router projects
-                    from a natural-language spec. Runs entirely on local hardware (DGX Spark, 128GB unified RAM)
-                    with no external API dependencies. Includes a cost and data privacy analysis comparing
-                    local inference vs. per-token cloud APIs.
+                    Multi-agent code generation pipeline using LangGraph and locally-hosted LLMs via
+                    Docker Model Runner. A foreman model (gpt-oss 20B) handles architecture planning
+                    and code review; a coder model (Qwen3 Coder 80B) handles file generation and fixes.
+                    Automated build-fix-regenerate loop recovers from failures without human intervention.
+                    Produces buildable Next.js App Router projects from a natural-language spec. Runs
+                    entirely on local hardware with no external API dependencies.
                 </p>
+                <p>
+                    Includes a cost and data privacy analysis comparing local inference vs. per-token
+                    cloud APIs — practical reference material for teams evaluating on-premise LLM deployment.
+                </p>
+                <div class="tags">
+                    <span class="tag">LangGraph</span>
+                    <span class="tag">Docker Model Runner</span>
+                    <span class="tag">gpt-oss 20B</span>
+                    <span class="tag">Qwen3 Coder 80B</span>
+                    <span class="tag">Next.js</span>
+                    <span class="tag">Local LLM</span>
+                    <span class="tag">Multi-Agent</span>
+                </div>
                 <p class="repo-note">
                     <a class="contact-link" href="https://github.com/t-espy/langgraph-factory"
                         target="_blank">github.com/t-espy/langgraph-factory</a>
@@ -74,37 +115,51 @@
             </div>
 
             <div class="project">
-                <h2>Route Forge — SaaS Multi-Stop Route Planning</h2>
+                <h2>
+                    <a class="contact-link" href="https://www.route-forge.com" target="_blank">Route Forge — SaaS
+                        Multi-Stop Route Planning</a>
+                </h2>
                 <p>
-                    End-to-end design, development, and deployment of Route Forge
-                    (<a class="contact-link" href="https://www.route-forge.com" target="_blank">route-forge.com</a>),
-                    a SaaS web application for multi-stop route planning. Built on Next.js, React, Tailwind,
-                    Supabase PostgreSQL, and Stripe, hosted on Vercel with automated GitHub Actions CI/CD.
-                    Architected as a three-app system — planner, storefront, and API/auth — using the Backend for
-                    Frontend (BFF) pattern with cross-subdomain authentication for security and scalability.
-                    Demonstrates full production deployment from zero: payments, auth, SEO setup, and go-to-market
-                    infrastructure. Built using AI coding assistants throughout — GitHub Copilot, Amazon Q Developer,
-                    and OpenAI Codex — demonstrating AI-accelerated full-stack development from architecture through
-                    deployment.
+                    End-to-end SaaS web application for multi-stop route planning. Built on Next.js,
+                    React, Tailwind, Supabase PostgreSQL, and Stripe, hosted on Vercel with automated
+                    GitHub Actions CI/CD. Architected as a three-app system using the BFF pattern with
+                    cross-subdomain authentication. Demonstrates full production deployment from zero:
+                    payments, auth, SEO, and go-to-market infrastructure.
                 </p>
+                <div class="tags">
+                    <span class="tag">Next.js</span>
+                    <span class="tag">React</span>
+                    <span class="tag">Supabase</span>
+                    <span class="tag">Stripe</span>
+                    <span class="tag">Vercel</span>
+                    <span class="tag">GitHub Actions</span>
+                </div>
             </div>
 
-
-            <h2>Publications & Patents</h2>
+            <h2>Publications &amp; Patents</h2>
             <ul>
                 <li>
-                    <a class="contact-link" href="https://ntrs.nasa.gov/citations/19930013020" target="_blank">Fuzzy
-                        Logic and Genetic Algorithms for Adaptive Process Control</a> — NASA Conference Publication
+                    <a class="contact-link" href="https://ieeexplore.ieee.org/document/258768"
+                        target="_blank">Fuzzy Logic Control of AC Induction Motors</a>
+                    — IEEE International Conference on Fuzzy Systems, 1992 (co-author)
+                </li>
+                <li>
+                    <a class="contact-link" href="https://ntrs.nasa.gov/citations/19930013020"
+                        target="_blank">Application of Genetic Algorithms to Tuning Fuzzy Control Systems</a>
+                    — NASA SOAR Conference &amp; Third International Workshop on Neural Networks and Fuzzy Logic, 1992
+                    (co-author)
                 </li>
                 <li>
                     <a class="contact-link" href="https://patents.google.com/patent/US8639505" target="_blank">US
-                        8,639,505</a> — Method and systems for simplifying copying and pasting transcriptions generated
-                    from a dictation based speech-to-text system (SandCherry/nVoq)
+                        8,639,505</a>
+                    — Method and systems for simplifying copying and pasting transcriptions from a dictation-based
+                    speech-to-text system (co-inventor)
                 </li>
                 <li>
                     <a class="contact-link" href="https://patents.google.com/patent/US8639512" target="_blank">US
-                        8,639,512</a> — Method and systems for measuring user performance with speech-to-text conversion
-                    for dictation systems (SandCherry/nVoq)
+                        8,639,512</a>
+                    — Method and systems for measuring user performance with speech-to-text conversion for dictation
+                    systems (co-inventor)
                 </li>
             </ul>
 
@@ -121,13 +176,13 @@
 
             <h2 style="margin-top: 2rem;">Certifications</h2>
             <div class="cert-badges">
-                <a href="https://www.credly.com/badges/ef070385-9cd4-4596-8289-5796bf4c61e4/public_url" target="_blank">
-                    <img src="images/aws-certified-ai-practitioner-early-adopter600x600.png"
-                        alt="AWS Certified AI Practitioner" width="180" />
-                </a>
                 <a href="https://www.credly.com/badges/0aa4f899-e591-4644-96ed-97cb862f94ab/public_url" target="_blank">
                     <img src="images/aws-certified-machine-learning-engineer-associate-e.png"
                         alt="AWS Certified ML Engineer" width="180" />
+                </a>
+                <a href="https://www.credly.com/badges/ef070385-9cd4-4596-8289-5796bf4c61e4/public_url" target="_blank">
+                    <img src="images/aws-certified-ai-practitioner-early-adopter600x600.png"
+                        alt="AWS Certified AI Practitioner" width="180" />
                 </a>
                 <a href="https://www.credly.com/badges/6e18930b-2286-423c-a406-49bb93acd98d/public_url" target="_blank">
                     <img src="images/aws-certified-cloud-practitioner.png" alt="AWS Certified Cloud Practitioner"
