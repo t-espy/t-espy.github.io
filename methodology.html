@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todd Espy — A Discipline for Building Software with AI</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-faint: #767676;
+    --paper: #fbfaf7;
+    --line: #e2ded4;
+    --rule: #c9c3b4;
+    --accent: #7a4a2b;        /* burnt sienna — restrained, single accent */
+    --accent-wash: #f1e8df;
+    --code-bg: #f3f0e8;
+    --mono: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    --sans: "Helvetica Neue", Arial, system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 26px 120px;
+  }
+
+  /* ---- masthead ---- */
+  header.top {
+    border-bottom: 1px solid var(--line);
+    padding: 38px 0 30px;
+    margin-bottom: 54px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+  }
+  .standfirst {
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 38em;
+  }
+  .backlink {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    text-decoration: none;
+    margin-top: 26px;
+  }
+  .backlink:hover { color: var(--accent); }
+  .backlink::before { content: "\2190  "; }
+
+  /* ---- section structure ---- */
+  section { margin: 0 0 52px; }
+
+  h2 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 22px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  h2 .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 21px;
+    margin: 36px 0 10px;
+    letter-spacing: -0.005em;
+  }
+
+  p { margin: 0 0 20px; }
+  p:last-child { margin-bottom: 0; }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  a:hover { border-bottom-color: var(--accent); }
+
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 14.5px;
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* ---- the signature element: the routing table ---- */
+  .routing {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 28px 0;
+    font-family: var(--sans);
+  }
+  .routing-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .routing-head > div {
+    padding: 13px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .routing-head > div:first-child { border-right: 1px solid #333; }
+  .routing-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line);
+  }
+  .routing-row > div {
+    padding: 13px 18px;
+    font-size: 14.5px;
+    font-family: var(--serif);
+    line-height: 1.5;
+  }
+  .routing-row > div:first-child {
+    border-right: 1px solid var(--line);
+    background: #fff;
+  }
+  .routing-row > div:last-child { background: var(--accent-wash); }
+
+  /* ---- the incident callout ---- */
+  .incident {
+    border-left: 3px solid var(--accent);
+    background: #fff;
+    padding: 22px 26px;
+    margin: 28px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .incident .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  .incident p { font-size: 16.5px; line-height: 1.6; color: var(--ink-soft); }
+  .incident p:last-child { margin-bottom: 0; }
+
+  /* ---- pull principles ---- */
+  .principle {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 24px 0;
+    margin: 30px 0;
+    font-style: italic;
+  }
+
+  /* ---- artifact list ---- */
+  .artifacts { list-style: none; padding: 0; margin: 24px 0 0; }
+  .artifacts li {
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 18px;
+  }
+  .artifacts li:last-child { border-bottom: 1px solid var(--line); }
+  .artifacts .name {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: var(--accent);
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  .artifacts .desc {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  /* ---- scope / honesty note ---- */
+  .scope {
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-faint);
+    background: transparent;
+    border: 1px dashed var(--rule);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 0;
+  }
+  .scope strong { color: var(--ink-soft); }
+
+  /* ---- footer ---- */
+  footer {
+    border-top: 1px solid var(--line);
+    margin-top: 60px;
+    padding-top: 26px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    line-height: 1.7;
+  }
+  footer a { color: var(--ink-faint); border-bottom-color: var(--line); }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 560px) {
+    body { font-size: 17px; }
+    h1 { font-size: 31px; }
+    .standfirst { font-size: 18px; }
+    .routing-head > div, .routing-row > div { padding: 11px 13px; font-size: 13px; }
+    .artifacts li { grid-template-columns: 1fr; gap: 4px; }
+    .principle { font-size: 19px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    section { animation: rise 0.5s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <p class="eyebrow">Working Notes / Method</p>
+    <h1>A Discipline for Building Software with AI</h1>
+    <p class="standfirst">
+      One of the more interesting questions about AI-assisted development has little to
+      do with how fast you can generate code. It's how you keep a model from confidently
+      building the wrong thing — or shipping buggy code, drifting the architecture,
+      reaching for off-pattern solutions — and how the project remembers why it was built
+      the way it was. These are the conventions I've settled on over a year of shipping
+      with AI assistants as the implementation layer.
+    </p>
+    <a class="backlink" href="https://t-espy.github.io/">Back to portfolio</a>
+  </header>
+
+  <section>
+    <h2><span class="num">00</span> The premise</h2>
+    <p>
+      I architect; an AI assistant implements. That division works well — until it
+      doesn't, and the ways it fails are specific. A model will assert an API behavior
+      from memory that the vendor's docs contradict. It will re-derive a metric that's
+      already stored. It will lose, between one session and the next, the reason a
+      decision was made, and quietly reopen a settled question. None of these are
+      failures of capability. They're failures of <em>process</em> — and process is
+      the part a human still owns.
+    </p>
+    <p>
+      What follows isn't a framework or a tool. It's a small set of conventions, each
+      one a response to a failure I actually hit. They're written down in the repo, not
+      held in my head, because the whole point is that they survive a fresh session with
+      a model that has no memory of the last one.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">01</span> Decisions are immutable; the record is append-only</h2>
+    <p>
+      Durable design decisions live in <strong>Architecture Decision Records</strong> —
+      one numbered file per decision, in Nygard format: context, decision, consequences.
+      The rule that makes them worth keeping is that <em>an accepted ADR is never
+      edited.</em> To change a decision you write a new record that supersedes the old
+      one and flip a single status line. Nothing else changes.
+    </p>
+    <p>
+      The value isn't documentation for its own sake. It's being able to read what was
+      believed <em>at decision time</em> — including the alternatives that were on the
+      table and the reasons they lost. Editing the record to match today's opinion
+      destroys exactly the thing that makes it useful six months later, when a model (or
+      a person) is about to reopen a question that was already settled for reasons no
+      longer visible in the code.
+    </p>
+    <p>
+      A companion convention covers <em>plans</em> — the working notes for a task in
+      flight. Plans are freely editable right up until the first commit that references
+      them lands; after that, changes are appended as dated updates, never edited in
+      place. Every plan closes with an outcome line: shipped with commit hashes,
+      abandoned with a reason, or superseded. That single line is what connects a
+      session's work to the durable record instead of letting it evaporate when the
+      session ends.
+    </p>
+    <p class="scope">
+      A guard against the obvious failure mode: <strong>ADR theater is worse than no
+      ADRs.</strong> The convention names when <em>not</em> to write one — routine
+      choices, bug fixes, style. A record is for decisions that are expensive to
+      reverse, surprising to a future reader, or that rule out an alternative someone
+      would otherwise reach for. When it's unclear, the answer is to ask, not to file.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span> Verify external claims before they harden into documents</h2>
+    <p>
+      This is the rule I'd keep if I could keep only one. <strong>Don't assert how an
+      external system behaves from memory when that claim is about to land in a durable
+      document.</strong> APIs, framework defaults, broker constraints, library behavior
+      — fetch the published source, cite the URL inline, and only then write it down.
+      Plans seed code; ADRs commit the codebase to a direction. A wrong assumption in
+      either one multiplies into wrong implementation.
+    </p>
+    <p>
+      This rule didn't come from theory. It came from getting caught.
+    </p>
+    <div class="incident">
+      <p class="label">The incident this rule is named after</p>
+      <p>
+        A plan to restructure part of the system committed to several confident claims
+        about a third-party framework's behavior — all drawn from the model's memory,
+        none verified. A first verification round found multiple wrong API and behavioral
+        claims, <em>and</em> that the plan had missed the vendor's own primary
+        recommendation for the exact scenario entirely.
+      </p>
+      <p>
+        A second round, checking the alternative the rewrite had dismissed, found that
+        the dismissed option was in fact endorsed by the vendor's staff with code
+        examples — and surfaced a serious operational hazard the earlier drafts hadn't
+        mentioned. The same recall-from-memory failure caught us twice in one session,
+        on one decision: first on the chosen path, then on the rejected one.
+      </p>
+      <p>
+        The decision record for that change now documents both rounds. The cost of
+        skipping verification, written into the rule, scales with how load-bearing and
+        durable the document is.
+      </p>
+    </div>
+    <p class="principle">
+      If I'd put it in a pull-request description for a reviewer, it's a decision record.
+      If I'd whisper it to a colleague onboarding the project, it's a memory note.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span> Three kinds of memory, routed on purpose</h2>
+    <p>
+      An AI-assisted project accumulates knowledge in at least three places, and the
+      failure mode is letting them blur. The cross-project assistant memory drifts
+      toward project facts it shouldn't own; design decisions get stranded in a session
+      log nobody reads again. So the routing is explicit:
+    </p>
+    <div class="routing">
+      <div class="routing-head">
+        <div>Belongs in session / assistant memory</div>
+        <div>Belongs in a decision record</div>
+      </div>
+      <div class="routing-row">
+        <div>How I want to collaborate — commit small, don't restart services without asking</div>
+        <div>Design decisions with consequences for the code itself</div>
+      </div>
+      <div class="routing-row">
+        <div>Who I am and what I'm building, across projects</div>
+        <div>Reasoning about <em>this</em> codebase a future reader will need</div>
+      </div>
+      <div class="routing-row">
+        <div>Handoff context — what's in flight, what just shipped</div>
+        <div>"We chose A over B because…" — including deliberate non-action</div>
+      </div>
+    </div>
+    <p>
+      The repo's hard-rules file carries the terse <em>what</em> — the standing
+      constraints a session must not break. Each rule that has real reasoning behind it
+      points to the decision record that holds the <em>why</em>. The rule is the
+      guardrail; the record is the argument. Keeping them separate means the guardrail
+      stays scannable and the argument stays available, and neither one rots into the
+      other.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span> The artifacts</h2>
+    <p>
+      Concretely, this is what lives in a repo run under these conventions. None of it
+      is exotic — the discipline is in keeping it current and letting it actually
+      constrain the work, session after session.
+    </p>
+    <ul class="artifacts">
+      <li>
+        <span class="name">CLAUDE.md</span>
+        <span class="desc">The hard-rules file a fresh session reads first. Standing constraints, terminology, architecture must-knows, and the gotchas already solved — each load-bearing rule cross-linked to its decision record.</span>
+      </li>
+      <li>
+        <span class="name">docs/adr/</span>
+        <span class="desc">Numbered, immutable decision records in Nygard format, with a maintained index and a meta-record (ADR-0001) defining the convention itself — when to write one, and when not to.</span>
+      </li>
+      <li>
+        <span class="name">plans/</span>
+        <span class="desc">Working notes for substantive tasks. Freely edited until first referenced by a commit, append-only after, each closed with a shipped / abandoned / superseded outcome line.</span>
+      </li>
+      <li>
+        <span class="name">tests/</span>
+        <span class="desc">A non-trivial change isn't done until its tests pass. New behavior and bug fixes land with coverage; bug fixes land with a regression test. The suite is the contract a model's output has to satisfy.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span> Where this came from</h2>
+    <p>
+      These conventions were forged on a real, demanding project: a parallel
+      optimization engine for algorithmic-trading research — a stateful, correctness-
+      sensitive system where a wrong assumption doesn't throw an exception, it silently
+      produces a plausible, wrong number. That's the environment that taught me to write
+      the verification rule down. The conventions described here evolved with the later,
+      private version of that engine, which runs well ahead of the public release; the
+      <a href="https://t-espy.github.io/lean-optimizer.html">public lean-optimizer page</a>
+      covers the open-source mirror, while this page is about the <em>method</em> that
+      built the private system and several projects beside it.
+    </p>
+    <p class="scope">
+      <strong>On scope, plainly:</strong> this is a discipline I've built and validated
+      as a solo architect, with AI assistants as the implementation layer — not a
+      process I've run across a team of human contributors, where immutable records and
+      plan handoffs meet different pressures. I think most of it transfers to a team
+      setting, and the decision-record and verification conventions long predate AI. But
+      I'd rather tell you exactly what's been proven than imply more than it has.
+    </p>
+  </section>
+
+  <footer>
+    Todd Espy — Senior Software Architect &amp; AI/ML Engineer<br>
+    <a href="https://t-espy.github.io/">Portfolio</a> ·
+    <a href="https://github.com/t-espy">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/toddespy/">LinkedIn</a>
+  </footer>
+
+</div>
+</body>
+</html>
