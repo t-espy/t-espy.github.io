@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>lean-optimizer — Todd Espy</title>
+    <title>LEAN Research-to-Live Platform — Todd Espy</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -12,28 +12,36 @@
     <div class="layout">
         <main class="content">
             <div class="banner">
-                <h1>lean-optimizer</h1>
-                <p>Parallel Optimization Engine for Algorithmic Trading</p>
+                <h1>LEAN Research-to-Live Platform</h1>
+                <p>QuantConnect LEAN optimization, validation, orchestration, and live-deployment infrastructure</p>
             </div>
 
             <p>
                 <a class="contact-link" href="index.html">&larr; Back to portfolio</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank">View on GitHub</a>
+                <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank">View public optimizer subset on GitHub</a>
             </p>
 
             <h2>Overview</h2>
             <p>
-                lean-optimizer is a production-grade parallel optimization engine for
-                <a class="contact-link" href="https://www.quantconnect.com/lean" target="_blank">QuantConnect LEAN</a>
-                algorithmic trading strategies. It compiles a C# strategy once, spins up a pool of warm Docker
-                containers with persistent .NET harness processes, and searches the parameter space via a
-                configurable multi-stage pipeline.
+                This work started as a six-month migration of an existing live MultiCharts systematic-trading workflow
+                into a private QuantConnect LEAN research-to-live infrastructure platform. The goal was not simply to
+                port strategy code; it was to build the infrastructure layer around research: repeatable optimization,
+                walk-forward validation, credibility gates, portfolio construction, monitored deployment packages, and
+                controlled live execution.
+            </p>
+            <p>
+                The public <code>lean-optimizer-public</code> repository exposes the optimizer-engine slice of the private
+                platform. It compiles C# strategies once, runs warm Docker containers with persistent .NET harness
+                processes, and searches parameter space via GA, LHS, Bayesian/Optuna TPE, and local-grid stages. The
+                private system adds IBKR data ingestion, WFO/WFAC credibility validation, portfolio construction,
+                prediction bands, parameter-staleness monitoring, live/paper deployment packaging, dashboard approval,
+                and post-trade analytics.
             </p>
 
-            <h2>Measured Performance</h2>
+            <h2>Measured Optimizer Performance</h2>
             <p>
-                Head-to-head comparison against LEAN CLI's built-in <code>lean optimize --strategy "grid search"</code>
+                Public optimizer benchmark against LEAN CLI's built-in <code>lean optimize --strategy "grid search"</code>
                 on a 7-parameter space (679,140 grid points), 15 parallel workers, same strategy, same data:
             </p>
             <table>
@@ -69,73 +77,110 @@
                 </tr>
             </table>
             <p>
-                The two advantages are independent and compound: the persistent harness yields ~1.8x higher
-                throughput per worker, and the GA's directed search converges in 1,112x fewer evaluations.
-                Combined: what takes LEAN CLI's grid search an estimated ~88 hours completes in under 3 minutes.
+                The two advantages are independent and compound: the persistent harness yields ~1.8x higher throughput
+                per worker, and the GA's directed search converges in 1,112x fewer evaluations. Combined: what takes
+                LEAN CLI's grid search an estimated ~88 hours completes in under 3 minutes. I do not claim a measured
+                multiplier for the full private WFO/WFAC research pipeline; that is described qualitatively as a move
+                from manual one-off backtests to an automated walk-forward credibility pipeline.
             </p>
 
-            <h2>Architecture</h2>
-            <p>The pipeline searches the parameter space via a configurable sequence of stages:</p>
-            <ol>
-                <li><strong>Latin Hypercube Sampling (LHS)</strong> — space-filling initial exploration</li>
-                <li><strong>Bayesian Optimization (Optuna TPE)</strong> — directed search with batch ask/tell</li>
-                <li><strong>Incremental Genetic Algorithm</strong> — population-based refinement with worst
-                    replacement and early stopping</li>
-                <li><strong>Local Grid Search</strong> — Chebyshev-distance neighborhood refinement around top
-                    candidates</li>
-            </ol>
+            <h2>Research-to-Live Platform Scope</h2>
             <p>
-                Stages can be enabled or disabled independently. The GA can run standalone or seeded from
-                prior stages. All stages share a common <code>BatchRunner</code> interface and deduplication cache.
+                The private platform spans the full research-to-live loop:
+            </p>
+            <ol>
+                <li>IBKR data ingestion and backfill</li>
+                <li>C# LEAN strategy packaging and Python strategy ports</li>
+                <li>Parameter-space definition through YAML research plans</li>
+                <li>GA, grid, and Bayesian parameter optimization</li>
+                <li>Out-of-sample evaluation on held-out windows</li>
+                <li>WFO/WFAC credibility scoring</li>
+                <li>DEPLOYABLE / MARGINAL / BLOCKED verdicts</li>
+                <li>Portfolio construction and sleeve sizing</li>
+                <li>Forward prediction bands and drawdown kill-lines</li>
+                <li>Parameter-staleness monitoring</li>
+                <li>Dashboard review and manually approved deployment packages</li>
+                <li>Post-trade analytics from the IBKR fill ledger</li>
+            </ol>
+
+            <h2>Validation Discipline</h2>
+            <p>
+                The platform is intentionally conservative. It evaluated 7 strategy families across 257 symbols with
+                WFAC verdicts, running 5,563 test plans and 36,254 WFO windows. Only two strategy families — Hull MA
+                trend following and Compression Breakout — passed the credibility gates and were promoted to live/paper
+                deployment. Rotation and mean-reversion candidates were evaluated and rejected by the validation
+                framework. That rejection behavior is part of the system's purpose: preventing attractive but fragile
+                backtests from reaching live trading.
+            </p>
+            <p>
+                WFAC aggregates walk-forward out-of-sample performance into DEPLOYABLE / MARGINAL / BLOCKED verdicts.
+                Deflated Sharpe Ratio, CPCV, False Strategy Theorem checks, bootstrap confidence intervals, and
+                effective-N corrections are used as diagnostics and guardrails. Live behavior is compared against a
+                pre-committed forward expected distribution rather than against inflated in-regime backtest headlines.
+            </p>
+
+            <h2>Research Orchestrator</h2>
+            <p>
+                The platform includes a service-based Research Orchestrator outside the main web UI. It can run the
+                research chain unattended for days: data pre-flight, symbol download, Discover, parameter-range
+                validation, WFO bake-off, WFO-to-WFAC promotion, composition, and packaged backtest. The orchestrator
+                interleaves IBKR-throttled minute downloads with otherwise-idle research compute, dispatching each
+                symbol's research once its data is ready.
+            </p>
+            <p>
+                A bounded Research Steward runs as a separate LLM-guided layer. A deterministic queue runner keeps
+                backtests running from a curated backlog; the LLM steward periodically reads results, writes findings,
+                and queues the next experiments. Its trust boundary is deliberately narrow: it can read and call a
+                restricted steward CLI, but has no raw shell, write, git, database, or live-trading access.
+            </p>
+            <p>
+                Research orchestration is distinct from live trading. Research can run unattended; real-money deployment
+                remains gated by dashboard review and manual operator approval.
             </p>
 
             <h2>Persistent Harness</h2>
             <p>
-                The core innovation is the persistent .NET harness. Each Docker container runs a long-lived
-                <code>dotnet /Harness/LeanHarness.dll</code> process that reads JSON requests from stdin, runs
-                backtests with full LEAN state reset between runs, and writes JSON responses to stdout. This
-                eliminates per-eval .NET startup, assembly loading, and LEAN engine initialization overhead.
+                The public optimizer's core innovation is the persistent .NET harness. Each Docker container runs a
+                long-lived <code>dotnet /Harness/LeanHarness.dll</code> process that reads JSON requests from stdin, runs
+                backtests with full LEAN state reset between runs, and writes JSON responses to stdout. This eliminates
+                per-eval .NET startup, assembly loading, and LEAN engine initialization overhead.
             </p>
             <p>
                 The harness uses LEAN's regression test reset sequence:
                 <code>Config.Reset()</code>, <code>Composer.Instance.Reset()</code>,
-                <code>SymbolCache.Clear()</code> — the same sequence LEAN's own test suite uses to run
-                multiple backtests in one process. <code>Console.Out</code> is redirected to stderr so LEAN's
-                trace/debug output doesn't corrupt the JSON protocol.
+                <code>SymbolCache.Clear()</code> — the same sequence LEAN's own test suite uses to run multiple
+                backtests in one process. <code>Console.Out</code> is redirected to stderr so LEAN trace/debug output
+                does not corrupt the JSON protocol.
             </p>
 
-            <h2>Key Design Decisions</h2>
+            <h2>Engineering Controls</h2>
             <ul>
-                <li><strong>Compile-once</strong> — Strategy source files are content-hashed. If the hash matches
-                    a cached build, compilation is skipped. Never compile per-evaluation.</li>
-                <li><strong>Warm workers</strong> — <code>WorkerPool</code> starts N long-lived Docker containers
-                    at init. Workers are acquired/released via a blocking queue — never create/destroy containers
-                    per backtest.</li>
-                <li><strong>Incremental GA</strong> — Uses worst-replacement, not generational. Children only enter
-                    the population if they beat the current worst member. Best fitness is monotonically
-                    non-decreasing.</li>
-                <li><strong>Checkpoint/resume</strong> — Atomic JSON checkpoints after each stage. Resume with
-                    <code>--resume</code> to skip completed stages and reuse their results.</li>
-                <li><strong>Injected stages</strong> — All stages implement <code>OptimizationStage</code> and
-                    receive a <code>BatchRunner</code> callable. Stages never touch Docker, workers, or
-                    compilation directly.</li>
+                <li><strong>Tests:</strong> 2,168 private test functions across 165 files; 130 tests in the public optimizer subset.</li>
+                <li><strong>ADRs:</strong> 39 architecture decision records document durable design choices.</li>
+                <li><strong>AI-assisted development:</strong> Claude Code accelerated implementation, but architecture,
+                    validation methodology, deployment controls, tests, and operational ownership remained human-owned.</li>
+                <li><strong>Manual deployment gate:</strong> real-money deployment is never autonomous.</li>
+                <li><strong>Bounded LLM access:</strong> the research steward cannot write code, modify the database, use git,
+                    or access live-trading controls directly.</li>
             </ul>
 
             <h2>Background</h2>
             <p>
-                The genetic algorithm at the core of lean-optimizer is the same class of algorithm I developed at
-                Togai InfraLogic in the early 1990s, where my research in fuzzy logic and genetic algorithms was
-                published at IEEE and NASA conferences. Three decades later, the same optimization principles run
-                in production against live market data.
+                The genetic algorithm at the core of lean-optimizer is the same class of algorithm I developed at Togai
+                InfraLogic in the early 1990s, where my research in fuzzy logic and genetic algorithms was published at
+                IEEE and NASA conferences. Three decades later, the same optimization principles run inside a modern
+                LEAN-based research infrastructure stack.
             </p>
 
             <h2>Tech Stack</h2>
             <ul>
-                <li>Python 3.12, Optuna, NumPy, SciPy</li>
-                <li>C# / .NET 9.0 (LEAN engine, persistent harness)</li>
-                <li>Docker (warm container pool, read-only data mounts)</li>
-                <li>NVIDIA DGX Spark (20-core, 128GB)</li>
-                <li>153 passing tests (pytest)</li>
+                <li>Python 3.12, Optuna, NumPy, SciPy, pandas</li>
+                <li>C# / .NET, QuantConnect LEAN, persistent harness</li>
+                <li>Docker, warm worker pools, read-only data mounts</li>
+                <li>FastAPI, Jinja2, HTMX, Bootstrap</li>
+                <li>IBKR Gateway, QuantConnect live deployment, IBKR fill ledger</li>
+                <li>Systemd user timers, service-based research orchestration</li>
+                <li>NVIDIA DGX Spark: 20-core ARM CPU, GB10 GPU, 128GB unified RAM</li>
             </ul>
 
         </main>
