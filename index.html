@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todd Espy — Senior Software Architect & AI/ML Engineer</title>
+    <title>Todd Espy — Senior AI/ML Infrastructure Engineer & Quant Research Platforms</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -13,58 +13,84 @@
         <main class="content">
             <div class="banner">
                 <h1>Todd Espy</h1>
-                <p>Senior Software Architect & AI/ML Engineer</p>
+                <p>Senior AI/ML Infrastructure Engineer &amp; Quant Research Platforms</p>
             </div>
 
             <p>
-                Senior architect with deep production roots in enterprise systems — contact center
-                platforms, distributed middleware, large-scale integrations. Started in AI before
-                the hardware existed to support it: fuzzy logic and genetic algorithms, published
-                at IEEE and NASA conferences. Picked up a couple of patents in speech recognition
-                along the way. Currently focused on algorithmic trading infrastructure and
-                multi-agent AI pipelines, both running on local hardware.
+                Senior software architect and AI/ML infrastructure engineer focused on research platforms,
+                systematic-trading infrastructure, agentic engineering workflows, and production systems. My
+                strongest current work is a private QuantConnect LEAN research-to-live infrastructure platform:
+                data ingestion, parameter optimization, walk-forward validation, credibility gates, portfolio
+                construction, prediction bands, staleness monitoring, bounded research orchestration, and
+                manually approved live deployment through QuantConnect to Interactive Brokers.
             </p>
             <p>
-                Twelve years at Verizon as technical lead on large-scale, mission-critical systems:
-                IVR consolidation for Kaiser Permanente (100K calls/hour), Dialogflow CX chatbot
-                deployments for state government agencies, mobile SDK development, and enterprise
-                tooling adopted organization-wide.
+                The platform grew from a six-month migration of an existing live MultiCharts systematic-trading
+                workflow to LEAN. The public <code>lean-optimizer-public</code> repository exposes the optimizer-engine
+                slice; the private system adds the full research-to-live loop, a service-based Research Orchestrator,
+                2,168 tests, 39 ADRs, live/paper deployment tooling, and a bounded LLM-guided research steward.
+                The live trading footprint is intentionally small; the proof point is infrastructure, validation
+                discipline, and research automation rather than assets under management.
+            </p>
+            <p>
+                Thirty years of production engineering across enterprise systems, distributed middleware,
+                contact-center platforms, speech systems, and AI. Early work in fuzzy logic and genetic algorithms
+                was published through IEEE and NASA; later work includes speech-recognition patents and twelve
+                years at Verizon as technical lead on large-scale, mission-critical platforms.
             </p>
             <p>
                 M.S.E.E., Duke University.
+            </p>
+
+            <h2>Positioning</h2>
+            <p>
+                Best fit: AI/ML infrastructure, quant research platforms, systematic-trading systems, research
+                engineering, agentic workflow infrastructure, and senior software architecture roles where
+                reliability, validation, orchestration, and production deployment matter. I am not positioning
+                myself as a pure alpha researcher or deep-learning quant scientist; the stronger fit is the
+                infrastructure layer around the research loop.
             </p>
 
             <h2>Projects</h2>
 
             <div class="project">
                 <h2>
-                    <a class="contact-link" href="lean-optimizer.html">lean-optimizer — Parallel Optimization Engine
-                        for Algorithmic Trading</a>
+                    <a class="contact-link" href="lean-optimizer.html">LEAN Research-to-Live Platform &amp;
+                        lean-optimizer</a>
                 </h2>
                 <p>
-                    Production-grade parallel optimization engine for QuantConnect LEAN algorithmic
-                    trading strategies. Compiles a C# strategy once, spins up a pool of warm Docker
-                    containers with persistent .NET harness processes, and searches the parameter space
-                    using an incremental genetic algorithm. Additional pipeline stages (LHS,
-                    Bayesian/Optuna TPE, Local Grid) are available and configurable.
+                    Private QuantConnect LEAN research-to-live infrastructure platform with a public optimizer-engine
+                    subset. The public repository compiles C# strategies once, runs warm Docker containers with
+                    persistent .NET harness processes, and searches parameter space using GA, LHS, Bayesian/Optuna
+                    TPE, and local-grid stages. The private system adds IBKR data ingestion, WFO/WFAC credibility
+                    validation, portfolio construction, prediction bands, parameter-staleness monitoring, live/paper
+                    deployment packaging, dashboard approval, and post-trade analytics.
                 </p>
                 <p>
-                    Measured head-to-head against LEAN CLI's built-in grid search on a 679,140-point
-                    parameter space: the GA converged in 611 evaluations at 1.8x higher throughput per
-                    worker — completing in under 3 minutes what grid search would take ~88 hours.
+                    The platform has evaluated 7 strategy families across 257 symbols with WFAC verdicts, run 5,563
+                    test plans and 36,254 WFO windows, and maintains 2,168 private test functions across 165 files.
+                    Only the Hull MA and Compression Breakout families passed credibility gates and were promoted
+                    to live/paper deployment; rotation and mean-reversion candidates were rejected by the validation
+                    framework.
+                </p>
+                <p>
+                    A service-based Research Orchestrator runs unattended research funnels: data updates, parameter
+                    sweeps, WFO bake-offs, WFO-to-WFAC promotion, composition, and packaged backtests. A bounded
+                    LLM-guided Research Steward can read results and queue the next experiments through a restricted
+                    CLI. Live trading remains separate and manually approved.
                 </p>
                 <div class="stats">
                     <div class="stat">
-                        <span class="stat-value">1,112x</span>
-                        <span class="stat-label">fewer evaluations</span>
+                        <span class="stat-value">5,563</span>
+                        <span class="stat-label">test-plan runs</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-value">&lt;3 min</span>
-                        <span class="stat-label">vs ~88 hr grid search</span>
+                        <span class="stat-value">36,254</span>
+                        <span class="stat-label">WFO windows</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-value">177</span>
-                        <span class="stat-label">passing tests</span>
+                        <span class="stat-value">2,168</span>
+                        <span class="stat-label">private tests</span>
                     </div>
                 </div>
                 <div class="tags">
@@ -74,9 +100,13 @@
                     <span class="tag">Optuna</span>
                     <span class="tag">Genetic Algorithm</span>
                     <span class="tag">QuantConnect LEAN</span>
+                    <span class="tag">IBKR</span>
+                    <span class="tag">WFAC / WFO</span>
+                    <span class="tag">Research Orchestrator</span>
                     <span class="tag">DGX Spark</span>
                 </div>
                 <p class="repo-note">
+                    Public optimizer subset:
                     <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public"
                         target="_blank">github.com/t-espy/lean-optimizer-public</a>
                 </p>
@@ -88,25 +118,23 @@
                         target="_blank">langgraph-factory — Multi-Agent Code Generation with Local LLMs</a>
                 </h2>
                 <p>
-                    Multi-agent code generation pipeline using LangGraph and locally-hosted LLMs via
-                    Docker Model Runner. A foreman model (gpt-oss 20B) handles architecture planning
-                    and code review; a coder model (Qwen3 Coder 80B) handles file generation and fixes.
-                    Automated build-fix-regenerate loop recovers from failures without human intervention.
-                    Produces buildable Next.js App Router projects from a natural-language spec. Runs
-                    entirely on local hardware with no external API dependencies.
+                    Multi-agent code generation pipeline using LangGraph and locally-hosted LLMs via Docker Model
+                    Runner. A foreman model handles architecture planning and code review; a coder model handles
+                    file generation and fixes. Automated build-fix-regenerate loops recover from failures without
+                    human intervention. Runs entirely on local hardware with no external API dependency.
                 </p>
                 <p>
-                    Includes a cost and data privacy analysis comparing local inference vs. per-token
-                    cloud APIs — practical reference material for teams evaluating on-premise LLM deployment.
+                    This project is part of the same AI-assisted engineering methodology used in the LEAN platform:
+                    explicit plans, bounded tool access, test discipline, durable decision records, and human-owned
+                    architecture rather than unstructured code generation.
                 </p>
                 <div class="tags">
                     <span class="tag">LangGraph</span>
                     <span class="tag">Docker Model Runner</span>
-                    <span class="tag">gpt-oss 20B</span>
-                    <span class="tag">Qwen3 Coder 80B</span>
-                    <span class="tag">Next.js</span>
                     <span class="tag">Local LLM</span>
                     <span class="tag">Multi-Agent</span>
+                    <span class="tag">Next.js</span>
+                    <span class="tag">Agentic Workflows</span>
                 </div>
                 <p class="repo-note">
                     <a class="contact-link" href="https://github.com/t-espy/langgraph-factory"
@@ -120,11 +148,11 @@
                         Multi-Stop Route Planning</a>
                 </h2>
                 <p>
-                    End-to-end SaaS web application for multi-stop route planning. Built on Next.js,
-                    React, Tailwind, Supabase PostgreSQL, and Stripe, hosted on Vercel with automated
-                    GitHub Actions CI/CD. Architected as a three-app system using the BFF pattern with
-                    cross-subdomain authentication. Demonstrates full production deployment from zero:
-                    payments, auth, SEO, and go-to-market infrastructure.
+                    End-to-end SaaS web application for multi-stop route planning. Built on Next.js, React,
+                    Tailwind, Supabase PostgreSQL, and Stripe, hosted on Vercel with automated GitHub Actions
+                    CI/CD. Architected as a three-app system using the BFF pattern with cross-subdomain
+                    authentication. Demonstrates full production deployment from zero: payments, auth, SEO,
+                    and go-to-market infrastructure.
                 </p>
                 <div class="tags">
                     <span class="tag">Next.js</span>
@@ -140,18 +168,20 @@
 
             <div class="project">
                 <h2>
-                    <a class="contact-link" href="methodology.html">A Discipline for Building Software with AI</a>
+                    <a class="contact-link" href="methodology.html">A Discipline for Building Production Software
+                        with AI Agents</a>
                 </h2>
                 <p>
-                    A working methodology for building production software with AI agents: immutable
-                    decisions on an append-only record, verifying external claims before they harden
-                    into documents, and routing memory across three kinds of stores on purpose. Drawn
-                    from the practices behind the lean-optimizer and langgraph-factory projects.
+                    A working methodology for AI-assisted production engineering: planning documents, ADRs,
+                    verification of external claims before they harden into durable decisions, bounded tool access,
+                    and test-driven handoff between human architecture and AI-accelerated implementation. Drawn
+                    from the practices behind the LEAN platform and langgraph-factory projects.
                 </p>
                 <div class="tags">
                     <span class="tag">AI Engineering</span>
                     <span class="tag">Agentic Workflows</span>
                     <span class="tag">Methodology</span>
+                    <span class="tag">ADRs</span>
                 </div>
             </div>
 
