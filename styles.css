@@ -224,16 +224,17 @@ table th {
 }
 
 .badge-entry {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.1rem;
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 1.1rem;
+    min-height: 96px;
 }
 
 .badge-entry > a,
 .badge-entry > img {
-    flex-shrink: 0;
-    width: 80px;
-    height: 80px;
+    width: 96px;
+    height: 96px;
     line-height: 0;
     display: flex;
     align-items: center;
@@ -241,10 +242,15 @@ table th {
 }
 
 .badge-entry img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
+    display: block;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.badge-entry img[src*="voicexml"] {
+    width: 76px;
+    height: 96px;
 }
 
 .badge-entry .badge-text {
@@ -323,5 +329,26 @@ table th {
     .credential-table td:last-child {
         border-top: 0;
         padding-top: 0.15rem;
+    }
+
+    .badge-entry {
+        grid-template-columns: 80px minmax(0, 1fr);
+        column-gap: 0.85rem;
+    }
+
+    .badge-entry > a,
+    .badge-entry > img {
+        width: 80px;
+        height: 88px;
+    }
+
+    .badge-entry img {
+        width: 72px;
+        height: 72px;
+    }
+
+    .badge-entry img[src*="voicexml"] {
+        width: 68px;
+        height: 86px;
     }
 }
