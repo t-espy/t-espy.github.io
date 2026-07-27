@@ -13,7 +13,7 @@
         <a href="/">Home</a>
         <a href="/lean-optimizer.html" aria-current="page">Strategy Assayer</a>
         <a href="/methodology.html">AI Engineering Methodology</a>
-        <a href="/technical-credentials/">Technical Credentials</a>
+        <a href="/technical-credentials.html">Technical Credentials</a>
     </nav>
 
     <div class="layout">
@@ -102,7 +102,7 @@
                 <li>GA, grid, and Bayesian parameter optimization</li>
                 <li>Out-of-sample evaluation on held-out windows</li>
                 <li>WFO/WFAC credibility scoring</li>
-                <li>DEPLOYABLE / MARGINAL / BLOCKED verdicts</li>
+                <li>Graduated credibility verdicts with absolute risk floors</li>
                 <li>Portfolio construction and sleeve sizing</li>
                 <li>Forward prediction bands and drawdown kill-lines</li>
                 <li>Parameter-staleness monitoring</li>
@@ -112,18 +112,32 @@
 
             <h2>Validation Discipline</h2>
             <p>
-                The platform is intentionally conservative. It evaluated 7 strategy families across 257 symbols with
-                WFAC verdicts, running 5,563 test plans and 36,254 WFO windows. Only two strategy families — Hull MA
-                trend following and Compression Breakout — passed the credibility gates and were promoted to live/paper
-                deployment. Rotation and mean-reversion candidates were evaluated and rejected by the validation
-                framework. That rejection behavior is part of the system's purpose: preventing attractive but fragile
-                backtests from reaching live trading.
+                The platform is intentionally conservative. It has evaluated 8 strategy families across 340 symbols
+                with full credibility verdicts, drawing on a corpus of more than 11,000 test plans, 60,000
+                walk-forward windows, and 4.3 million individual backtests. Verdicts are graduated economic-quality
+                scores (0&ndash;10, banded from strong to poor) with absolute floors: a candidate whose returns or
+                drawdowns breach the floors is blocked outright, regardless of how well it scores elsewhere. Nearly
+                half of all scored runs land in the blocked band, and only two strategy families have ever passed the
+                gates and been promoted to live/paper deployment. That rejection behavior is the system's purpose:
+                preventing attractive but fragile backtests from reaching live trading.
             </p>
             <p>
-                WFAC aggregates walk-forward out-of-sample performance into DEPLOYABLE / MARGINAL / BLOCKED verdicts.
-                Deflated Sharpe Ratio, CPCV, False Strategy Theorem checks, bootstrap confidence intervals, and
-                effective-N corrections are used as diagnostics and guardrails. Live behavior is compared against a
-                pre-committed forward expected distribution rather than against inflated in-regime backtest headlines.
+                Scoring is walk-forward and benchmark-relative. Every candidate is judged on stitched out-of-sample
+                performance from a walk-forward loop whose re-optimization schedule mirrors how it would actually be
+                re-tuned in live operation, and the headline metric is capital efficiency relative to passively
+                holding the underlying &mdash; a strategy has to beat the do-nothing alternative, not just look good in
+                isolation. Statistical credibility checks &mdash; Deflated Sharpe Ratio, combinatorially purged
+                cross-validation, bootstrap confidence intervals, probability-of-backtest-overfitting &mdash; are
+                computed and persisted as diagnostics and guardrails rather than verdict inputs, accumulating until
+                live outcomes allow them to be calibrated against realized P&amp;L.
+            </p>
+            <p>
+                The strongest guardrail is a random-entry null distribution: the complete walk-forward loop is re-run
+                dozens of times with entries replaced by seeded random signals, measuring whether the optimization
+                process can manufacture an equally attractive result from pure noise. Distributed across the compute
+                fleet through the shared work queue, a 50-seed null distribution completes in about two minutes,
+                making the test routine rather than prohibitive. Live behavior is then compared against a
+                pre-committed forward expected distribution rather than against in-regime backtest headlines.
             </p>
 
             <h2>Research Orchestrator</h2>
