@@ -229,8 +229,13 @@ table th {
     gap: 1.1rem;
 }
 
-.badge-entry img {
+.badge-entry > a,
+.badge-entry > img {
     flex-shrink: 0;
+    line-height: 0;
+}
+
+.badge-entry img {
     max-width: 100%;
     height: auto;
 }
