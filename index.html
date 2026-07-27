@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todd Espy — Research Engineer, AI/ML Infrastructure & Quant Platforms</title>
+    <title>Todd Espy — Research Engineer, AI/ML Infrastructure & Strategy Assayer</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -23,11 +23,12 @@
                 observable, testable systems that can be trusted in production.
             </p>
             <p>
-                My current flagship work is a private QuantConnect LEAN research-to-live platform covering broker-data
-                ingestion, parameter optimization, walk-forward validation, credibility gates, portfolio construction,
-                prediction bands, bounded research orchestration, manually approved deployment, and Interactive Brokers
-                reconciliation. The public <code>lean-optimizer-public</code> repository exposes the optimizer-engine
-                slice; the private system adds the complete controlled research-to-live loop.
+                My current flagship work is <strong>Strategy Assayer</strong>, an AI-assisted quantitative research
+                platform built on QuantConnect LEAN to distinguish genuine out-of-sample edge from overfit noise. It
+                covers broker-data ingestion, parameter optimization, walk-forward validation, credibility gates,
+                portfolio construction, prediction bands, bounded research orchestration, manually approved deployment,
+                and Interactive Brokers reconciliation. The public <code>lean-optimizer-public</code> repository exposes
+                the optimization-engine slice; the private system adds the complete controlled research-to-live loop.
             </p>
             <p>
                 My technical foundation includes published research through IEEE, NASA, and the U.S. Department of
@@ -57,33 +58,35 @@
 
             <h2>Positioning</h2>
             <p>
-                Best fit: AI/ML infrastructure, quant research platforms, systematic-trading systems, research
-                engineering, agentic workflow infrastructure, and senior software architecture roles where reliability,
-                validation, orchestration, and production deployment matter. I am not positioning myself as a pure alpha
-                researcher or deep-learning quant scientist; the stronger fit is the infrastructure and optimization
-                layer around the research loop.
+                Best fit: AI/ML infrastructure, strategy credibility and quant research platforms, systematic-trading
+                systems, research engineering, agentic workflow infrastructure, and senior software architecture roles
+                where reliability, validation, orchestration, and production deployment matter. I am not positioning
+                myself as a pure alpha researcher or deep-learning quant scientist; the stronger fit is the infrastructure,
+                optimization, and validation layer around the research loop.
             </p>
 
             <h2>Selected Work</h2>
 
             <div class="project">
                 <h2>
-                    <a class="contact-link" href="lean-optimizer.html">LEAN Research-to-Live Platform &amp;
-                        lean-optimizer</a>
+                    <a class="contact-link" href="lean-optimizer.html">Strategy Assayer — AI-Assisted Strategy
+                        Credibility Platform</a>
                 </h2>
                 <p>
-                    Private QuantConnect LEAN research-to-live infrastructure platform with a public optimizer-engine
-                    subset. The public repository compiles C# strategies once, runs warm Docker containers with
-                    persistent .NET harness processes, and searches parameter space using genetic, Latin Hypercube,
-                    Bayesian/Optuna TPE, and local-grid stages. The private system adds IBKR data ingestion, WFO/WFAC
-                    credibility validation, portfolio construction, prediction bands, parameter-staleness monitoring,
-                    live/paper deployment packaging, dashboard approval, and post-trade analytics.
+                    Private quantitative research platform built on QuantConnect LEAN to determine whether a strategy
+                    exhibits credible, out-of-sample edge or merely fits historical noise. The public
+                    <code>lean-optimizer-public</code> repository exposes its optimization engine: it compiles C#
+                    strategies once, runs warm Docker containers with persistent .NET harness processes, and searches
+                    parameter space using genetic, Latin Hypercube, Bayesian/Optuna TPE, and local-grid stages. The
+                    private platform adds IBKR data ingestion, WFO/WFAC credibility validation, portfolio construction,
+                    prediction bands, parameter-staleness monitoring, live/paper deployment packaging, dashboard
+                    approval, and post-trade analytics.
                 </p>
                 <p>
-                    The platform has evaluated seven strategy families across 257 symbols, run 5,563 research test plans
-                    and 36,254 walk-forward windows, and maintains more than 2,000 private automated tests. A bounded
-                    LLM-guided Research Steward can read results and queue follow-on experiments through restricted
-                    interfaces; live trading remains separate and manually approved.
+                    Strategy Assayer has evaluated seven strategy families across 257 symbols, run 5,563 research test
+                    plans and 36,254 walk-forward windows, and maintains more than 2,000 private automated tests. A
+                    bounded LLM-guided Research Steward can read results and queue follow-on experiments through
+                    restricted interfaces; live trading remains separate and manually approved.
                 </p>
                 <div class="stats">
                     <div class="stat"><span class="stat-value">5,563</span><span class="stat-label">test-plan runs</span></div>
@@ -97,7 +100,7 @@
                     <span class="tag">WFAC / WFO</span><span class="tag">Research Orchestration</span>
                     <span class="tag">DGX Spark</span>
                 </div>
-                <p class="repo-note">Public optimizer subset:
+                <p class="repo-note">Public Strategy Assayer optimization engine:
                     <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank">github.com/t-espy/lean-optimizer-public</a>
                 </p>
             </div>
