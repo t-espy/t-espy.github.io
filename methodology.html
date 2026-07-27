@@ -41,6 +41,29 @@
     padding: 0 26px 120px;
   }
 
+  /* ---- site navigation ---- */
+  nav.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    padding: 20px 0 0;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+  }
+  nav.site-nav a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: none;
+  }
+  nav.site-nav a:hover { color: var(--accent); }
+  nav.site-nav a[aria-current="page"] { color: var(--accent); }
+
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
   /* ---- masthead ---- */
   header.top {
     border-bottom: 1px solid var(--line);
@@ -270,6 +293,13 @@
 </head>
 <body>
 <div class="wrap">
+
+  <nav class="site-nav" aria-label="Site">
+    <a href="/">Home</a>
+    <a href="/lean-optimizer.html">Strategy Assayer</a>
+    <a href="/methodology.html" aria-current="page">AI Engineering Methodology</a>
+    <a href="/technical-credentials/">Technical Credentials</a>
+  </nav>
 
   <header class="top">
     <p class="eyebrow">Working Notes / Method</p>
