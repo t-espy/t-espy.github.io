@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todd Espy — Senior AI/ML Infrastructure Engineer & Quant Research Platforms</title>
+    <title>Todd Espy — Research Engineer, AI/ML Infrastructure & Quant Platforms</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -13,46 +13,58 @@
         <main class="content">
             <div class="banner">
                 <h1>Todd Espy</h1>
-                <p>Senior AI/ML Infrastructure Engineer &amp; Quant Research Platforms</p>
+                <p>Research Engineer &amp; Principal Software Architect</p>
             </div>
 
             <p>
-                Senior software architect and AI/ML infrastructure engineer focused on research platforms,
-                systematic-trading infrastructure, agentic engineering workflows, and production systems. My
-                strongest current work is a private QuantConnect LEAN research-to-live infrastructure platform:
-                data ingestion, parameter optimization, walk-forward validation, credibility gates, portfolio
-                construction, prediction bands, staleness monitoring, bounded research orchestration, and
-                manually approved live deployment through QuantConnect to Interactive Brokers.
+                I build modern AI/ML infrastructure, agentic systems, and quantitative research platforms. My work
+                spans research, optimization, statistical validation, GPU inference, cloud and SaaS automation,
+                deployment, and production operations. The common thread is turning complex technical ideas into
+                observable, testable systems that can be trusted in production.
             </p>
             <p>
-                The platform grew from a six-month migration of an existing live MultiCharts systematic-trading
-                workflow to LEAN. The public <code>lean-optimizer-public</code> repository exposes the optimizer-engine
-                slice; the private system adds the full research-to-live loop, a service-based Research Orchestrator,
-                2,168 tests, 39 ADRs, live/paper deployment tooling, and a bounded LLM-guided research steward.
-                The live trading footprint is intentionally small; the proof point is infrastructure, validation
-                discipline, and research automation rather than assets under management.
+                My current flagship work is a private QuantConnect LEAN research-to-live platform covering broker-data
+                ingestion, parameter optimization, walk-forward validation, credibility gates, portfolio construction,
+                prediction bands, bounded research orchestration, manually approved deployment, and Interactive Brokers
+                reconciliation. The public <code>lean-optimizer-public</code> repository exposes the optimizer-engine
+                slice; the private system adds the complete controlled research-to-live loop.
             </p>
             <p>
-                Thirty years of production engineering across enterprise systems, distributed middleware,
-                contact-center platforms, speech systems, and AI. Early work in fuzzy logic and genetic algorithms
-                was published through IEEE and NASA; later work includes five granted speech-recognition patents
-                across the United States, Europe, and China, plus twelve years at Verizon as technical lead on
-                large-scale, mission-critical platforms.
+                My technical foundation includes published research through IEEE, NASA, and the U.S. Department of
+                Energy; five granted speech-recognition patents across the United States, Europe, and China; and the
+                Davey Tree VoiceXML field-reporting application, which I developed as principal developer at Vocalocity
+                and which <em>Speech Technology Magazine</em> recognized as a Most Innovative Solution. Current AWS
+                certifications in machine learning engineering, artificial intelligence, and cloud fundamentals provide
+                independent evidence that the work remains current.
             </p>
-            <p>
-                M.S.E.E., Duke University.
-            </p>
+            <p><strong>M.S.E.E., Duke University.</strong></p>
+
+            <h2>Research, Innovation &amp; Recognition</h2>
+            <div class="project">
+                <ul>
+                    <li><strong>Published research:</strong> IEEE fuzzy-logic control paper; NASA conference and
+                        international workshop publications on genetic algorithms for tuning fuzzy-control systems;
+                        U.S. Department of Energy technical report based on my Duke M.S. thesis.</li>
+                    <li><strong>Granted intellectual property:</strong> Co-inventor on five speech-recognition patents
+                        across two patent families—three U.S., one European, and one Chinese.</li>
+                    <li><strong>Industry recognition:</strong> Principal developer of the Davey Tree VoiceXML
+                        field-reporting application at Vocalocity, recognized by <em>Speech Technology Magazine</em> as a
+                        Most Innovative Solution.</li>
+                    <li><strong>Current credentials:</strong> AWS Certified Machine Learning Engineer – Associate, AWS
+                        Certified AI Practitioner, and AWS Certified Cloud Practitioner.</li>
+                </ul>
+            </div>
 
             <h2>Positioning</h2>
             <p>
                 Best fit: AI/ML infrastructure, quant research platforms, systematic-trading systems, research
-                engineering, agentic workflow infrastructure, and senior software architecture roles where
-                reliability, validation, orchestration, and production deployment matter. I am not positioning
-                myself as a pure alpha researcher or deep-learning quant scientist; the stronger fit is the
-                infrastructure layer around the research loop.
+                engineering, agentic workflow infrastructure, and senior software architecture roles where reliability,
+                validation, orchestration, and production deployment matter. I am not positioning myself as a pure alpha
+                researcher or deep-learning quant scientist; the stronger fit is the infrastructure and optimization
+                layer around the research loop.
             </p>
 
-            <h2>Projects</h2>
+            <h2>Selected Work</h2>
 
             <div class="project">
                 <h2>
@@ -62,172 +74,90 @@
                 <p>
                     Private QuantConnect LEAN research-to-live infrastructure platform with a public optimizer-engine
                     subset. The public repository compiles C# strategies once, runs warm Docker containers with
-                    persistent .NET harness processes, and searches parameter space using GA, LHS, Bayesian/Optuna
-                    TPE, and local-grid stages. The private system adds IBKR data ingestion, WFO/WFAC credibility
-                    validation, portfolio construction, prediction bands, parameter-staleness monitoring, live/paper
-                    deployment packaging, dashboard approval, and post-trade analytics.
+                    persistent .NET harness processes, and searches parameter space using genetic, Latin Hypercube,
+                    Bayesian/Optuna TPE, and local-grid stages. The private system adds IBKR data ingestion, WFO/WFAC
+                    credibility validation, portfolio construction, prediction bands, parameter-staleness monitoring,
+                    live/paper deployment packaging, dashboard approval, and post-trade analytics.
                 </p>
                 <p>
-                    The platform has evaluated 7 strategy families across 257 symbols with WFAC verdicts, run 5,563
-                    test plans and 36,254 WFO windows, and maintains 2,168 private test functions across 165 files.
-                    Only the Hull MA and Compression Breakout families passed credibility gates and were promoted
-                    to live/paper deployment; rotation and mean-reversion candidates were rejected by the validation
-                    framework.
-                </p>
-                <p>
-                    A service-based Research Orchestrator runs unattended research funnels: data updates, parameter
-                    sweeps, WFO bake-offs, WFO-to-WFAC promotion, composition, and packaged backtests. A bounded
-                    LLM-guided Research Steward can read results and queue the next experiments through a restricted
-                    CLI. Live trading remains separate and manually approved.
+                    The platform has evaluated seven strategy families across 257 symbols, run 5,563 research test plans
+                    and 36,254 walk-forward windows, and maintains more than 2,000 private automated tests. A bounded
+                    LLM-guided Research Steward can read results and queue follow-on experiments through restricted
+                    interfaces; live trading remains separate and manually approved.
                 </p>
                 <div class="stats">
-                    <div class="stat">
-                        <span class="stat-value">5,563</span>
-                        <span class="stat-label">test-plan runs</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value">36,254</span>
-                        <span class="stat-label">WFO windows</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value">2,168</span>
-                        <span class="stat-label">private tests</span>
-                    </div>
+                    <div class="stat"><span class="stat-value">5,563</span><span class="stat-label">test-plan runs</span></div>
+                    <div class="stat"><span class="stat-value">36,254</span><span class="stat-label">WFO windows</span></div>
+                    <div class="stat"><span class="stat-value">2,000+</span><span class="stat-label">private tests</span></div>
                 </div>
                 <div class="tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">C# / .NET</span>
-                    <span class="tag">Docker</span>
-                    <span class="tag">Optuna</span>
-                    <span class="tag">Genetic Algorithm</span>
-                    <span class="tag">QuantConnect LEAN</span>
-                    <span class="tag">IBKR</span>
-                    <span class="tag">WFAC / WFO</span>
-                    <span class="tag">Research Orchestrator</span>
+                    <span class="tag">Python</span><span class="tag">C# / .NET</span><span class="tag">Docker</span>
+                    <span class="tag">Optuna</span><span class="tag">Genetic Algorithms</span>
+                    <span class="tag">QuantConnect LEAN</span><span class="tag">IBKR</span>
+                    <span class="tag">WFAC / WFO</span><span class="tag">Research Orchestration</span>
                     <span class="tag">DGX Spark</span>
                 </div>
-                <p class="repo-note">
-                    Public optimizer subset:
-                    <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public"
-                        target="_blank">github.com/t-espy/lean-optimizer-public</a>
+                <p class="repo-note">Public optimizer subset:
+                    <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank">github.com/t-espy/lean-optimizer-public</a>
                 </p>
             </div>
 
             <div class="project">
-                <h2>
-                    <a class="contact-link" href="https://github.com/t-espy/langgraph-factory"
-                        target="_blank">langgraph-factory — Multi-Agent Code Generation with Local LLMs</a>
-                </h2>
+                <h2><a class="contact-link" href="https://github.com/t-espy/langgraph-factory" target="_blank">langgraph-factory — Multi-Agent Code Generation with Local LLMs</a></h2>
                 <p>
-                    Multi-agent code generation pipeline using LangGraph and locally-hosted LLMs via Docker Model
-                    Runner. A foreman model handles architecture planning and code review; a coder model handles
-                    file generation and fixes. Automated build-fix-regenerate loops recover from failures without
-                    human intervention. Runs entirely on local hardware with no external API dependency.
-                </p>
-                <p>
-                    This project is part of the same AI-assisted engineering methodology used in the LEAN platform:
-                    explicit plans, bounded tool access, test discipline, durable decision records, and human-owned
-                    architecture rather than unstructured code generation.
+                    Multi-agent code-generation pipeline using LangGraph and locally hosted LLMs. A foreman model handles
+                    architecture planning and code review; a coder model handles file generation and fixes. Automated
+                    build-fix-regenerate loops recover from failures without human intervention, while explicit plans,
+                    bounded tool access, test discipline, and human-owned architecture keep the workflow controlled.
                 </p>
                 <div class="tags">
-                    <span class="tag">LangGraph</span>
-                    <span class="tag">Docker Model Runner</span>
-                    <span class="tag">Local LLM</span>
-                    <span class="tag">Multi-Agent</span>
-                    <span class="tag">Next.js</span>
+                    <span class="tag">LangGraph</span><span class="tag">Local LLMs</span>
+                    <span class="tag">Multi-Agent</span><span class="tag">Next.js</span>
                     <span class="tag">Agentic Workflows</span>
                 </div>
-                <p class="repo-note">
-                    <a class="contact-link" href="https://github.com/t-espy/langgraph-factory"
-                        target="_blank">github.com/t-espy/langgraph-factory</a>
-                </p>
+                <p class="repo-note"><a class="contact-link" href="https://github.com/t-espy/langgraph-factory" target="_blank">github.com/t-espy/langgraph-factory</a></p>
             </div>
 
             <div class="project">
-                <h2>
-                    <a class="contact-link" href="https://www.route-forge.com" target="_blank">Route Forge — SaaS
-                        Multi-Stop Route Planning</a>
-                </h2>
+                <h2><a class="contact-link" href="https://www.route-forge.com" target="_blank">Route Forge — SaaS Multi-Stop Route Planning</a></h2>
                 <p>
-                    End-to-end SaaS web application for multi-stop route planning. Built on Next.js, React,
-                    Tailwind, Supabase PostgreSQL, and Stripe, hosted on Vercel with automated GitHub Actions
-                    CI/CD. Architected as a three-app system using the BFF pattern with cross-subdomain
-                    authentication. Demonstrates full production deployment from zero: payments, auth, SEO,
-                    and go-to-market infrastructure.
+                    End-to-end SaaS web application built with Next.js, React, Tailwind, Supabase PostgreSQL, Stripe,
+                    Vercel, and GitHub Actions. Architected as a three-application system using the BFF pattern with
+                    cross-subdomain authentication, payments, SEO, and production deployment infrastructure.
                 </p>
                 <div class="tags">
-                    <span class="tag">Next.js</span>
-                    <span class="tag">React</span>
-                    <span class="tag">Supabase</span>
-                    <span class="tag">Stripe</span>
-                    <span class="tag">Vercel</span>
-                    <span class="tag">GitHub Actions</span>
+                    <span class="tag">Next.js</span><span class="tag">React</span><span class="tag">Supabase</span>
+                    <span class="tag">Stripe</span><span class="tag">Vercel</span><span class="tag">GitHub Actions</span>
                 </div>
             </div>
 
             <h2>Writing</h2>
-
             <div class="project">
-                <h2>
-                    <a class="contact-link" href="methodology.html">A Discipline for Building Production Software
-                        with AI Agents</a>
-                </h2>
+                <h2><a class="contact-link" href="methodology.html">A Discipline for Building Production Software with AI Agents</a></h2>
                 <p>
-                    A working methodology for AI-assisted production engineering: planning documents, ADRs,
-                    verification of external claims before they harden into durable decisions, bounded tool access,
-                    and test-driven handoff between human architecture and AI-accelerated implementation. Drawn
-                    from the practices behind the LEAN platform and langgraph-factory projects.
+                    A working methodology for AI-assisted production engineering: planning documents, architecture
+                    decision records, verification of external claims, bounded tool access, and test-driven handoff
+                    between human architecture and AI-accelerated implementation.
                 </p>
                 <div class="tags">
-                    <span class="tag">AI Engineering</span>
-                    <span class="tag">Agentic Workflows</span>
-                    <span class="tag">Methodology</span>
-                    <span class="tag">ADRs</span>
+                    <span class="tag">AI Engineering</span><span class="tag">Agentic Workflows</span>
+                    <span class="tag">Methodology</span><span class="tag">ADRs</span>
                 </div>
             </div>
 
             <h2>Research &amp; Intellectual Property</h2>
             <p>
                 My graduate research at Duke applied fuzzy logic and genetic algorithms to nonlinear control and
-                optimization problems. That work produced peer-reviewed and government-archived publications and
-                established an early foundation for the optimization, validation, and intelligent-systems work I
-                continue today in quantitative research infrastructure and applied AI. Later work in speech systems
-                produced five granted patents across two patent families: three U.S., one European, and one Chinese.
+                optimization. That work established an early foundation for the optimization, validation, and
+                intelligent-systems work I continue today. Later work in commercial speech systems produced five granted
+                patents across two patent families.
             </p>
             <ul>
-                <li>
-                    <a class="contact-link" href="https://ieeexplore.ieee.org/document/258768" target="_blank">Fuzzy
-                        Logic Control of AC Induction Motors</a>
-                    — IEEE International Conference on Fuzzy Systems (co-author). Later cited in
-                    <a class="contact-link" href="https://iaeme.com/Home/article_id/IJECET_04_02_043"
-                        target="_blank">a 2013 IJECET paper on fuzzy-logic AC motor speed control</a>.
-                </li>
-                <li>
-                    <a class="contact-link" href="https://ntrs.nasa.gov/citations/19930013020"
-                        target="_blank">Application of Genetic Algorithms to Tuning Fuzzy Control Systems</a>
-                    — NASA SOAR Conference and Third International Workshop on Neural Networks and Fuzzy Logic
-                    (co-author). The work was also published as a
-                    <a class="contact-link" href="https://www.osti.gov/biblio/5290293" target="_blank">U.S. Department
-                        of Energy technical report (OSTI 5290293)</a> based on my M.S. thesis.
-                </li>
-                <li>
-                    <strong>Copy/paste transcription patent family</strong> —
-                    <a class="contact-link" href="https://patents.google.com/patent/US8639505B2/en"
-                        target="_blank">US 8,639,505</a>,
-                    <a class="contact-link" href="https://patents.google.com/patent/US9058817B1/en"
-                        target="_blank">US 9,058,817</a>, and
-                    <a class="contact-link" href="https://patents.google.com/patent/CN102067209B/en"
-                        target="_blank">CN 102067209</a> (co-inventor).
-                </li>
-                <li>
-                    <strong>Speech-to-text performance measurement patent family</strong> —
-                    <a class="contact-link" href="https://patents.google.com/patent/US8639512B2/en"
-                        target="_blank">US 8,639,512</a> and
-                    <a class="contact-link" href="https://patents.google.com/patent/EP2279508B1/en"
-                        target="_blank">EP 2,279,508</a> (co-inventor).
-                </li>
+                <li><a class="contact-link" href="https://ieeexplore.ieee.org/document/258768" target="_blank">Fuzzy Logic Control of AC Induction Motors</a> — IEEE International Conference on Fuzzy Systems (co-author).</li>
+                <li><a class="contact-link" href="https://ntrs.nasa.gov/citations/19930013020" target="_blank">Application of Genetic Algorithms to Tuning Fuzzy Control Systems</a> — NASA SOAR Conference and Third International Workshop on Neural Networks and Fuzzy Logic (co-author). Also archived as a <a class="contact-link" href="https://www.osti.gov/biblio/5290293" target="_blank">U.S. Department of Energy technical report</a> based on my M.S. thesis.</li>
+                <li><strong>Copy/paste transcription patent family</strong> — <a class="contact-link" href="https://patents.google.com/patent/US8639505B2/en" target="_blank">US 8,639,505</a>, <a class="contact-link" href="https://patents.google.com/patent/US9058817B1/en" target="_blank">US 9,058,817</a>, and <a class="contact-link" href="https://patents.google.com/patent/CN102067209B/en" target="_blank">CN 102067209</a> (co-inventor).</li>
+                <li><strong>Speech-to-text performance measurement patent family</strong> — <a class="contact-link" href="https://patents.google.com/patent/US8639512B2/en" target="_blank">US 8,639,512</a> and <a class="contact-link" href="https://patents.google.com/patent/EP2279508B1/en" target="_blank">EP 2,279,508</a> (co-inventor).</li>
             </ul>
-
         </main>
 
         <aside class="sidebar" id="contact">
@@ -235,24 +165,14 @@
             <p>Feel free to reach out:</p>
             <ul style="list-style: none; padding-left: 0;">
                 <li><strong>Email:</strong> <span id="email"></span></li>
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/"
-                        target="_blank">linkedin.com/in/toddespy</a></li>
+                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/" target="_blank">linkedin.com/in/toddespy</a></li>
             </ul>
 
             <h2 style="margin-top: 2rem;">Certifications</h2>
             <div class="cert-badges">
-                <a href="https://www.credly.com/badges/0aa4f899-e591-4644-96ed-97cb862f94ab/public_url" target="_blank">
-                    <img src="images/aws-certified-machine-learning-engineer-associate-e.png"
-                        alt="AWS Certified ML Engineer" width="180" />
-                </a>
-                <a href="https://www.credly.com/badges/ef070385-9cd4-4596-8289-5796bf4c61e4/public_url" target="_blank">
-                    <img src="images/aws-certified-ai-practitioner-early-adopter600x600.png"
-                        alt="AWS Certified AI Practitioner" width="180" />
-                </a>
-                <a href="https://www.credly.com/badges/6e18930b-2286-423c-a406-49bb93acd98d/public_url" target="_blank">
-                    <img src="images/aws-certified-cloud-practitioner.png" alt="AWS Certified Cloud Practitioner"
-                        width="160" />
-                </a>
+                <a href="https://www.credly.com/badges/0aa4f899-e591-4644-96ed-97cb862f94ab/public_url" target="_blank"><img src="images/aws-certified-machine-learning-engineer-associate-e.png" alt="AWS Certified Machine Learning Engineer – Associate" width="180" /></a>
+                <a href="https://www.credly.com/badges/ef070385-9cd4-4596-8289-5796bf4c61e4/public_url" target="_blank"><img src="images/aws-certified-ai-practitioner-early-adopter600x600.png" alt="AWS Certified AI Practitioner" width="180" /></a>
+                <a href="https://www.credly.com/badges/6e18930b-2286-423c-a406-49bb93acd98d/public_url" target="_blank"><img src="images/aws-certified-cloud-practitioner.png" alt="AWS Certified Cloud Practitioner" width="160" /></a>
             </div>
         </aside>
     </div>
