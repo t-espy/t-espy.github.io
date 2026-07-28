@@ -26,7 +26,8 @@
             <p>
                 <a class="contact-link" href="index.html">&larr; Back to portfolio</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank" rel="noopener noreferrer">View public optimizer subset on GitHub</a>
+                <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank"
+                    rel="noopener noreferrer">View public optimizer subset on GitHub</a>
             </p>
 
             <h2>Overview</h2>
@@ -38,7 +39,8 @@
                 controlled live execution.
             </p>
             <p>
-                The public <code>lean-optimizer-public</code> repository exposes the optimizer-engine slice of the private
+                The public <code>lean-optimizer-public</code> repository exposes the optimizer-engine slice of the
+                private
                 platform. It compiles C# strategies once, runs warm Docker containers with persistent .NET harness
                 processes, and searches parameter space via GA, LHS, Bayesian/Optuna TPE, and local-grid stages. The
                 private system adds IBKR data ingestion, WFO/WFAC credibility validation, portfolio construction,
@@ -48,7 +50,8 @@
 
             <h2>Measured Optimizer Performance</h2>
             <p>
-                Public optimizer benchmark against LEAN CLI's built-in <code>lean optimize --strategy "grid search"</code>
+                Public optimizer benchmark against LEAN CLI's built-in
+                <code>lean optimize --strategy "grid search"</code>
                 on a 7-parameter space (679,140 grid points), 15 parallel workers, same strategy, same data:
             </p>
             <table>
@@ -162,7 +165,8 @@
             <h2>Persistent Harness</h2>
             <p>
                 The public optimizer's core innovation is the persistent .NET harness. Each Docker container runs a
-                long-lived <code>dotnet /Harness/LeanHarness.dll</code> process that reads JSON requests from stdin, runs
+                long-lived <code>dotnet /Harness/LeanHarness.dll</code> process that reads JSON requests from stdin,
+                runs
                 backtests with full LEAN state reset between runs, and writes JSON responses to stdout. This eliminates
                 per-eval .NET startup, assembly loading, and LEAN engine initialization overhead.
             </p>
@@ -176,20 +180,23 @@
 
             <h2>Engineering Controls</h2>
             <ul>
-                <li><strong>Tests:</strong> 2,168 private test functions across 165 files; 130 tests in the public optimizer subset.</li>
+                <li><strong>Tests:</strong> 2,168 private test functions across 165 files; 130 tests in the public
+                    optimizer subset.</li>
                 <li><strong>ADRs:</strong> 39 architecture decision records document durable design choices.</li>
                 <li><strong>AI-assisted development:</strong> Claude Code accelerated implementation, but architecture,
-                    validation methodology, deployment controls, tests, and operational ownership remained human-owned.</li>
+                    validation methodology, deployment controls, tests, and operational ownership remained human-owned.
+                </li>
                 <li><strong>Manual deployment gate:</strong> real-money deployment is never autonomous.</li>
-                <li><strong>Bounded LLM access:</strong> the research steward cannot write code, modify the database, use git,
+                <li><strong>Bounded LLM access:</strong> the research steward cannot write code, modify the database,
+                    use git,
                     or access live-trading controls directly.</li>
             </ul>
 
             <h2>Background</h2>
             <p>
                 The genetic algorithm at the core of lean-optimizer is the same class of algorithm I developed at Togai
-                InfraLogic in the early 1990s, where my research in fuzzy logic and genetic algorithms was published at
-                IEEE and NASA conferences. Three decades later, the same optimization principles run inside a modern
+                InfraLogic, where my research in fuzzy logic and genetic algorithms was published at
+                IEEE and NASA conferences. Today, the same optimization principles run inside a modern
                 LEAN-based research infrastructure stack.
             </p>
 
@@ -211,21 +218,24 @@
             <p>Feel free to reach out:</p>
             <ul style="list-style: none; padding-left: 0;">
                 <li><strong>Email:</strong> <span id="email"></span></li>
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/"
-                        target="_blank" rel="noopener noreferrer">linkedin.com/in/toddespy</a></li>
+                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/" target="_blank"
+                        rel="noopener noreferrer">linkedin.com/in/toddespy</a></li>
             </ul>
 
             <h2 style="margin-top: 2rem;">Certifications</h2>
             <div class="cert-badges">
-                <a href="https://www.credly.com/badges/ef070385-9cd4-4596-8289-5796bf4c61e4/public_url" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.credly.com/badges/ef070385-9cd4-4596-8289-5796bf4c61e4/public_url" target="_blank"
+                    rel="noopener noreferrer">
                     <img src="images/aws-certified-ai-practitioner-early-adopter600x600.png"
                         alt="AWS Certified AI Practitioner" width="180" />
                 </a>
-                <a href="https://www.credly.com/badges/0aa4f899-e591-4644-96ed-97cb862f94ab/public_url" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.credly.com/badges/0aa4f899-e591-4644-96ed-97cb862f94ab/public_url" target="_blank"
+                    rel="noopener noreferrer">
                     <img src="images/aws-certified-machine-learning-engineer-associate-e.png"
                         alt="AWS Certified ML Engineer" width="180" />
                 </a>
-                <a href="https://www.credly.com/badges/6e18930b-2286-423c-a406-49bb93acd98d/public_url" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.credly.com/badges/6e18930b-2286-423c-a406-49bb93acd98d/public_url" target="_blank"
+                    rel="noopener noreferrer">
                     <img src="images/aws-certified-cloud-practitioner.png" alt="AWS Certified Cloud Practitioner"
                         width="160" />
                 </a>
