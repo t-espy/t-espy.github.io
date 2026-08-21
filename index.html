@@ -132,6 +132,34 @@
                 </p>
             </div>
 
+            <div class="project" id="agent-coord">
+                <h2>agent-coord — Coordination Board for AI Coding Agents</h2>
+                <p>
+                    A coordination board for AI coding agents on separate machines. It is not a task
+                    runner or a build queue: it answers who is working on what when any worker can
+                    die. Claims are leased and heartbeaten; identity comes from the bearer token;
+                    the daemon is stateless over Postgres. Agents attach over MCP; humans and
+                    scripts drive the same board through a CLI.
+                </p>
+                <p>
+                    Built for the
+                    <a class="contact-link" href="lean-optimizer.html">Strategy Assayer</a>
+                    fleet — this site's research platform — and used in production across those
+                    boxes. A finding posted as a card survives a context compaction that would
+                    otherwise lose it; that is the same
+                    <a class="contact-link" href="methodology.html#agent-coord-board">session-memory
+                        problem</a>
+                    the methodology page describes, implemented as infrastructure rather than
+                    convention.
+                </p>
+                <div class="tags">
+                    <span class="tag">Python</span><span class="tag">Postgres</span>
+                    <span class="tag">MCP</span><span class="tag">Multi-Agent</span>
+                    <span class="tag">CLI</span>
+                </div>
+                <p class="repo-note">Private infrastructure; available on request.</p>
+            </div>
+
             <div class="project">
                 <h2><a class="contact-link" href="https://github.com/t-espy/langgraph-factory" target="_blank"
                         rel="noopener noreferrer">langgraph-factory — Multi-Agent Code Generation with Local LLMs</a>

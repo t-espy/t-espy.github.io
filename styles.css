@@ -134,6 +134,12 @@ p {
     margin-bottom: 2rem;
 }
 
+.project:target {
+    outline: 2px solid #0066cc;
+    outline-offset: 8px;
+    border-radius: 4px;
+}
+
 .repo-note {
     font-size: 0.95rem;
     color: #555;
