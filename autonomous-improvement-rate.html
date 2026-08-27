@@ -27,9 +27,11 @@
                 A system gets better by trying something, learning something from what happened, and using that the next time around. If that's the loop, then the speed of improvement depends on three things:
             </p>
 
-            <div class="project">
-                <h2 style="text-align:center;">R<sub>A</sub> ≈ E<sub>t</sub> × I<sub>E</sub> × η<sub>L</sub></h2>
-                <p style="text-align:center;"><strong>Improvement Rate ≈ Iteration Throughput × Information per Iteration × Learning Efficiency</strong></p>
+            <div class="project equation-card">
+                <div class="equation" role="math" aria-label="R sub A is approximately equal to E sub t times I sub E times eta sub L">
+                    <span>R<sub>A</sub></span><span class="equation-op">≈</span><span>E<sub>t</sub></span><span class="equation-op">×</span><span>I<sub>E</sub></span><span class="equation-op">×</span><span>η<sub>L</sub></span>
+                </div>
+                <p class="equation-caption"><strong>Improvement Rate ≈ Iteration Throughput × Information per Iteration × Learning Efficiency</strong></p>
             </div>
 
             <ul>
@@ -67,6 +69,9 @@
                 Software makes this easy to see. An AI coding system can write code, compile it, run tests, inspect failures, change the code, and try again. Iterations can take seconds or minutes. Failures are cheap and usually reversible.
             </p>
             <p>
+                That changes how you should search. When an iteration costs a few seconds of compute, brute-force exploration can be rational: try more variants, test them, keep the evidence, and move on. When an iteration means an expensive simulation, a long model run, a chemical reaction, or physical hardware, experiment selection matters much more. Cheap loops reward throughput; expensive loops reward careful information gain per attempt.
+            </p>
+            <p>
                 Simulation and computational research work much the same way. Instead of compiling code, the system runs a model or experiment. Instead of a unit-test result, it gets measurements. The loop is fundamentally similar:
             </p>
             <p style="text-align:center;"><strong>propose → execute → measure → evaluate → learn → repeat</strong></p>
@@ -93,13 +98,7 @@
 
             <h2>Where I use this</h2>
             <p>
-                In my software-development factory, <strong>BuildLoop is the automated build/test/fix cycle</strong>: local models handle high-volume implementation and retry loops while scarce frontier-model tokens are reserved for architecture, difficult decisions, and review. The operating metric is <strong>Autonomous Completed Work per Frontier-Model Token</strong>, not agents spawned or tokens generated. The <a class="contact-link" href="/#agent-coord">agent-coord</a> coordination board tracks work and preserves findings across agents and sessions.
-            </p>
-            <p>
-                Information quality is more domain-specific. Throughput machinery and memory/coordination patterns can be reused across many kinds of autonomous work, but deciding whether an iteration produced useful, trustworthy evidence depends on the problem being solved and the evaluator being used. <a class="contact-link" href="/lean-optimizer.html">Strategy Assayer</a> is one example for one domain: in quantitative research, walk-forward and out-of-sample validation protect the loop from learning too efficiently from in-sample noise.
-            </p>
-            <p>
-                Put another way: <strong>BuildLoop raises iteration throughput. agent-coord tracks the work and helps findings survive. The information-quality layer must be built for the domain; Strategy Assayer is one implementation of it.</strong>
+                <strong>BuildLoop raises iteration throughput.</strong> The <a class="contact-link" href="/#agent-coord">agent-coord</a> coordination board keeps work and findings alive across agents and sessions. <a class="contact-link" href="/lean-optimizer.html">Strategy Assayer</a> is the domain check: walk-forward and out-of-sample validation keep the quantitative-research loop from learning too efficiently from in-sample noise. In the software factory, I track <strong>Autonomous Completed Work per Frontier-Model Token</strong> rather than agents spawned or tokens generated.
             </p>
 
             <h2>The flywheel</h2>
@@ -111,30 +110,17 @@
                 That does not prove the loop accelerates forever; improvements can get harder to find. But wherever a system can act, measure the result, retain the evidence, and use it to choose a better next action, these three factors provide a practical way to think about what controls the speed of improvement.
             </p>
 
-            <h2>Relationship to earlier work</h2>
-            <p>
-                The loop itself is old, and so are the individual ingredients. Self-driving-laboratory research has identified closely related axes: experiments per unit time, information gained per experiment, and the efficiency of converting experimental data into scientific knowledge. Active learning, Bayesian experimental design, high-throughput experimentation, and continuous-improvement methods each develop pieces of the same picture.
-            </p>
-            <p>
-                The claim made here is narrower: <strong>generalize those factors into a simple multiplicative rate model for autonomous improvement across domains</strong> — software development, computational research, simulation, robotics, and eventually autonomous physical production.
-            </p>
-
-            <div class="project">
-                <h3>Want the technical version?</h3>
+            <div class="project technical-notes-callout">
+                <h3>Technical notes</h3>
                 <p>
-                    The technical notes develop the dimensional form of the equation, coupling between throughput and information gain, verification fidelity, measurable proxies, falsifiable predictions, and the relationship to earlier work.
+                    The technical version develops the dimensional form of the equation, coupling between throughput and information gain, verification fidelity, measurable proxies, falsifiable predictions, and the relationship to earlier work.
                 </p>
                 <p><a class="contact-link" href="/autonomous-improvement-rate-technical.html">Read Autonomous Improvement Rate — Technical Notes →</a></p>
             </div>
 
-            <h2>Prior-art note</h2>
-            <p>
-                A particularly close antecedent is Lee et al., <em>Toward self-driving laboratory 2.0 for chemistry and materials discovery</em>, <em>Materials Horizons</em> (2026), DOI: <a class="contact-link" href="https://doi.org/10.1039/D5MH01984B" target="_blank" rel="noopener noreferrer">10.1039/D5MH01984B</a>. That review describes self-driving laboratories as advancing along three interdependent axes: experiment throughput, information gained per experiment, and efficiency of converting data into scientific knowledge. The Autonomous Improvement Rate proposed here extends that decomposition beyond self-driving laboratories into a domain-independent model of autonomous improvement.
-            </p>
-
             <p><strong>I don't claim this is the final model of autonomous improvement. I claim it's a reasonable starting point: simple enough to reason about, specific enough to measure, and clear enough to prove wrong.</strong></p>
 
-            <p class="repo-note">Todd Espy · August 27, 2026 · Initial public formulation</p>
+            <p class="repo-note">Todd Espy · August 2026</p>
         </main>
     </div>
 </body>
