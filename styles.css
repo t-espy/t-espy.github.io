@@ -140,6 +140,58 @@ p {
     border-radius: 4px;
 }
 
+.equation-card {
+    margin: 1.75rem 0 2rem;
+    padding: 1.2rem 1rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
+    text-align: center;
+}
+
+.equation {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.12em 0.28em;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+}
+
+.equation sub {
+    font-size: 0.52em;
+    line-height: 0;
+    position: relative;
+    bottom: -0.12em;
+}
+
+.equation-op {
+    font-weight: 400;
+    padding: 0 0.03em;
+}
+
+.equation-caption {
+    margin: 0.8rem auto 0;
+    max-width: 48rem;
+    line-height: 1.4;
+}
+
+.technical-notes-callout {
+    margin-top: 2.5rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.technical-notes-callout h3 {
+    margin-top: 0;
+}
+
 .repo-note {
     font-size: 0.95rem;
     color: #555;
@@ -316,6 +368,11 @@ table th {
 
     .banner {
         padding: 2.8rem 0.8rem;
+    }
+
+    .equation-card {
+        padding-left: 0.6rem;
+        padding-right: 0.6rem;
     }
 
     .credential-table,
