@@ -24,8 +24,7 @@
             </div>
 
             <p>
-                A system improves by trying things, learning something from the results, and using what it learned the next time around.
-                That suggests a simple way to think about the speed of autonomous improvement:
+                A system gets better by trying something, learning something from what happened, and using that the next time around. If that's the loop, then the speed of improvement depends on three things:
             </p>
 
             <div class="project">
@@ -33,47 +32,71 @@
                 <p style="text-align:center;"><strong>Improvement Rate ≈ Iteration Throughput × Information per Iteration × Learning Efficiency</strong></p>
             </div>
 
-            <p>Where:</p>
             <ul>
                 <li><strong>E<sub>t</sub> — Iteration throughput:</strong> How many experiments, attempts, simulations, builds, or other useful iterations can the system complete per unit of time?</li>
-                <li><strong>I<sub>E</sub> — Information per iteration:</strong> How much useful information does each iteration produce? Running more experiments is not helpful if they teach you nothing.</li>
-                <li><strong>η<sub>L</sub> — Learning efficiency:</strong> How effectively does the system retain what it learned and use it to make future iterations better?</li>
+                <li><strong>I<sub>E</sub> — Information per iteration:</strong> How much useful information does each iteration produce? A thousand experiments that all tell you the same thing are not a thousand useful experiments.</li>
+                <li><strong>η<sub>L</sub> — Learning efficiency:</strong> How effectively does the system retain what it learned and use it to make the next iteration better?</li>
             </ul>
 
             <h2>Why multiplication matters</h2>
-            <p>These aren't three independent scorecards. They compound.</p>
             <p>
-                Suppose a system becomes 10× faster at running experiments, 2× better at choosing informative experiments, and 3× better at retaining and exploiting the results. The improvement rate doesn't rise by 15×. In this simple model, it rises by roughly 60×.
+                These aren't three separate report cards. They compound. If a system becomes 10× faster at running experiments, 2× better at choosing informative experiments, and 3× better at retaining and exploiting the results, the improvement rate doesn't rise by 15×. In this simple model, it rises by roughly 60×.
             </p>
-            <p>That is the important part of the equation. Modern autonomous systems can improve all three terms at the same time.</p>
+            <p>
+                That is the interesting part: modern autonomous systems can push on all three terms at once.
+            </p>
+
+            <h2>The terms interact</h2>
+            <p>
+                There is a catch. The easiest way to increase throughput is often parallelism, but parallel experiments cannot learn from one another while they are running. Ten sequential experiments can make experiment ten depend on what experiments one through nine discovered. Ten simultaneous experiments cannot.
+            </p>
+            <p>
+                So increasing E<sub>t</sub> can reduce I<sub>E</sub>. The goal is not to maximize any one term. <strong>It is to maximize the product.</strong>
+            </p>
+
+            <h2>Bad feedback can reverse the flywheel</h2>
+            <p>
+                Learning efficiency can effectively become negative. If the evaluator rewards the wrong thing — a bad test, a misleading simulation, an overfit backtest, or some other weak proxy for reality — the system can learn efficiently in the wrong direction. More iterations then make things worse faster.
+            </p>
+            <p>
+                Fast autonomous improvement therefore requires trustworthy feedback, not just a fast loop.
+            </p>
 
             <h2>Software is the fast loop</h2>
             <p>
-                Software development makes this easy to see. An AI coding system can write code, compile it, run tests, inspect the failures, modify the code, and try again. An iteration may take seconds or minutes. Failed experiments are cheap and usually reversible. Thousands of independent loops can run in parallel.
+                Software makes this easy to see. An AI coding system can write code, compile it, run tests, inspect failures, change the code, and try again. Iterations can take seconds or minutes. Failures are cheap and usually reversible.
             </p>
             <p>
-                Simulation and computational research have many of the same properties. Instead of compiling code, the system runs a model or experiment. Instead of a unit-test result, it gets measurements. The loop is fundamentally similar:
+                Simulation and computational research work much the same way. Instead of compiling code, the system runs a model or experiment. Instead of a unit-test result, it gets measurements. The loop is fundamentally similar:
             </p>
             <p style="text-align:center;"><strong>propose → execute → measure → evaluate → learn → repeat</strong></p>
             <p>
-                Physical systems use the same loop, but the clock runs slower. Automated laboratories must move samples and wait for reactions. Robots must interact with real objects. Vehicles have safety constraints. Manufacturing consumes materials and energy. Physical mistakes cost more than failed software builds.
+                Physical systems run the same loop with a slower clock. Automated laboratories move samples and wait for reactions. Robots interact with real objects. Vehicles have safety constraints. Manufacturing consumes materials and energy. Physical mistakes cost more than failed software builds.
             </p>
             <p>
-                So I expect autonomous improvement to advance fastest where iteration is cheap and feedback is objective: software first, then simulation and computational research, followed increasingly by automated laboratories, robotics, manufacturing, and other physical systems.
+                So I expect autonomous improvement to show up fastest where iteration is cheap and feedback is objective: software first, then simulation and computational research, followed increasingly by automated laboratories, robotics, manufacturing, and other physical systems.
             </p>
 
-            <h2>The scarce-resource version</h2>
+            <h2>Spend the scarce thing wisely</h2>
             <p>
-                There is another useful way to look at the same idea. Autonomous systems should not merely maximize output. They should maximize completed useful work per unit of whatever resource is actually scarce.
+                Autonomous systems should not simply maximize output. They should maximize completed useful work per unit of whatever resource is actually scarce.
             </p>
             <p>
-                In an AI software factory, local compute may be abundant while access to the most capable frontier models is limited or expensive. A useful operating metric is therefore:
+                In an AI software factory, local compute can be cheap and abundant while access to the most capable frontier models is limited or expensive. A useful operating metric is therefore:
             </p>
             <div class="project">
                 <p style="text-align:center;"><strong>Autonomous Completed Work / Frontier-Model Token</strong></p>
             </div>
             <p>
-                Cheap local models can perform large numbers of implementation and test iterations. More capable models can be reserved for architecture, difficult decisions, review, and escalation. As the autonomous loop improves, more work completes without consuming the scarce resource at all.
+                Cheap local models can handle implementation, tests, retries, and repeated build/fix loops. More capable models can be reserved for architecture, difficult decisions, review, and escalation. If more work starts completing without consuming the scarce resource at all, the loop is genuinely improving.
+            </p>
+
+            <h2>Where I use this</h2>
+            <p>
+                In my software-development factory, local models handle high-volume compile/test/fix loops while scarce frontier-model tokens are reserved for architecture, difficult decisions, and review. The operating metric is <strong>Autonomous Completed Work per Frontier-Model Token</strong>, not agents spawned or tokens generated. In <a class="contact-link" href="/lean-optimizer.html">Strategy Assayer</a>, walk-forward validation provides the fidelity check: optimizing faster against in-sample fitness without reliable out-of-sample validation is exactly how a high-throughput loop can learn the wrong lesson. ADRs and the <a class="contact-link" href="/#agent-coord">agent-coord</a> coordination board preserve decisions and findings so the next agent or session can actually exploit what the previous one learned.
+            </p>
+            <p>
+                Put another way: <strong>BuildLoop raises iteration throughput. Strategy Assayer protects information quality. ADRs and agent-coord preserve and exploit learning.</strong>
             </p>
 
             <h2>The flywheel</h2>
@@ -82,24 +105,28 @@
             </p>
             <p style="text-align:center;"><strong>better system → more autonomous work → faster system improvement → better system</strong></p>
             <p>
-                Software and simulation are likely to show this effect first because their feedback loops are so fast. But the principle is broader: wherever a system can act, measure the result, retain the evidence, and use it to choose a better next action, the Autonomous Improvement Rate provides a simple way to think about what controls the speed of the flywheel.
+                That does not prove the loop accelerates forever; improvements can get harder to find. But wherever a system can act, measure the result, retain the evidence, and use it to choose a better next action, these three factors provide a practical way to think about what controls the speed of improvement.
             </p>
 
             <h2>Relationship to earlier work</h2>
             <p>
-                This formulation has clear antecedents. Self-driving-laboratory research has separately identified three closely related axes: experiments per unit time, information gained per experiment, and the efficiency of converting experimental data into scientific knowledge. Work on active learning, Bayesian experimental design, and high-throughput experimentation develops individual parts of the same picture.
+                The loop itself is old, and so are the individual ingredients. Self-driving-laboratory research has identified closely related axes: experiments per unit time, information gained per experiment, and the efficiency of converting experimental data into scientific knowledge. Active learning, Bayesian experimental design, high-throughput experimentation, and continuous-improvement methods each develop pieces of the same picture.
             </p>
             <p>
-                The claim made here is the <strong>generalization</strong>: treat these three factors as a simple multiplicative model for the rate of improvement of autonomous systems generally — not only laboratory experiments, but software development, computational research, simulation, robotics, and eventually autonomous physical production.
+                The claim made here is narrower: <strong>generalize those factors into a simple multiplicative rate model for autonomous improvement across domains</strong> — software development, computational research, simulation, robotics, and eventually autonomous physical production.
             </p>
-            <p>In that generalized form:</p>
+
             <div class="project">
-                <h2 style="text-align:center;">R<sub>A</sub> ≈ E<sub>t</sub> × I<sub>E</sub> × η<sub>L</sub></h2>
+                <h3>Want the technical version?</h3>
+                <p>
+                    The technical notes develop the dimensional form of the equation, coupling between throughput and information gain, verification fidelity, measurable proxies, falsifiable predictions, and the relationship to earlier work.
+                </p>
+                <p><a class="contact-link" href="/autonomous-improvement-rate-technical.html">Read Autonomous Improvement Rate — Technical Notes →</a></p>
             </div>
 
             <h2>Prior-art note</h2>
             <p>
-                A particularly close antecedent is Lee et al., <em>Toward self-driving laboratory 2.0 for chemistry and materials discovery</em>, <em>Materials Horizons</em> (2026), DOI: 10.1039/D5MH01984B. That review describes self-driving laboratories as advancing along three interdependent axes: experiment throughput, information gained per experiment, and efficiency of converting data into scientific knowledge. The Autonomous Improvement Rate proposed here extends that decomposition beyond self-driving laboratories into a domain-independent model of autonomous improvement.
+                A particularly close antecedent is Lee et al., <em>Toward self-driving laboratory 2.0 for chemistry and materials discovery</em>, <em>Materials Horizons</em> (2026), DOI: <a class="contact-link" href="https://doi.org/10.1039/D5MH01984B" target="_blank" rel="noopener noreferrer">10.1039/D5MH01984B</a>. That review describes self-driving laboratories as advancing along three interdependent axes: experiment throughput, information gained per experiment, and efficiency of converting data into scientific knowledge. The Autonomous Improvement Rate proposed here extends that decomposition beyond self-driving laboratories into a domain-independent model of autonomous improvement.
             </p>
 
             <p class="repo-note">Todd Espy · August 27, 2026 · Initial public formulation</p>
