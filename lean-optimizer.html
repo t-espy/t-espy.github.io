@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LEAN Research-to-Live Platform — Todd Espy</title>
+    <title>Strategy Assayer — Evaluation Infrastructure — Todd Espy</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -13,14 +13,15 @@
         <a href="/">Home</a>
         <a href="/lean-optimizer.html" aria-current="page">Strategy Assayer</a>
         <a href="/methodology.html">AI Engineering Methodology</a>
+        <a href="/autonomous-improvement-rate.html">Autonomous Improvement Rate</a>
         <a href="/technical-credentials.html">Technical Credentials</a>
     </nav>
 
     <div class="layout">
         <main class="content">
             <div class="banner">
-                <h1>LEAN Research-to-Live Platform</h1>
-                <p>QuantConnect LEAN optimization, validation, orchestration, and live-deployment infrastructure</p>
+                <h1>Strategy Assayer</h1>
+                <p>Evaluation infrastructure and experiment orchestration</p>
             </div>
 
             <p>
@@ -32,32 +33,31 @@
 
             <h2>Overview</h2>
             <p>
-                This work started as a six-month migration of an existing live MultiCharts systematic-trading workflow
-                into a private QuantConnect LEAN research-to-live infrastructure platform. The goal was not simply to
-                port strategy code; it was to build the infrastructure layer around research: repeatable optimization,
-                walk-forward validation, credibility gates, portfolio construction, monitored deployment packages, and
-                controlled live execution.
+                Strategy Assayer is an ML evaluation and provenance framework. Search finds candidates.
+                Evaluation decides whether they are real. A result that only looks good because many
+                variants were tried does not clear the gates: walk-forward holdout, randomized control
+                arms, null distributions, multiple-trial correction, blocking promotion rules, and
+                hash-stamped run records (plan hash, code SHA, engine version).
             </p>
             <p>
-                The public <code>lean-optimizer-public</code> repository exposes the optimizer-engine slice of the
-                private
-                platform. It compiles C# strategies once, runs warm Docker containers with persistent .NET harness
-                processes, and searches parameter space via GA, LHS, Bayesian/Optuna TPE, and local-grid stages. The
-                private system adds IBKR data ingestion, WFO/WFAC credibility validation, portfolio construction,
-                prediction bands, parameter-staleness monitoring, live/paper deployment packaging, dashboard approval,
-                and post-trade analytics.
+                Underneath that is a parallel experiment orchestration engine: compile once, warm
+                worker pools, a persistent harness, and directed search (genetic, Latin Hypercube,
+                Bayesian/Optuna TPE, local grid). The expensive tests are routine because the engine
+                makes them cheap. The evaluation workload is QuantConnect LEAN. The public
+                <code>lean-optimizer-public</code> repository exposes the orchestration-engine slice;
+                the private platform adds the evaluation and promotion pipeline.
             </p>
 
             <h2>Measured Optimizer Performance</h2>
             <p>
-                Public optimizer benchmark against LEAN CLI's built-in
-                <code>lean optimize --strategy "grid search"</code>
-                on a 7-parameter space (679,140 grid points), 15 parallel workers, same strategy, same data:
+                Public optimizer benchmark against the engine CLI's built-in exhaustive grid search
+                on a 7-parameter space (679,140 grid points), 15 parallel workers, same workload,
+                same data:
             </p>
             <table>
                 <tr>
                     <th></th>
-                    <th>LEAN CLI Grid Search</th>
+                    <th>Exhaustive grid (CLI baseline)</th>
                     <th>lean-optimizer (GA)</th>
                 </tr>
                 <tr>
@@ -89,108 +89,106 @@
             <p>
                 The two advantages are independent and compound: the persistent harness yields ~1.8x higher throughput
                 per worker, and the GA's directed search converges in 1,112x fewer evaluations. Combined: what takes
-                LEAN CLI's grid search an estimated ~88 hours completes in under 3 minutes. I do not claim a measured
-                multiplier for the full private WFO/WFAC research pipeline; that is described qualitatively as a move
-                from manual one-off backtests to an automated walk-forward credibility pipeline.
+                the CLI grid search an estimated ~88 hours completes in under 3 minutes. I do not claim a measured
+                multiplier for the full private walk-forward evaluation pipeline; that is described qualitatively as a
+                move from one-off runs to an automated credibility pipeline.
             </p>
 
-            <h2>Research-to-Live Platform Scope</h2>
+            <h2>Evaluation and Promotion Pipeline</h2>
             <p>
-                The private platform spans the full research-to-live loop:
+                The private platform spans the full experiment-to-promotion loop:
             </p>
             <ol>
-                <li>IBKR data ingestion and backfill</li>
-                <li>C# LEAN strategy packaging and Python strategy ports</li>
-                <li>Parameter-space definition through YAML research plans</li>
-                <li>GA, grid, and Bayesian parameter optimization</li>
+                <li>Data ingestion and backfill</li>
+                <li>Workload packaging and experiment ports</li>
+                <li>Parameter-space definition through YAML experiment plans</li>
+                <li>GA, grid, and Bayesian parameter search</li>
                 <li>Out-of-sample evaluation on held-out windows</li>
-                <li>WFO/WFAC credibility scoring</li>
-                <li>Graduated credibility verdicts with absolute risk floors</li>
-                <li>Portfolio construction and sleeve sizing</li>
-                <li>Forward prediction bands and drawdown kill-lines</li>
+                <li>Walk-forward credibility scoring</li>
+                <li>Graduated verdicts with absolute floors</li>
+                <li>Composition and sizing</li>
+                <li>Forward prediction bands and kill-lines</li>
                 <li>Parameter-staleness monitoring</li>
-                <li>Dashboard review and manually approved deployment packages</li>
-                <li>Post-trade analytics from the IBKR fill ledger</li>
+                <li>Dashboard review and manually approved promotion packages</li>
+                <li>Post-promotion monitoring from the fill ledger</li>
             </ol>
 
             <h2>Validation Discipline</h2>
             <p>
-                The platform is intentionally conservative. It has evaluated 8 strategy families across 340 symbols
-                with full credibility verdicts, drawing on a corpus of more than 11,000 test plans, 60,000
-                walk-forward windows, and 4.3 million individual backtests. Verdicts are graduated economic-quality
-                scores (0&ndash;10, banded from strong to poor) with absolute floors: a candidate whose returns or
-                drawdowns breach the floors is blocked outright, regardless of how well it scores elsewhere. Nearly
-                half of all scored runs land in the blocked band, and only two strategy families have ever passed the
-                gates and been promoted to live/paper deployment. That rejection behavior is the system's purpose:
-                preventing attractive but fragile backtests from reaching live trading.
+                The platform is intentionally conservative. It has scored 11 experiment families across 350+
+                evaluation tasks with full credibility verdicts, drawing on a corpus of more than 25,000 experiment
+                plans, 86,000 walk-forward windows, and 5.2 million individual evaluation runs. Verdicts are
+                graduated quality scores (0&ndash;10, banded from strong to poor) with absolute floors: a candidate
+                that breaches the floors is blocked outright, regardless of how well it scores elsewhere. Of 1,693
+                scored runs, 435 were blocked. Promotion is the exception; preventing attractive but fragile
+                evaluations from shipping is the system's purpose.
             </p>
             <p>
-                Scoring is walk-forward and benchmark-relative. Every candidate is judged on stitched out-of-sample
+                Scoring is walk-forward and baseline-relative. Every candidate is judged on stitched out-of-sample
                 performance from a walk-forward loop whose re-optimization schedule mirrors how it would actually be
-                re-tuned in live operation, and the headline metric is capital efficiency relative to passively
-                holding the underlying &mdash; a strategy has to beat the do-nothing alternative, not just look good in
-                isolation. Statistical credibility checks &mdash; Deflated Sharpe Ratio, combinatorially purged
-                cross-validation, bootstrap confidence intervals, probability-of-backtest-overfitting &mdash; are
-                computed and persisted as diagnostics and guardrails rather than verdict inputs, accumulating until
-                live outcomes allow them to be calibrated against realized P&amp;L.
+                re-tuned in production, and the headline metric has to beat the do-nothing alternative, not just look
+                good in isolation. Statistical credibility checks &mdash; multiple-trial correction, combinatorially
+                purged cross-validation, bootstrap confidence intervals, probability of selection overfitting &mdash;
+                are computed and persisted as diagnostics and guardrails rather than verdict inputs, accumulating
+                until live outcomes allow them to be calibrated against realized results.
             </p>
             <p>
-                The strongest guardrail is a random-entry null distribution: the complete walk-forward loop is re-run
-                dozens of times with entries replaced by seeded random signals, measuring whether the optimization
-                process can manufacture an equally attractive result from pure noise. Distributed across the compute
-                fleet through the shared work queue, a 50-seed null distribution completes in about two minutes,
-                making the test routine rather than prohibitive. Live behavior is then compared against a
-                pre-committed forward expected distribution rather than against in-regime backtest headlines.
+                The strongest guardrail is a randomized-control null distribution: the complete walk-forward loop is
+                re-run dozens of times with the signal replaced by seeded random entries, measuring whether the
+                optimization process can manufacture an equally attractive result from pure noise. Distributed across
+                the compute fleet through the shared work queue, a 50-seed null distribution completes in about two
+                minutes, making the test routine rather than prohibitive. Production behavior is then compared
+                against a pre-committed forward expected distribution rather than against in-regime evaluation
+                headlines.
             </p>
 
-            <h2>Research Orchestrator</h2>
+            <h2>Experiment Orchestrator</h2>
             <p>
-                The platform includes a service-based Research Orchestrator outside the main web UI. It can run the
-                research chain unattended for days: data pre-flight, symbol download, Discover, parameter-range
-                validation, WFO bake-off, WFO-to-WFAC promotion, composition, and packaged backtest. The orchestrator
-                interleaves IBKR-throttled minute downloads with otherwise-idle research compute, dispatching each
-                symbol's research once its data is ready.
+                The platform includes a service-based experiment orchestrator outside the main web UI. It can run the
+                evaluation chain unattended for days: data pre-flight, download, Discover, parameter-range
+                validation, walk-forward bake-off, credibility promotion, composition, and packaged evaluation. The
+                orchestrator interleaves throttled data downloads with otherwise-idle research compute, dispatching
+                each task's evaluation once its data is ready.
             </p>
             <p>
-                A bounded Research Steward runs as a separate LLM-guided layer. A deterministic queue runner keeps
-                backtests running from a curated backlog; the LLM steward periodically reads results, writes findings,
-                and queues the next experiments. Its trust boundary is deliberately narrow: it can read and call a
-                restricted steward CLI, but has no raw shell, write, git, database, or live-trading access.
+                A bounded evaluation steward runs as a separate LLM-guided layer. A deterministic queue runner keeps
+                evaluations running from a curated backlog; the LLM steward periodically reads results, writes
+                findings, and queues the next experiments. Its trust boundary is deliberately narrow: it can read and
+                call a restricted steward CLI, but has no raw shell, write, git, database, or production-promotion
+                access.
             </p>
             <p>
-                Research orchestration is distinct from live trading. Research can run unattended; real-money deployment
-                remains gated by dashboard review and manual operator approval.
+                Experiment orchestration is distinct from production promotion. Evaluation can run unattended;
+                promotion remains gated by dashboard review and manual operator approval.
             </p>
 
             <h2>Persistent Harness</h2>
             <p>
                 The public optimizer's core innovation is the persistent .NET harness. Each Docker container runs a
                 long-lived <code>dotnet /Harness/LeanHarness.dll</code> process that reads JSON requests from stdin,
-                runs
-                backtests with full LEAN state reset between runs, and writes JSON responses to stdout. This eliminates
-                per-eval .NET startup, assembly loading, and LEAN engine initialization overhead.
+                runs evaluations with full engine state reset between runs, and writes JSON responses to stdout. This
+                eliminates per-eval .NET startup, assembly loading, and engine initialization overhead.
             </p>
             <p>
-                The harness uses LEAN's regression test reset sequence:
+                The harness uses the engine's regression-test reset sequence:
                 <code>Config.Reset()</code>, <code>Composer.Instance.Reset()</code>,
-                <code>SymbolCache.Clear()</code> — the same sequence LEAN's own test suite uses to run multiple
-                backtests in one process. <code>Console.Out</code> is redirected to stderr so LEAN trace/debug output
+                <code>SymbolCache.Clear()</code> — the same sequence the engine's own test suite uses to run multiple
+                evaluations in one process. <code>Console.Out</code> is redirected to stderr so trace/debug output
                 does not corrupt the JSON protocol.
             </p>
 
             <h2>Engineering Controls</h2>
             <ul>
-                <li><strong>Tests:</strong> 2,168 private test functions across 165 files; 130 tests in the public
+                <li><strong>Tests:</strong> 5,400+ private test functions across 454 files; 130 tests in the public
                     optimizer subset.</li>
-                <li><strong>ADRs:</strong> 39 architecture decision records document durable design choices.</li>
+                <li><strong>ADRs:</strong> 99 architecture decision records document durable design choices.</li>
                 <li><strong>AI-assisted development:</strong> Claude Code accelerated implementation, but architecture,
                     validation methodology, deployment controls, tests, and operational ownership remained human-owned.
                 </li>
-                <li><strong>Manual deployment gate:</strong> real-money deployment is never autonomous.</li>
-                <li><strong>Bounded LLM access:</strong> the research steward cannot write code, modify the database,
-                    use git,
-                    or access live-trading controls directly.</li>
-                <li><strong>Multi-agent coordination:</strong> coding agents on the research fleet
+                <li><strong>Manual promotion gate:</strong> production promotion is never autonomous.</li>
+                <li><strong>Bounded LLM access:</strong> the evaluation steward cannot write code, modify the database,
+                    use git, or access promotion controls directly.</li>
+                <li><strong>Multi-agent coordination:</strong> coding agents on the evaluation fleet
                     coordinate through a private board (leases, heartbeats, MCP) rather than a
                     shared chat. See
                     <a class="contact-link" href="/#agent-coord">agent-coord</a>
@@ -202,17 +200,16 @@
                 The genetic algorithm at the core of lean-optimizer is the same class of algorithm I developed at Togai
                 InfraLogic, where my research in fuzzy logic and genetic algorithms was published at
                 IEEE and NASA conferences. Today, the same optimization principles run inside a modern
-                LEAN-based research infrastructure stack.
+                evaluation-infrastructure stack.
             </p>
 
             <h2>Tech Stack</h2>
             <ul>
                 <li>Python 3.12, Optuna, NumPy, SciPy, pandas</li>
-                <li>C# / .NET, QuantConnect LEAN, persistent harness</li>
+                <li>C# / .NET, persistent evaluation harness</li>
                 <li>Docker, warm worker pools, read-only data mounts</li>
                 <li>FastAPI, Jinja2, HTMX, Bootstrap</li>
-                <li>IBKR Gateway, QuantConnect live deployment, IBKR fill ledger</li>
-                <li>Systemd user timers, service-based research orchestration</li>
+                <li>Systemd user timers, service-based experiment orchestration</li>
                 <li>NVIDIA DGX Spark: 20-core ARM CPU, GB10 GPU, 128GB unified RAM</li>
             </ul>
 
@@ -222,6 +219,7 @@
             <h2>Contact</h2>
             <p>Feel free to reach out:</p>
             <ul style="list-style: none; padding-left: 0;">
+                <li><strong>Location:</strong> Atlanta / Remote</li>
                 <li><strong>Email:</strong> <span id="email"></span></li>
                 <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/" target="_blank"
                         rel="noopener noreferrer">linkedin.com/in/toddespy</a></li>
