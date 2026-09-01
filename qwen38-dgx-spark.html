@@ -22,7 +22,8 @@
         <p>That distinction matters because high local inference throughput can create the impression that a model fitting comfortably inside a sub-100-GB working footprint is approaching frontier-model utility. My tests do not support that conclusion. The tokens per second are real. So is the useful work. But throughput and utility are different measurements: as the tasks became harder, limitations in reasoning, output volume, edit strategy, and harness behavior became visible long before raw decode speed became a problem.</p>
 
         <h2>1. DFlash2 works — and my coding workload is a particularly good case</h2>
-        <p>The basic performance claim reproduced. With identical prompts, <code>max_tokens=3072</code>, temperature zero, and thinking disabled, Qwen3.8-27B reached 75.7 output tokens/second on the coding workload through SGLang/DFlash2 versus 12.5 through llama.cpp with a GGUF: a 6.1× gain.</p>
+        <p>The basic performance claim reproduced. I ran the same generation settings — <code>max_tokens=3072</code>, temperature zero, thinking disabled — on three prompt shapes chosen to span how predictable the next tokens are: a coding completion, a step-by-step math derivation, and a stretch of ordinary prose. Speculative decoding should help most on the structured end of that range.</p>
+        <p>On the coding prompt, Qwen3.8-27B reached 75.7 output tokens/second through SGLang/DFlash2 versus 12.5 through llama.cpp with a GGUF: a 6.1× gain.</p>
         <div class="project"><table style="width:100%; border-collapse:collapse;"><thead><tr><th style="text-align:left;">Workload</th><th>Qwen3.8 · SGLang</th><th>Qwen3.8 · llama.cpp</th><th>Gain</th><th>Coder-Next · llama.cpp</th></tr></thead><tbody>
         <tr><td>Code</td><td style="text-align:center;">75.7 tok/s</td><td style="text-align:center;">12.5</td><td style="text-align:center;">6.1×</td><td style="text-align:center;">52.8</td></tr>
         <tr><td>Math</td><td style="text-align:center;">62.0 tok/s</td><td style="text-align:center;">12.4</td><td style="text-align:center;">5.0×</td><td style="text-align:center;">52.5</td></tr>
@@ -56,7 +57,7 @@
         <p>Another startup failure came from the draft model's missing <code>refs/main</code>. The recipe downloads into a pinned snapshot directory, but SGLang's speculative-alias path later resolves configuration without the revision. In offline mode there is no fallback. Writing the pinned SHA into <code>refs/main</code> fixes it.</p>
 
         <h2>5. Then I stopped benchmarking tokens and gave it real work</h2>
-        <p>The first backlog task was a narrow Phase 2 item in BuildLoop: refuse a post from a watcher whose lock file remains but whose process is dead. Fourteen acceptance tests were written and committed before any agent ran. The gate was verified failing for the expected reason. Each arm ran from the same base commit in an isolated worktree.</p>
+        <p>The first backlog task was a small production-hardening change: refuse work from a watcher whose lock file is still on disk after the process has died. Fourteen acceptance tests were written and committed before any agent ran. The gate was verified failing for the expected reason. Each arm ran from the same base commit in an isolated worktree.</p>
         <div class="project"><table style="width:100%; border-collapse:collapse;"><thead><tr><th>Arm</th><th>Harness</th><th>Gate</th><th>Attempts</th><th>Wall</th></tr></thead><tbody>
         <tr><td>Grok</td><td>Agentic live session</td><td style="text-align:center;">14/14</td><td style="text-align:center;">1</td><td style="text-align:center;">Fast</td></tr>
         <tr><td>Qwen</td><td>Qwen Code CLI</td><td style="text-align:center;">14/14</td><td style="text-align:center;">1</td><td style="text-align:center;">889 s</td></tr>
@@ -66,7 +67,7 @@
         <p>That changed the question. Instead of asking, “Can Qwen act as an autonomous coding agent?” I started asking, “What is the cheapest harness that reliably completes each shape of work?”</p>
 
         <h2>6. Multi-file work did not require an agent either</h2>
-        <p>Round two was a genuinely multi-file task: implement the <code>WORKFLOW.md</code> policy loader across three files and preserve a design contract that the specification stated but the code did not enforce. Twenty-one tests were preregistered.</p>
+        <p>Round two was a genuinely multi-file task: implement a policy loader across three files and preserve a design contract that the specification stated but the code did not enforce. Twenty-one tests were preregistered.</p>
         <div class="project"><table style="width:100%; border-collapse:collapse;"><thead><tr><th>Context strategy</th><th>Gate</th><th>Attempts</th><th>Wall</th><th>Completion tokens</th></tr></thead><tbody>
         <tr><td>Three files named in spec</td><td style="text-align:center;">21/21</td><td style="text-align:center;">1</td><td style="text-align:center;">48 s</td><td style="text-align:center;">2,342</td></tr>
         <tr><td>Whole package, no file hint</td><td style="text-align:center;">21/21</td><td style="text-align:center;">1</td><td style="text-align:center;">62 s</td><td style="text-align:center;">2,394</td></tr></tbody></table></div>
@@ -79,9 +80,9 @@
         <p>The lesson was more useful than the false failure: <strong>when repeated model attempts plateau on exactly the same failures, a broken gate should become the null hypothesis.</strong> An automated development system needs to distrust its evaluator as well as its worker.</p>
 
         <h2>8. The first real ceiling was output volume</h2>
-        <p>Round three moved to a 1,070-line <code>controller.py</code> and a security-relevant git-porcelain path guard: quoted and escaped paths, renames checked on both sides, and path traversal. This required understanding and correcting subtle existing logic rather than adding a small isolated feature.</p>
+        <p>Round three moved to a ~1,000-line orchestration module and a security-relevant path guard over git status output: quoted and escaped paths, renames checked on both sides, and path traversal. This required understanding and correcting subtle existing logic rather than adding a small isolated feature.</p>
         <div class="project"><table style="width:100%; border-collapse:collapse;"><thead><tr><th>Edit strategy</th><th>Best gate</th><th>Existing suite</th><th>Cost</th></tr></thead><tbody>
-        <tr><td>Whole 1,070-line file</td><td style="text-align:center;">0/4 successful rounds</td><td style="text-align:center;">—</td><td style="text-align:center;">53,493 tok · 18 min</td></tr>
+        <tr><td>Whole ~1,000-line file</td><td style="text-align:center;">0/4 successful rounds</td><td style="text-align:center;">—</td><td style="text-align:center;">53,493 tok · 18 min</td></tr>
         <tr><td>FUNC / DELETE / IMPORT, AST-spliced</td><td style="text-align:center;">17/19</td><td style="text-align:center;">116/116</td><td style="text-align:center;">8,893 tok · 4 min</td></tr></tbody></table></div>
         <p>Whole-file output collapsed. Two rounds degraded into prose without usable edit blocks; two produced syntax errors. The same model had held its output protocol cleanly across roughly 250 lines and three files in round two. Surgical edit verbs plus AST splicing made the task tractable immediately.</p>
         <p>That suggests the practical limit I hit was not “multi-file work” or even task complexity by itself. It was asking this model to emit too much existing source in one response.</p>
@@ -111,7 +112,7 @@
         <p>The useful unit is completed, validated work — not tokens generated and not agent turns.</p>
 
         <h2>What I would test next</h2>
-        <p>The next round is a pure refactor: split the 1,070-line <code>controller.py</code> without changing behavior, using the existing 116-test suite as the acceptance criterion. That tests whether the model can choose sensible module seams and execute a higher-blast-radius many-file change without the crutch of new feature logic.</p>
+        <p>The next round is a pure refactor: split that ~1,000-line module without changing behavior, using the existing 116-test suite as the acceptance criterion. That tests whether the model can choose sensible module seams and execute a higher-blast-radius many-file change without the crutch of new feature logic.</p>
         <p>Two other boundaries remain open: an ambiguous specification, where the correct behavior is to ask rather than guess, and a task without a deterministic gate, where review quality and human verification cost become part of the result.</p>
 
         <div class="project"><h3>Reproducibility notes</h3>
