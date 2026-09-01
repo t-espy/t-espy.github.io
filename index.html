@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todd Espy - AI Platform Engineer</title>
     <meta name="description"
-        content="AI Platform Engineer in Atlanta / Remote. Evaluation harnesses, agent orchestration, and production deployment. Strategy Assayer, langgraph-factory, agent-coord." />
+        content="AI Platform Engineer in Atlanta / Remote. Evaluation harnesses, agent orchestration, and production deployment. Strategy Assayer, langgraph-factory, Meetup Finder." />
     <link rel="stylesheet" href="styles.css" />
     <script src="site-nav.js" defer></script>
 </head>
@@ -24,32 +24,25 @@
 
             <main class="content">
             <p>
-                I build the infrastructure that makes AI results defensible: evaluation harnesses, agent orchestration,
-                and the deployment layer underneath both.
+                I make agent and model work pass gates you can show a reviewer: evaluation harnesses,
+                orchestration, and the promotion layer underneath both.
             </p>
             <p>
-                Model and prompt improvements are easy to overstate when many variants are tested and only the winner
-                is reported. I build evaluation systems designed to make that process explicit: randomized control
-                arms, null distributions, multiple-trial correction, held-out evaluation, blocking gates, and
-                hash-stamped run provenance. A result that clears those gates is one you can defend in front of a
-                technical or business reviewer.
+                Strategy Assayer converged a 679,140-point search in 611 evaluations against an ~88-hour
+                grid-search extrapolation. I also ship production software with the same discipline -
+                plans and ADRs first, independent review, then code.
             </p>
             <p>
                 Before that, a decade-plus delivering production systems in large enterprise and public-sector
                 environments - including Kaiser Permanente, Walmart, and a state DOT - where the requirement was uptime,
-                not a demo. Recent work: a multi-agent code-generation pipeline on LangGraph with automated build-fix
-                loops, local models on a DGX Spark, and a parallel experiment engine that converged a 679,140-point
-                parameter space in 611 evaluations, under three minutes against an ~88-hour grid-search extrapolation.
-            </p>
-            <p>
-                Published research in fuzzy logic and genetic algorithms through IEEE, NASA, and DOE, five granted
-                speech-recognition patents, and AWS ML / AI certifications are in
+                not a demo. Published research, five granted speech-recognition patents, and AWS ML / AI certifications
+                are in
                 <a class="contact-link" href="/technical-credentials.html">Technical Credentials</a>.
             </p>
 
             <h2>Where I Add Value</h2>
             <p>
-                AI platform engineering: evaluation infrastructure, agentic systems, and production deployment - 
+                AI platform engineering: evaluation infrastructure, agentic systems, and production deployment -
                 roles where reliability, verification, and orchestration matter.
             </p>
 
@@ -75,6 +68,14 @@
                     ~88-hour grid-search extrapolation. The private platform adds the evaluation and promotion
                     pipeline: 13 experiment families, 25,000+ experiment plans, 86,000 walk-forward windows, and
                     5.2 million evaluation runs. Production promotion is manually gated.
+                </p>
+                <p>
+                    The Assayer fleet runs a coordination board I built for coding agents on separate machines
+                    (<code>agent-coord</code>): leased claims, heartbeats, MCP attach, CLI for humans. It is not a
+                    task runner. It answers who is working on what when a worker can die, and a finding posted as a
+                    card survives context compaction. Private infrastructure; available on request. See also the
+                    <a class="contact-link" href="methodology.html#agent-coord-board">session-memory note</a>
+                    in the methodology.
                 </p>
                 <div class="stats">
                     <div class="stat"><span class="stat-value">25,000+</span><span class="stat-label">experiment
@@ -156,62 +157,7 @@
                 </p>
             </div>
 
-            <div class="project" id="agent-coord">
-                <h2>agent-coord - Coordination Board for AI Coding Agents</h2>
-                <p>
-                    A coordination board for AI coding agents on separate machines. It is not a task
-                    runner or a build queue: it answers who is working on what when any worker can
-                    die. Claims are leased and heartbeaten; identity comes from the bearer token;
-                    the daemon is stateless over Postgres. Agents attach over MCP; humans and
-                    scripts drive the same board through a CLI.
-                </p>
-                <p>
-                    Built for the
-                    <a class="contact-link" href="lean-optimizer.html">Strategy Assayer</a>
-                    fleet and used in production across those boxes. A finding posted as a card
-                    survives a context compaction that would otherwise lose it; that is the same
-                    <a class="contact-link" href="methodology.html#agent-coord-board">session-memory
-                        problem</a>
-                    the methodology page describes, implemented as infrastructure rather than
-                    convention.
-                </p>
-                <div class="tags">
-                    <span class="tag">Python</span><span class="tag">Postgres</span>
-                    <span class="tag">MCP</span><span class="tag">Multi-Agent</span>
-                    <span class="tag">CLI</span>
-                </div>
-                <p class="repo-note">Private infrastructure; available on request.</p>
-            </div>
-
-            <h2>Also shipping</h2>
-            <p>
-                Production systems that are not the hiring case, still live:
-                <a class="contact-link" href="https://route-forge.com" target="_blank"
-                    rel="noopener noreferrer">Route Forge</a>
-                (multi-stop route planning),
-                <a class="contact-link" href="https://groundworksites.net" target="_blank"
-                    rel="noopener noreferrer">Groundwork Sites</a>
-                (AI-assisted website delivery), and
-                <a class="contact-link" href="https://assetsforge.net" target="_blank"
-                    rel="noopener noreferrer">Assets Forge</a>
-                (AI-generated fine art marketplace).
-            </p>
-
             <h2>Writing</h2>
-            <div class="project">
-                <h2><a class="contact-link" href="autonomous-improvement-rate.html">Autonomous Improvement Rate</a></h2>
-                <p>
-                    A simple multiplicative model for how fast autonomous systems improve: iteration throughput ×
-                    information gained per iteration × learning efficiency. The framework generalizes ideas from
-                    self-driving laboratories to software development, computational research, simulation, robotics,
-                    and autonomous physical systems.
-                </p>
-                <div class="tags">
-                    <span class="tag">Autonomous Systems</span><span class="tag">Computational Research</span>
-                    <span class="tag">AI Engineering</span><span class="tag">Research Methodology</span>
-                </div>
-            </div>
-
             <div class="project">
                 <h2><a class="contact-link" href="qwen38-dgx-spark.html">Putting Qwen3.8-27B to Work on a DGX Spark</a></h2>
                 <p>
@@ -237,41 +183,6 @@
                 <div class="tags">
                     <span class="tag">AI Engineering</span><span class="tag">Agentic Workflows</span>
                     <span class="tag">Methodology</span><span class="tag">ADRs</span>
-                </div>
-            </div>
-
-            <div class="project">
-                <h2><a class="contact-link"
-                        href="https://www.linkedin.com/feed/update/urn:li:activity:7457478527844683776/" target="_blank"
-                        rel="noopener noreferrer">Open-Sourcing lean-optimizer: Design Decisions Behind
-                        a Parallel Optimization Engine</a></h2>
-                <p>
-                    LinkedIn post announcing the open-source release of lean-optimizer and walking through its three
-                    core design decisions: a compile-once persistent harness in warm Docker containers for ~1.8×
-                    throughput, directed search in place of exhaustive grid search, and a genetic algorithm that
-                    converged in 611 evaluations against a 679,140-point parameter space.
-                </p>
-                <div class="tags">
-                    <span class="tag">LinkedIn Post</span><span class="tag">Experiment Orchestration</span>
-                    <span class="tag">Genetic Algorithms</span><span class="tag">Open Source</span>
-                </div>
-            </div>
-
-            <div class="project">
-                <h2><a class="contact-link"
-                        href="https://www.linkedin.com/feed/update/urn:li:activity:7437638102040403969/" target="_blank"
-                        rel="noopener noreferrer">langgraph-factory: Multi-Agent Code Generation on
-                        Local LLMs</a></h2>
-                <p>
-                    LinkedIn post announcing the open-source release of langgraph-factory: a foreman model for
-                    architecture planning and build diagnostics paired with a coder model for file generation, plus a
-                    tiered build-failure recovery layer - deterministic fixes, reviewer-guided corrections, spin
-                    detection, and failure-informed regeneration. A sample run generated a 24-file blog platform in
-                    266 seconds, entirely on local infrastructure.
-                </p>
-                <div class="tags">
-                    <span class="tag">LinkedIn Post</span><span class="tag">LangGraph</span>
-                    <span class="tag">Local LLMs</span><span class="tag">Multi-Agent</span>
                 </div>
             </div>
 
