@@ -90,6 +90,19 @@ a:focus-visible {
     margin-top: 0;
 }
 
+.sidebar-column {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.sidebar-column .sidebar {
+    width: 100%;
+}
+
+.credentials-sidebar {
+    margin-top: 1.5rem;
+}
+
 @media (max-width: 1024px) {
     .layout {
         flex-direction: column;
@@ -101,6 +114,32 @@ a:focus-visible {
         border-left: none;
         border-top: 1px solid #ccc;
         box-shadow: none;
+    }
+
+    .home-layout > .main-column,
+    .home-layout > .sidebar-column {
+        display: contents;
+    }
+
+    .home-layout .banner {
+        order: 1;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .home-layout .contact-sidebar {
+        order: 2;
+        margin-top: 0;
+        margin-bottom: 2rem;
+    }
+
+    .home-layout .content {
+        order: 3;
+        width: 100%;
+    }
+
+    .home-layout .credentials-sidebar {
+        order: 4;
     }
 }
 

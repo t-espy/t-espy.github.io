@@ -14,14 +14,15 @@
 <body>
     <site-nav></site-nav>
 
-    <div class="layout">
-        <main class="content">
+    <div class="layout home-layout">
+        <div class="main-column">
             <div class="banner">
                 <h1>Todd Espy</h1>
                 <p>AI Platform Engineer</p>
                 <p>Agentic systems · Evaluation infrastructure · Production deployment</p>
             </div>
 
+            <main class="content">
             <p>
                 I build the infrastructure that makes AI results defensible: evaluation harnesses, agent orchestration,
                 and the deployment layer underneath both.
@@ -279,46 +280,54 @@
                 </p>
             </div>
 
-        </main>
+            </main>
+        </div>
 
-        <aside class="sidebar" id="contact">
-            <h2>Contact</h2>
-            <p>Feel free to reach out:</p>
-            <ul style="list-style: none; padding-left: 0;">
-                <li><strong>Location:</strong> Atlanta / Remote</li>
-                <li><strong>Email:</strong> <span id="email"></span></li>
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/" target="_blank"
-                        rel="noopener noreferrer">linkedin.com/in/toddespy</a></li>
-            </ul>
-            <h2 style="margin-top: 2rem;">Education</h2>
-            <ul style="list-style: none; padding-left: 0;">
-                <li>MSEE, Duke University</li>
-                <li>BS Physics, Bob Jones University</li>
-            </ul>
+        <div class="sidebar-column">
+            <aside class="sidebar contact-sidebar" id="contact">
+                <h2>Contact</h2>
+                <p>Feel free to reach out:</p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li><strong>Location:</strong> Atlanta / Remote</li>
+                    <li><strong>Email:</strong> <span id="email"></span></li>
+                    <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/" target="_blank"
+                            rel="noopener noreferrer">linkedin.com/in/toddespy</a></li>
+                </ul>
+            </aside>
 
-            <h2 style="margin-top: 2rem;">Certifications</h2>
-            <div class="cert-badges">
-                <a href="https://www.coursera.org/account/accomplishments/verify/4RZB8QHPYBSW" target="_blank"
-                    rel="noopener noreferrer"><img src="images/StanfordMLCert.jpeg"
-                        alt="Machine Learning (Stanford Online, Andrew Ng)" width="160" /></a>
-                <a href="https://www.credly.com/badges/0aa4f899-e591-4644-96ed-97cb862f94ab/public_url" target="_blank"
-                    rel="noopener noreferrer"><img src="images/aws-certified-machine-learning-engineer-associate-e.png"
-                        alt="AWS Certified Machine Learning Engineer – Associate" width="180" /></a>
-                <a href="https://www.credly.com/badges/ef070385-9cd4-4596-8289-5796bf4c61e4/public_url" target="_blank"
-                    rel="noopener noreferrer"><img src="images/aws-certified-ai-practitioner-early-adopter600x600.png"
-                        alt="AWS Certified AI Practitioner" width="180" /></a>
-                <a href="https://www.credly.com/badges/6e18930b-2286-423c-a406-49bb93acd98d/public_url" target="_blank"
-                    rel="noopener noreferrer"><img src="images/aws-certified-cloud-practitioner.png"
-                        alt="AWS Certified Cloud Practitioner" width="160" /></a>
-            </div>
-            <h2 style="margin-top: 2rem;">Recognition</h2>
-            <ul style="list-style: none; padding-left: 0;">
-                <li>5 granted patents</li>
-                <li>IEEE / NASA publications</li>
-                <li>Speech Technology Magazine &mdash; 2&times; Innovative Solution Award</li>
-                <li>VoiceXML Forum Certified Developer</li>
-            </ul>
-        </aside>
+            <aside class="sidebar credentials-sidebar">
+                <h2>Education</h2>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>MSEE, Duke University</li>
+                    <li>BS Physics, Bob Jones University</li>
+                </ul>
+
+                <h2 style="margin-top: 2rem;">Certifications</h2>
+                <div class="cert-badges">
+                    <a href="https://www.coursera.org/account/accomplishments/verify/4RZB8QHPYBSW" target="_blank"
+                        rel="noopener noreferrer"><img src="images/StanfordMLCert.jpeg"
+                            alt="Machine Learning (Stanford Online, Andrew Ng)" width="160" /></a>
+                    <a href="https://www.credly.com/badges/0aa4f899-e591-4644-96ed-97cb862f94ab/public_url"
+                        target="_blank" rel="noopener noreferrer"><img
+                            src="images/aws-certified-machine-learning-engineer-associate-e.png"
+                            alt="AWS Certified Machine Learning Engineer – Associate" width="180" /></a>
+                    <a href="https://www.credly.com/badges/ef070385-9cd4-4596-8289-5796bf4c61e4/public_url"
+                        target="_blank" rel="noopener noreferrer"><img
+                            src="images/aws-certified-ai-practitioner-early-adopter600x600.png"
+                            alt="AWS Certified AI Practitioner" width="180" /></a>
+                    <a href="https://www.credly.com/badges/6e18930b-2286-423c-a406-49bb93acd98d/public_url" target="_blank"
+                        rel="noopener noreferrer"><img src="images/aws-certified-cloud-practitioner.png"
+                            alt="AWS Certified Cloud Practitioner" width="160" /></a>
+                </div>
+                <h2 style="margin-top: 2rem;">Recognition</h2>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>5 granted patents</li>
+                    <li>IEEE / NASA publications</li>
+                    <li>Speech Technology Magazine &mdash; 2&times; Innovative Solution Award</li>
+                    <li>VoiceXML Forum Certified Developer</li>
+                </ul>
+            </aside>
+        </div>
     </div>
 
     <script>
