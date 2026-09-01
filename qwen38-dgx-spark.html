@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Putting Qwen3.8-27B to Work on a DGX Spark — Todd Espy</title>
+    <meta name="description"
+        content="Engineering notes on running Qwen3.8-27B with SGLang/DFlash2 on a DGX Spark: measured throughput, a safe memory operating point, and which coding work is worth routing locally." />
     <link rel="canonical" href="https://t-espy.github.io/qwen38-dgx-spark.html" />
     <link rel="stylesheet" href="styles.css" />
     <script src="site-nav.js" defer></script>
@@ -113,7 +115,7 @@
         <p>Two other boundaries remain open: an ambiguous specification, where the correct behavior is to ask rather than guess, and a task without a deterministic gate, where review quality and human verification cost become part of the result.</p>
 
         <div class="project"><h3>Reproducibility notes</h3>
-        <p>Measurements were taken August 27, 2026 on one DGX Spark with GB10, 128 GB unified memory (approximately 121 GiB reported usable by Linux), 20 ARM CPU cores, NVIDIA driver 580.126.09, and CUDA 13.0. The Spark was not an empty benchmark appliance: PostgreSQL, coordination services, containers, and normal system processes were also resident, which is why the memory discussion above distinguishes installed memory from memory practically available to SGLang. The harness, preregistered gates, and worktree branches are preserved in <code>~/projects/bakeoff</code>; the pinned launcher and throughput harness are preserved in <code>~/projects/spark-llm</code>.</p>
+        <p>Measurements were taken August 27, 2026 on one DGX Spark with GB10, 128 GB unified memory (approximately 121 GiB reported usable by Linux), 20 ARM CPU cores, NVIDIA driver 580.126.09, and CUDA 13.0. The Spark was not an empty benchmark appliance: PostgreSQL, coordination services, containers, and normal system processes were also resident, which is why the memory discussion above distinguishes installed memory from memory practically available to SGLang. The harness, preregistered gates, worktree branches, pinned launcher, and throughput scripts are retained locally for follow-up; they are not published with this note.</p>
         <p>These are engineering experiments on one machine and a small number of real tasks, not a statistically powered model comparison. Claims above are deliberately limited to what those experiments establish.</p></div>
         <p class="repo-note">Todd Espy · August 27, 2026</p>
     </main></div>
