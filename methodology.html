@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todd Espy — A Discipline for Building Software with AI</title>
+    <title>Todd Espy - A Discipline for Building Software with AI</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="site-nav.js" defer></script>
 </head>
@@ -26,20 +26,20 @@
             <p>
                 One of the more interesting questions about AI-assisted development has little to
                 do with how fast you can generate code. It's how you keep a model from confidently
-                building the wrong thing — or shipping buggy code, drifting the architecture,
-                reaching for off-pattern solutions — and how the project remembers why it was built
+                building the wrong thing - or shipping buggy code, drifting the architecture,
+                reaching for off-pattern solutions - and how the project remembers why it was built
                 the way it was. These are the conventions I've settled on over a year of shipping
                 with AI assistants as the implementation layer.
             </p>
 
             <h2>The premise</h2>
             <p>
-                I architect; an AI assistant implements. That division works well — until it
+                I architect; an AI assistant implements. That division works well - until it
                 doesn't, and the ways it fails are specific. A model will assert an API behavior
                 from memory that the vendor's docs contradict. It will re-derive a metric that's
                 already stored. It will lose, between one session and the next, the reason a
                 decision was made, and quietly reopen a settled question. None of these are
-                failures of capability. They're failures of <em>process</em> — and process is
+                failures of capability. They're failures of <em>process</em> - and process is
                 the part a human still owns.
             </p>
             <p>
@@ -51,7 +51,7 @@
 
             <h2>Decisions are immutable; the record is append-only</h2>
             <p>
-                Durable design decisions live in <strong>Architecture Decision Records</strong> —
+                Durable design decisions live in <strong>Architecture Decision Records</strong> - 
                 one numbered file per decision, in Nygard format: context, decision, consequences.
                 The rule that makes them worth keeping is that <em>an accepted ADR is never
                     edited.</em> To change a decision you write a new record that supersedes the old
@@ -59,14 +59,14 @@
             </p>
             <p>
                 The value isn't documentation for its own sake. It's being able to read what was
-                believed <em>at decision time</em> — including the alternatives that were on the
+                believed <em>at decision time</em> - including the alternatives that were on the
                 table and the reasons they lost. Editing the record to match today's opinion
                 destroys exactly the thing that makes it useful six months later, when a model (or
                 a person) is about to reopen a question that was already settled for reasons no
                 longer visible in the code.
             </p>
             <p>
-                A companion convention covers <em>plans</em> — the working notes for a task in
+                A companion convention covers <em>plans</em> - the working notes for a task in
                 flight. Plans are freely editable right up until the first commit that references
                 them lands; after that, changes are appended as dated updates, never edited in
                 place. Every plan closes with an outcome line: shipped with commit hashes,
@@ -76,7 +76,7 @@
             </p>
             <p class="reference-note">
                 A guard against the obvious failure mode: <strong>ADR theater is worse than no
-                    ADRs.</strong> The convention names when <em>not</em> to write one — routine
+                    ADRs.</strong> The convention names when <em>not</em> to write one - routine
                 choices, bug fixes, style. A record is for decisions that are expensive to
                 reverse, surprising to a future reader, or that rule out an alternative someone
                 would otherwise reach for. When it's unclear, the answer is to ask, not to file.
@@ -87,7 +87,7 @@
                 This is the rule I'd keep if I could keep only one. <strong>Don't assert how an
                     external system behaves from memory when that claim is about to land in a durable
                     document.</strong> APIs, framework defaults, broker constraints, library behavior
-                — fetch the published source, cite the URL inline, and only then write it down.
+                - fetch the published source, cite the URL inline, and only then write it down.
                 Plans seed code; ADRs commit the codebase to a direction. A wrong assumption in
                 either one multiplies into wrong implementation.
             </p>
@@ -98,7 +98,7 @@
                 <h3>The incident this rule is named after</h3>
                 <p>
                     A plan to restructure part of the system committed to several confident claims
-                    about a third-party framework's behavior — all drawn from the model's memory,
+                    about a third-party framework's behavior - all drawn from the model's memory,
                     none verified. A first verification round found multiple wrong API and behavioral
                     claims, <em>and</em> that the plan had missed the vendor's own primary
                     recommendation for the exact scenario entirely.
@@ -106,7 +106,7 @@
                 <p>
                     A second round, checking the alternative the rewrite had dismissed, found that
                     the dismissed option was in fact endorsed by the vendor's staff with code
-                    examples — and surfaced a serious operational hazard the earlier drafts hadn't
+                    examples - and surfaced a serious operational hazard the earlier drafts hadn't
                     mentioned. The same recall-from-memory failure caught us twice in one session,
                     on one decision: first on the chosen path, then on the rejected one.
                 </p>
@@ -135,7 +135,7 @@
                     <th>Belongs in a decision record</th>
                 </tr>
                 <tr>
-                    <td>How I want to collaborate — commit small, don't restart services without asking</td>
+                    <td>How I want to collaborate - commit small, don't restart services without asking</td>
                     <td>Design decisions with consequences for the code itself</td>
                 </tr>
                 <tr>
@@ -143,12 +143,12 @@
                     <td>Reasoning about <em>this</em> codebase a future reader will need</td>
                 </tr>
                 <tr>
-                    <td>Handoff context — what's in flight, what just shipped</td>
-                    <td>"We chose A over B because…" — including deliberate non-action</td>
+                    <td>Handoff context - what's in flight, what just shipped</td>
+                    <td>"We chose A over B because…" - including deliberate non-action</td>
                 </tr>
             </table>
             <p>
-                The repo's hard-rules file carries the terse <em>what</em> — the standing
+                The repo's hard-rules file carries the terse <em>what</em> - the standing
                 constraints a session must not break. Each rule that has real reasoning behind it
                 points to the decision record that holds the <em>why</em>. The rule is the
                 guardrail; the record is the argument. Keeping them separate means the guardrail
@@ -168,20 +168,20 @@
             <h2>The artifacts</h2>
             <p>
                 Concretely, this is what lives in a repo run under these conventions. None of it
-                is exotic — the discipline is in keeping it current and letting it actually
+                is exotic - the discipline is in keeping it current and letting it actually
                 constrain the work, session after session.
             </p>
             <table class="credential-table">
                 <tr>
                     <td>CLAUDE.md</td>
                     <td>The hard-rules file a fresh session reads first. Standing constraints, terminology,
-                        architecture must-knows, and the gotchas already solved — each load-bearing rule
+                        architecture must-knows, and the gotchas already solved - each load-bearing rule
                         cross-linked to its decision record.</td>
                 </tr>
                 <tr>
                     <td>docs/adr/</td>
                     <td>Numbered, immutable decision records in Nygard format, with a maintained index and a
-                        meta-record (ADR-0001) defining the convention itself — when to write one, and when
+                        meta-record (ADR-0001) defining the convention itself - when to write one, and when
                         not to.</td>
                 </tr>
                 <tr>
@@ -211,7 +211,7 @@
             </p>
             <p class="reference-note">
                 <strong>On scope, plainly:</strong> this is a discipline I've built and validated
-                as a solo architect, with AI assistants as the implementation layer — not a
+                as a solo architect, with AI assistants as the implementation layer - not a
                 process I've run across a team of human contributors, where immutable records and
                 plan handoffs meet different pressures. I think most of it transfers to a team
                 setting, and the decision-record and verification conventions long predate AI. But

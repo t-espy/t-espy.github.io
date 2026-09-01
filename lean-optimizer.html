@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Strategy Assayer — Evaluation Infrastructure — Todd Espy</title>
+    <title>Strategy Assayer - Evaluation Infrastructure - Todd Espy</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="site-nav.js" defer></script>
 </head>
@@ -122,8 +122,8 @@
                 Scoring is walk-forward and baseline-relative. Every candidate is judged on stitched out-of-sample
                 performance from a walk-forward loop whose re-optimization schedule mirrors how it would actually be
                 re-tuned in production, and the headline metric has to beat the do-nothing alternative, not just look
-                good in isolation. Statistical credibility checks &mdash; multiple-trial correction, combinatorially
-                purged cross-validation, bootstrap confidence intervals, probability of selection overfitting &mdash;
+                good in isolation. Statistical credibility checks - multiple-trial correction, combinatorially
+                purged cross-validation, bootstrap confidence intervals, probability of selection overfitting - 
                 are computed and persisted as diagnostics and guardrails rather than verdict inputs, accumulating
                 until live outcomes allow them to be calibrated against realized results.
             </p>
@@ -167,7 +167,7 @@
             <p>
                 The harness uses the engine's regression-test reset sequence:
                 <code>Config.Reset()</code>, <code>Composer.Instance.Reset()</code>,
-                <code>SymbolCache.Clear()</code> — the same sequence the engine's own test suite uses to run multiple
+                <code>SymbolCache.Clear()</code> - the same sequence the engine's own test suite uses to run multiple
                 evaluations in one process. <code>Console.Out</code> is redirected to stderr so trace/debug output
                 does not corrupt the JSON protocol.
             </p>

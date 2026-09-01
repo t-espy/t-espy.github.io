@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Putting Qwen3.8-27B to Work on a DGX Spark — Todd Espy</title>
+    <title>Putting Qwen3.8-27B to Work on a DGX Spark - Todd Espy</title>
     <meta name="description"
         content="Engineering notes on running Qwen3.8-27B with SGLang/DFlash2 on a DGX Spark: measured throughput, a safe memory operating point, and which coding work is worth routing locally." />
     <link rel="canonical" href="https://t-espy.github.io/qwen38-dgx-spark.html" />
@@ -18,18 +18,18 @@
 
         <p>I wanted to know whether a 27-billion-parameter local coding model on a DGX Spark was actually useful in a real software-development workflow. Not whether it could produce an impressive benchmark number, but whether I could hand it work from a real backlog, verify the result mechanically, and decide what work should move off expensive frontier models and onto local compute.</p>
         <p>I started by standing up Qwen3.8-27B with SGLang and DFlash2 speculative decoding, then measured it against Docker Model Runner's llama.cpp path on the same machine. After that I gave the model progressively harder work from my own codebase, with acceptance tests written before the model ran.</p>
-        <p>Some of the published claims held up very well. Some installation and configuration guidance did not survive contact with the current software stack. And the most useful result was not a tokens-per-second number at all: it was learning where this local model belongs in my development pipeline — and where it does not.</p>
+        <p>Some of the published claims held up very well. Some installation and configuration guidance did not survive contact with the current software stack. And the most useful result was not a tokens-per-second number at all: it was learning where this local model belongs in my development pipeline - and where it does not.</p>
         <p>That distinction matters because high local inference throughput can create the impression that a model fitting comfortably inside a sub-100-GB working footprint is approaching frontier-model utility. My tests do not support that conclusion. The tokens per second are real. So is the useful work. But throughput and utility are different measurements: as the tasks became harder, limitations in reasoning, output volume, edit strategy, and harness behavior became visible long before raw decode speed became a problem.</p>
 
-        <h2>1. DFlash2 works — and my coding workload is a particularly good case</h2>
-        <p>The basic performance claim reproduced. I ran the same generation settings — <code>max_tokens=3072</code>, temperature zero, thinking disabled — on three prompt shapes chosen to span how predictable the next tokens are: a coding completion, a step-by-step math derivation, and a stretch of ordinary prose. Speculative decoding should help most on the structured end of that range.</p>
+        <h2>1. DFlash2 works - and my coding workload is a particularly good case</h2>
+        <p>The basic performance claim reproduced. I ran the same generation settings - <code>max_tokens=3072</code>, temperature zero, thinking disabled - on three prompt shapes chosen to span how predictable the next tokens are: a coding completion, a step-by-step math derivation, and a stretch of ordinary prose. Speculative decoding should help most on the structured end of that range.</p>
         <p>On the coding prompt, Qwen3.8-27B reached 75.7 output tokens/second through SGLang/DFlash2 versus 12.5 through llama.cpp with a GGUF: a 6.1× gain.</p>
         <div class="project"><table style="width:100%; border-collapse:collapse;"><thead><tr><th style="text-align:left;">Workload</th><th>Qwen3.8 · SGLang</th><th>Qwen3.8 · llama.cpp</th><th>Gain</th><th>Coder-Next · llama.cpp</th></tr></thead><tbody>
         <tr><td>Code</td><td style="text-align:center;">75.7 tok/s</td><td style="text-align:center;">12.5</td><td style="text-align:center;">6.1×</td><td style="text-align:center;">52.8</td></tr>
         <tr><td>Math</td><td style="text-align:center;">62.0 tok/s</td><td style="text-align:center;">12.4</td><td style="text-align:center;">5.0×</td><td style="text-align:center;">52.5</td></tr>
         <tr><td>Prose</td><td style="text-align:center;">18.1 tok/s</td><td style="text-align:center;">12.4</td><td style="text-align:center;">1.5×</td><td style="text-align:center;">52.7</td></tr></tbody></table></div>
         <p>The gain tracks predictability: code 6.1×, math 5.0×, prose 1.5×. That is exactly what I would expect from speculative decoding. A draft model does best when it can correctly predict blocks of upcoming tokens, and code is highly structured.</p>
-        <p>I also removed speculation while holding the SGLang path constant. Throughput fell to 12.6 tok/s — essentially llama.cpp's 12.5. In this configuration, essentially all of the measured throughput advantage came from DFlash2 speculative decoding, not from switching inference servers by itself.</p>
+        <p>I also removed speculation while holding the SGLang path constant. Throughput fell to 12.6 tok/s - essentially llama.cpp's 12.5. In this configuration, essentially all of the measured throughput advantage came from DFlash2 speculative decoding, not from switching inference servers by itself.</p>
         <pre><code>llama.cpp GGUF Q4_K_M              12.5 tok/s   baseline
 + SGLang kernels + NVFP4 + graphs  12.6 tok/s     +1%
 + DFlash2 speculative decoding     75.7 tok/s   +501%</code></pre>
@@ -46,7 +46,7 @@
         <p>The DGX Spark is specified with 128 GB of unified memory; Linux reports roughly 121 GiB usable to the operating system. Even that OS-visible number should not be read as memory available to a model in a real installation. This Spark also runs PostgreSQL, coordination services, containers, and normal system processes, all drawing from the same unified pool as the GPU workload.</p>
         <p>The recipe discusses <code>mem-fraction-static</code> values around 0.90 and warns that 0.95 can hard-reboot the machine during CUDA-graph capture. On GB10 there is no separate VRAM pool: SGLang is competing for the same unified memory used by the operating system and everything else on the Spark.</p>
         <div class="project"><table style="width:100%; border-collapse:collapse;"><thead><tr><th>Setting</th><th>Peak used</th><th>Available</th><th>KV tokens</th><th>Clock</th><th>Gate</th></tr></thead><tbody>
-        <tr><td style="text-align:center;">0.90</td><td style="text-align:center;">110 GiB</td><td style="text-align:center;">10 GiB</td><td style="text-align:center;">—</td><td style="text-align:center;">2502 MHz</td><td style="text-align:center;">Clean</td></tr>
+        <tr><td style="text-align:center;">0.90</td><td style="text-align:center;">110 GiB</td><td style="text-align:center;">10 GiB</td><td style="text-align:center;">-</td><td style="text-align:center;">2502 MHz</td><td style="text-align:center;">Clean</td></tr>
         <tr><td style="text-align:center;">0.85</td><td style="text-align:center;">108 GiB</td><td style="text-align:center;">13 GiB</td><td style="text-align:center;">1,328,341</td><td style="text-align:center;">2489 MHz</td><td style="text-align:center;">Clean</td></tr>
         <tr><td style="text-align:center;">0.75</td><td style="text-align:center;">99 GiB</td><td style="text-align:center;">22 GiB</td><td style="text-align:center;">1,109,824</td><td style="text-align:center;">2489 MHz</td><td style="text-align:center;">Clean</td></tr></tbody></table></div>
         <p>For my machine, 0.75 is the sensible setting. I could not measure a throughput or quality penalty, and it returned roughly 12 GiB compared with 0.90. The remaining 1.1 million KV tokens are far beyond what my current coding workload can consume. The published crash boundary is useful information; it is not the same thing as a safe operating point for a Spark doing other work at the same time.</p>
@@ -62,7 +62,7 @@
         <tr><td>Grok</td><td>Agentic live session</td><td style="text-align:center;">14/14</td><td style="text-align:center;">1</td><td style="text-align:center;">Fast</td></tr>
         <tr><td>Qwen</td><td>Qwen Code CLI</td><td style="text-align:center;">14/14</td><td style="text-align:center;">1</td><td style="text-align:center;">889 s</td></tr>
         <tr><td>Qwen</td><td>Direct completion</td><td style="text-align:center;">14/14</td><td style="text-align:center;">1</td><td style="text-align:center;">22 s</td></tr></tbody></table></div>
-        <p>All three passed on the first attempt. The same Qwen model took 889 seconds through the agentic CLI and 22 seconds when given the specification plus the current file and asked to return the replacement file directly — about a 40× difference on this task.</p>
+        <p>All three passed on the first attempt. The same Qwen model took 889 seconds through the agentic CLI and 22 seconds when given the specification plus the current file and asked to return the replacement file directly - about a 40× difference on this task.</p>
         <p>That is <strong>not</strong> evidence that agent harnesses generally cost 40×. It is one task, deliberately favorable to a direct completion: a precise specification, one file, and a deterministic gate. What it did establish was that my harness could dominate the cost of this class of work. The agentic run made 43 model turns, opened with roughly 22,000 tokens of context, and grew beyond 45,000 while editing a file it ultimately got right on its first pass.</p>
         <p>That changed the question. Instead of asking, “Can Qwen act as an autonomous coding agent?” I started asking, “What is the cheapest harness that reliably completes each shape of work?”</p>
 
@@ -82,15 +82,15 @@
         <h2>8. The first real ceiling was output volume</h2>
         <p>Round three moved to a ~1,000-line orchestration module and a security-relevant path guard over git status output: quoted and escaped paths, renames checked on both sides, and path traversal. This required understanding and correcting subtle existing logic rather than adding a small isolated feature.</p>
         <div class="project"><table style="width:100%; border-collapse:collapse;"><thead><tr><th>Edit strategy</th><th>Best gate</th><th>Existing suite</th><th>Cost</th></tr></thead><tbody>
-        <tr><td>Whole ~1,000-line file</td><td style="text-align:center;">0/4 successful rounds</td><td style="text-align:center;">—</td><td style="text-align:center;">53,493 tok · 18 min</td></tr>
+        <tr><td>Whole ~1,000-line file</td><td style="text-align:center;">0/4 successful rounds</td><td style="text-align:center;">-</td><td style="text-align:center;">53,493 tok · 18 min</td></tr>
         <tr><td>FUNC / DELETE / IMPORT, AST-spliced</td><td style="text-align:center;">17/19</td><td style="text-align:center;">116/116</td><td style="text-align:center;">8,893 tok · 4 min</td></tr></tbody></table></div>
         <p>Whole-file output collapsed. Two rounds degraded into prose without usable edit blocks; two produced syntax errors. The same model had held its output protocol cleanly across roughly 250 lines and three files in round two. Surgical edit verbs plus AST splicing made the task tractable immediately.</p>
         <p>That suggests the practical limit I hit was not “multi-file work” or even task complexity by itself. It was asking this model to emit too much existing source in one response.</p>
 
         <h2>9. Iteration did not rescue the hard case</h2>
-        <p>The AST-spliced version scored 17/19 on its first attempt. Later attempts got worse: one dropped to 13/19 and two produced syntax errors. The two persistent failures were also the subtle cases — decoding consecutive octal escapes as the bytes of a single UTF-8 character, and normalizing <code>..</code> before the allowlist check.</p>
+        <p>The AST-spliced version scored 17/19 on its first attempt. Later attempts got worse: one dropped to 13/19 and two produced syntax errors. The two persistent failures were also the subtle cases - decoding consecutive octal escapes as the bytes of a single UTF-8 character, and normalizing <code>..</code> before the allowlist check.</p>
         <p>This matters because I had built a draft/review/revise loop specifically to trade free local tokens for wall-clock time. Across these three rounds it never improved the best result, and in round three it actively degraded it. For this model and these tasks, “one shot, run the gate, keep the best result” currently has more evidence behind it than repeated autonomous revision.</p>
-        <p>That is still a provisional conclusion. The experiment has not yet tested ambiguous requirements, broad exploratory work, or tasks without deterministic gates — exactly the places where an agentic loop may earn its overhead.</p>
+        <p>That is still a provisional conclusion. The experiment has not yet tested ambiguous requirements, broad exploratory work, or tasks without deterministic gates - exactly the places where an agentic loop may earn its overhead.</p>
 
         <h2>10. The routing policy I am actually using</h2>
         <p>Three rounds are not a model benchmark. They are enough, however, to establish a useful local operating policy for the work shapes actually tested.</p>
@@ -109,7 +109,7 @@
         <p>I began this work expecting the interesting question to be whether DFlash2 could make a dense 27B model fast enough to use interactively on the Spark. It can. On predictable coding output, the measured acceleration is substantial.</p>
         <p>But once inference became cheap and fast, the bottleneck moved upward. Context construction, number of model turns, output protocol, edit strategy, gate correctness, and task routing started dominating the result.</p>
         <p>That is also why I care about evaluating the entire autonomous loop rather than only the model. The worker proposes code; the build and test system measures it. When the measurement apparatus is wrong, more autonomous iteration can simply produce the wrong conclusion faster. When the harness is wasteful, a faster model mostly burns through an inefficient loop more quickly.</p>
-        <p>The useful unit is completed, validated work — not tokens generated and not agent turns.</p>
+        <p>The useful unit is completed, validated work - not tokens generated and not agent turns.</p>
 
         <h2>What I would test next</h2>
         <p>The next round is a pure refactor: split that ~1,000-line module without changing behavior, using the existing 116-test suite as the acceptance criterion. That tests whether the model can choose sensible module seams and execute a higher-blast-radius many-file change without the crutch of new feature logic.</p>
