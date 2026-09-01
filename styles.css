@@ -108,6 +108,10 @@ a:focus-visible {
         flex-direction: column;
     }
 
+    .home-layout {
+        gap: 0;
+    }
+
     .sidebar {
         width: 100%;
         margin-top: 2rem;
@@ -124,13 +128,26 @@ a:focus-visible {
     .home-layout .banner {
         order: 1;
         width: 100%;
+        margin-bottom: 1rem;
         box-sizing: border-box;
     }
 
     .home-layout .contact-sidebar {
         order: 2;
         margin-top: 0;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .home-layout .contact-sidebar h2 {
+        margin-bottom: 0.35rem;
+    }
+
+    .home-layout .contact-sidebar p,
+    .home-layout .contact-sidebar ul {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
     }
 
     .home-layout .content {
