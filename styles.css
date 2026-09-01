@@ -90,6 +90,15 @@ a:focus-visible {
     margin-top: 0;
 }
 
+.sidebar h2:not(:first-child) {
+    margin-top: 2rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+}
+
 .sidebar-column {
     width: 280px;
     flex-shrink: 0;

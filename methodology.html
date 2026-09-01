@@ -7,6 +7,7 @@
     <title>Todd Espy - A Discipline for Building Software with AI</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="site-nav.js" defer></script>
+    <script src="site-aside.js" defer></script>
 </head>
 
 <body>
@@ -157,7 +158,7 @@
             </p>
             <p id="agent-coord-board">
                 A fourth place is a coordination board, not a document.
-                <a class="contact-link" href="/#agent-coord">agent-coord</a>
+                <a class="contact-link" href="lean-optimizer.html">agent-coord</a>
                 is the production implementation: a Postgres-backed board that
                 coding agents on separate machines claim, heartbeat, and complete
                 against. A finding posted as a card survives the session that found
@@ -220,36 +221,8 @@
 
         </main>
 
-        <aside class="sidebar" id="contact">
-            <h2>Contact</h2>
-            <ul style="list-style: none; padding-left: 0;">
-                <li><strong>Email:</strong> <span id="email"></span></li>
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/" target="_blank"
-                        rel="noopener noreferrer">linkedin.com/in/toddespy</a></li>
-            </ul>
-
-            <h2 style="margin-top: 2rem;">Certifications</h2>
-            <div class="cert-badges">
-                <a href="https://www.credly.com/badges/0aa4f899-e591-4644-96ed-97cb862f94ab/public_url" target="_blank"
-                    rel="noopener noreferrer"><img src="images/aws-certified-machine-learning-engineer-associate-e.png"
-                        alt="AWS Certified Machine Learning Engineer – Associate" width="180" /></a>
-                <a href="https://www.credly.com/badges/ef070385-9cd4-4596-8289-5796bf4c61e4/public_url" target="_blank"
-                    rel="noopener noreferrer"><img src="images/aws-certified-ai-practitioner-early-adopter600x600.png"
-                        alt="AWS Certified AI Practitioner" width="180" /></a>
-                <a href="https://www.credly.com/badges/6e18930b-2286-423c-a406-49bb93acd98d/public_url" target="_blank"
-                    rel="noopener noreferrer"><img src="images/aws-certified-cloud-practitioner.png"
-                        alt="AWS Certified Cloud Practitioner" width="160" /></a>
-            </div>
-        </aside>
+        <site-aside></site-aside>
     </div>
-
-    <script>
-        (function () {
-            var u = "todd.espy", d = "gmail.com", e = u + "@" + d;
-            var s = document.getElementById("email");
-            if (s) s.innerHTML = '<a href="mailto:' + e + '">' + e + '</a>';
-        })();
-    </script>
 </body>
 
 </html>

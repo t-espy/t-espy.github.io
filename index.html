@@ -9,6 +9,7 @@
         content="AI Platform Engineer in Atlanta / Remote. Evaluation harnesses, agent orchestration, and production deployment. Strategy Assayer, langgraph-factory, Meetup Finder." />
     <link rel="stylesheet" href="styles.css" />
     <script src="site-nav.js" defer></script>
+    <script src="site-aside.js" defer></script>
 </head>
 
 <body>
@@ -227,15 +228,7 @@
         </div>
 
         <div class="sidebar-column">
-            <aside class="sidebar contact-sidebar" id="contact">
-                <h2>Contact</h2>
-                <ul style="list-style: none; padding-left: 0;">
-                    <li><strong>Location:</strong> Atlanta / Remote</li>
-                    <li><strong>Email:</strong> <span id="email"></span></li>
-                    <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/" target="_blank"
-                            rel="noopener noreferrer">linkedin.com/in/toddespy</a></li>
-                </ul>
-            </aside>
+            <site-aside></site-aside>
 
             <aside class="sidebar credentials-sidebar">
                 <h2>Education</h2>
@@ -272,13 +265,6 @@
         </div>
     </div>
 
-    <script>
-        (function () {
-            var u = "todd.espy", d = "gmail.com", e = u + "@" + d;
-            var s = document.getElementById("email");
-            if (s) s.innerHTML = '<a href="mailto:' + e + '">' + e + '</a>';
-        })();
-    </script>
 </body>
 
 </html>

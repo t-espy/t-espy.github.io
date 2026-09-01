@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Playwright check for the agent-coord portfolio card.
+"""Playwright check for nav, shared aside, and agent-coord cross-links.
 
-Serves this directory and clicks the new home / methodology / Assayer links.
-Uses lean-optimizer's Playwright (not a site dependency).
+Serves this directory. Uses lean-optimizer's Playwright (not a site dependency).
 
   /home/tespy/lean-optimizer/venv/bin/python e2e_agent_coord_playwright.py
 """
@@ -36,6 +35,15 @@ def _serve() -> tuple[threading.Thread, int, http.server.HTTPServer]:
     return t, port, httpd
 
 
+def _assert_contact(page) -> None:
+    aside = page.locator("#contact")
+    aside.wait_for()
+    text = aside.inner_text()
+    assert "Atlanta / Remote" in text
+    assert "todd.espy@gmail.com" in text
+    assert "linkedin.com/in/toddespy" in text
+
+
 def main() -> int:
     from playwright.sync_api import sync_playwright
 
@@ -48,41 +56,52 @@ def main() -> int:
             page = browser.new_page(viewport={"width": 1280, "height": 900})
 
             page.goto(f"{base}/", wait_until="domcontentloaded")
-            nav = page.locator(".site-nav a")
-            assert nav.count() == 6, nav.count()
+            assert page.locator(".site-nav a").count() == 6
             assert page.locator('a[href*="agent-coord.html"]').count() == 0
+            assert page.locator('a[href="/#agent-coord"]').count() == 0
             assert "github.com/t-espy/agent-coord" not in page.content()
-            card = page.locator("#agent-coord")
-            card.wait_for()
-            assert "Coordination Board for AI Coding Agents" in card.inner_text()
-            assert "Private infrastructure; available on request" in card.inner_text()
-            assert "not a task runner" in card.inner_text().lower()
+            assert page.locator("#agent-coord").count() == 0
+            _assert_contact(page)
+            assert page.locator(".credentials-sidebar").is_visible()
+            assert "MSEE, Duke University" in page.locator(
+                ".credentials-sidebar"
+            ).inner_text()
             page.screenshot(path=str(SHOTS / "home-card.png"), full_page=True)
 
-            page.locator('#agent-coord a[href="methodology.html#agent-coord-board"]').click()
+            page.locator('a[href="methodology.html#agent-coord-board"]').click()
             page.wait_for_url("**/methodology.html#agent-coord-board")
             board = page.locator("#agent-coord-board")
             board.wait_for()
             assert "fourth place is a coordination board" in board.inner_text()
+            _assert_contact(page)
+            related = page.locator("#contact h2", has_text="Related")
+            assert related.count() == 1
             page.screenshot(path=str(SHOTS / "methodology-jump.png"), full_page=True)
 
-            page.locator('#agent-coord-board a[href="/#agent-coord"]').click()
-            page.wait_for_url("**/#agent-coord")
-            page.locator("#agent-coord").wait_for()
-            outline = page.evaluate(
-                """() => getComputedStyle(document.getElementById('agent-coord')).outlineStyle"""
-            )
-            assert outline != "none", outline
+            page.locator('#agent-coord-board a[href="lean-optimizer.html"]').click()
+            page.wait_for_url("**/lean-optimizer.html")
+            assert page.locator('a[href="/#agent-coord"]').count() == 0
+            _assert_contact(page)
 
-            page.goto(f"{base}/lean-optimizer.html", wait_until="domcontentloaded")
-            page.locator('a[href="/#agent-coord"]').click()
-            page.wait_for_url("**/#agent-coord")
-            assert page.locator("#agent-coord").is_visible()
+            page.goto(f"{base}/autonomous-improvement-rate.html", wait_until="domcontentloaded")
+            _assert_contact(page)
+            assert page.locator('#contact a[href="/autonomous-improvement-rate-technical.html"]').count() == 1
+            assert page.locator(".credentials-sidebar").count() == 0
+            assert page.locator('a[href="/#agent-coord"]').count() == 0
+
+            page.goto(f"{base}/qwen38-dgx-spark.html", wait_until="domcontentloaded")
+            _assert_contact(page)
+            assert page.locator('#contact a[href="/autonomous-improvement-rate.html"]').count() == 1
+
+            page.goto(
+                f"{base}/technical-credentials.html", wait_until="domcontentloaded"
+            )
+            assert page.locator("#contact").count() == 0
 
             phone = browser.new_page(viewport={"width": 390, "height": 844})
-            phone.goto(f"{base}/#agent-coord", wait_until="domcontentloaded")
-            phone.locator("#agent-coord").wait_for()
+            phone.goto(f"{base}/", wait_until="domcontentloaded")
             assert phone.locator(".site-nav a").count() == 6
+            _assert_contact(phone)
             phone.screenshot(path=str(SHOTS / "home-card-mobile.png"), full_page=True)
             phone.close()
             browser.close()

@@ -9,6 +9,7 @@
         content="Case study: taking Meetup Finder from idea to a deployed beta using an AI-native engineering workflow with independent design and code review." />
     <link rel="stylesheet" href="styles.css" />
     <script src="site-nav.js" defer></script>
+    <script src="site-aside.js" defer></script>
 </head>
 
 <body>
@@ -147,30 +148,8 @@
             </p>
         </main>
 
-        <aside class="sidebar" id="contact">
-            <h2>Contact</h2>
-            <ul style="list-style: none; padding-left: 0;">
-                <li><strong>Location:</strong> Atlanta / Remote</li>
-                <li><strong>Email:</strong> <span id="email"></span></li>
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/" target="_blank"
-                        rel="noopener noreferrer">linkedin.com/in/toddespy</a></li>
-            </ul>
-
-            <h2 style="margin-top: 2rem;">Related</h2>
-            <ul style="list-style: none; padding-left: 0;">
-                <li><a href="/methodology.html">AI Engineering Methodology</a></li>
-                <li><a href="https://meetupfinder.com" target="_blank" rel="noopener noreferrer">Meetup Finder beta</a></li>
-            </ul>
-        </aside>
+        <site-aside></site-aside>
     </div>
-
-    <script>
-        (function () {
-            var u = "todd.espy", d = "gmail.com", e = u + "@" + d;
-            var s = document.getElementById("email");
-            if (s) s.innerHTML = '<a href="mailto:' + e + '">' + e + '</a>';
-        })();
-    </script>
 </body>
 
 </html>
