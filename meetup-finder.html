@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todd Espy — Meetup Finder Case Study</title>
+    <meta name="description"
+        content="Case study: taking Meetup Finder from idea to a deployed beta using an AI-native engineering workflow with independent design and code review." />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <nav class="site-nav" aria-label="Site">
+        <a href="/">Home</a>
+        <a href="/lean-optimizer.html">Strategy Assayer</a>
+        <a href="/methodology.html">AI Engineering Methodology</a>
+        <a href="/autonomous-improvement-rate.html">Autonomous Improvement Rate</a>
+        <a href="/technical-credentials.html">Technical Credentials</a>
+    </nav>
+
+    <div class="layout">
+        <main class="content">
+            <div class="banner">
+                <h1>Meetup Finder</h1>
+                <p>An AI-native software delivery case study</p>
+                <p>Idea · architecture · adversarial review · implementation · test · deployment</p>
+            </div>
+
+            <p>
+                <a class="contact-link" href="index.html">&larr; Back to portfolio</a>
+            </p>
+
+            <p>
+                <strong>Status:</strong> deployed and currently in beta testing.
+                <a class="contact-link" href="https://meetupfinder.com" target="_blank"
+                    rel="noopener noreferrer">Try the live site at meetupfinder.com</a>.
+            </p>
+
+            <p>
+                Meetup Finder started as a small product idea: remove the friction from a group deciding where to meet.
+                What makes it useful as a portfolio case study is not the application category. It is the development
+                process. I used multiple frontier coding agents as a small engineering organization: one or more agents
+                could propose and implement, while separate agents independently challenged architecture, security
+                assumptions, failure handling, and test coverage.
+            </p>
+
+            <p>
+                The first working implementation was produced the same afternoon the initial design was written. The
+                product was then exercised through independent code review, automated tests, real-device validation,
+                and deployment rather than being treated as complete when generated code first ran.
+            </p>
+
+            <h2>The workflow</h2>
+            <div class="project">
+                <ol>
+                    <li><strong>Frame the product and constraints.</strong> Define the user problem, privacy boundary,
+                        deployment constraints, and explicit non-goals before implementation.</li>
+                    <li><strong>Write the architecture and implementation plan.</strong> Treat the plan as an engineering
+                        artifact with risks, exit criteria, and a deliberate order of attack.</li>
+                    <li><strong>Adversarial design review.</strong> Give the design to independent frontier models and ask
+                        them to find incorrect assumptions rather than improve the prose.</li>
+                    <li><strong>Resolve findings before coding.</strong> Material findings become design changes,
+                        clarified constraints, or architecture decision records instead of being left as review notes.</li>
+                    <li><strong>Agent-assisted implementation.</strong> Use a coding agent to turn the reviewed design
+                        into a working system.</li>
+                    <li><strong>Independent implementation review.</strong> Different models inspect and, where useful,
+                        execute the result to look for protocol errors, browser lifecycle failures, misleading UI states,
+                        security gaps, and missing tests.</li>
+                    <li><strong>Close the loop with tests and devices.</strong> Add regression coverage, exercise the
+                        real workflow on phones, and deploy only after the important paths work outside the development
+                        environment.</li>
+                </ol>
+            </div>
+
+            <h2>Why independent reviewers mattered</h2>
+            <p>
+                The reviewers did not simply produce stylistic suggestions. They found issues that changed the design
+                and the implementation. Examples included an overstated security property, an incorrect assumption
+                about what infrastructure could observe, browser-storage and page-lifecycle failure cases, ambiguous
+                error handling, and important end-to-end tests that were not yet acting as release gates.
+            </p>
+            <p>
+                In one implementation review, an agent wrote an independent compatibility probe rather than trusting
+                the production implementation's own tests. That distinction matters: generated code reviewing itself
+                is weaker evidence than a separately constructed check that reaches the same result.
+            </p>
+
+            <h2>The human role moved up a level</h2>
+            <p>
+                I did not use the models as autocomplete. My role was closer to architect, technical lead, and release
+                owner: define the product boundary; decide which risks mattered; choose which reviewer findings were
+                valid; reconcile conflicting recommendations; preserve design intent; set acceptance criteria; test the
+                actual user workflow; and decide what shipped.
+            </p>
+            <p>
+                That is the part of AI-assisted software development I find most interesting. As implementation becomes
+                cheaper, the leverage shifts toward problem selection, architecture, judgment, verification, and the
+                process that keeps several capable agents from confidently converging on the same mistake.
+            </p>
+
+            <h2>What is intentionally not public</h2>
+            <p>
+                The source repository is private. So are the detailed protocol specification, threat model,
+                implementation plan, architecture decision records, and full adversarial review files. For this product,
+                those documents are not merely commentary around the code; they contain enough resolved engineering
+                decisions to make reconstruction substantially easier with current coding agents.
+            </p>
+            <p>
+                This case study therefore exposes the engineering process and the deployed result without publishing a
+                build recipe. The live beta is public evidence that the process produced a working artifact; the private
+                design record remains product IP.
+            </p>
+
+            <h2>What shipped</h2>
+            <div class="project">
+                <p>
+                    A small mobile-first web application, deployed to the public Internet and being tested on real
+                    devices. The implementation includes automated unit, browser/E2E, artifact, and scenario-harness
+                    checks; separate production and test deployment paths; and explicit operational handling for the
+                    browser and device behaviors that matter to the workflow.
+                </p>
+                <div class="tags">
+                    <span class="tag">TypeScript</span><span class="tag">Preact</span>
+                    <span class="tag">Vite</span><span class="tag">Web Crypto</span>
+                    <span class="tag">IndexedDB</span><span class="tag">Vitest</span>
+                    <span class="tag">Playwright</span><span class="tag">Cloudflare Pages</span>
+                    <span class="tag">Claude Code</span><span class="tag">Grok</span>
+                    <span class="tag">GitHub Copilot</span><span class="tag">Adversarial Review</span>
+                </div>
+                <p class="repo-note">
+                    Live beta: <a class="contact-link" href="https://meetupfinder.com" target="_blank"
+                        rel="noopener noreferrer">meetupfinder.com</a> · Source and detailed design remain private.
+                </p>
+            </div>
+
+            <h2>The larger point</h2>
+            <p>
+                The interesting metric here is not lines of code written by a human. It is the amount of validated,
+                deployed software that one experienced engineer can direct when implementation, review, and iteration
+                can happen in parallel through AI agents. Meetup Finder is a compact example: a product idea became a
+                reviewed, tested, deployed beta fast enough that the bottleneck was judgment and validation rather than
+                typing code.
+            </p>
+            <p>
+                The broader methodology behind this workflow is described in
+                <a class="contact-link" href="methodology.html">A Discipline for Building Software with AI</a>.
+            </p>
+        </main>
+
+        <aside class="sidebar" id="contact">
+            <h2>Contact</h2>
+            <p>Feel free to reach out:</p>
+            <ul style="list-style: none; padding-left: 0;">
+                <li><strong>Location:</strong> Atlanta / Remote</li>
+                <li><strong>Email:</strong> <span id="email"></span></li>
+                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/toddespy/" target="_blank"
+                        rel="noopener noreferrer">linkedin.com/in/toddespy</a></li>
+            </ul>
+
+            <h2 style="margin-top: 2rem;">Related</h2>
+            <ul style="list-style: none; padding-left: 0;">
+                <li><a href="/methodology.html">AI Engineering Methodology</a></li>
+                <li><a href="https://meetupfinder.com" target="_blank" rel="noopener noreferrer">Meetup Finder beta</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <script>
+        (function () {
+            var u = "todd.espy", d = "gmail.com", e = u + "@" + d;
+            var s = document.getElementById("email");
+            if (s) s.innerHTML = '<a href="mailto:' + e + '">' + e + '</a>';
+        })();
+    </script>
+</body>
+
+</html>
