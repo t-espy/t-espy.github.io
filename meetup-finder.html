@@ -76,6 +76,10 @@
                 error handling, and important end-to-end tests that were not yet acting as release gates.
             </p>
             <p>
+                The first architecture used a real-time peer connection. Independent review killed that transport before
+                any implementation of it existed; only the replacement was written.
+            </p>
+            <p>
                 In one implementation review, an agent wrote an independent compatibility probe rather than trusting
                 the production implementation's own tests. That distinction matters: generated code reviewing itself
                 is weaker evidence than a separately constructed check that reaches the same result.
