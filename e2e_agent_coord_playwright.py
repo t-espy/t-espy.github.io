@@ -56,7 +56,9 @@ def main() -> int:
             page = browser.new_page(viewport={"width": 1280, "height": 900})
 
             page.goto(f"{base}/", wait_until="domcontentloaded")
-            assert page.locator(".site-nav a").count() == 6
+            assert page.locator(".site-nav a").count() == 7
+            assert "Bring me a difficult technical problem" in page.locator("h1").inner_text()
+            assert page.locator('a[href="contact.html"]').count() >= 1
             assert page.locator('a[href*="agent-coord.html"]').count() == 0
             assert page.locator('a[href="/#agent-coord"]').count() == 0
             assert "github.com/t-espy/agent-coord" not in page.content()
@@ -100,7 +102,7 @@ def main() -> int:
 
             phone = browser.new_page(viewport={"width": 390, "height": 844})
             phone.goto(f"{base}/", wait_until="domcontentloaded")
-            assert phone.locator(".site-nav a").count() == 6
+            assert phone.locator(".site-nav a").count() == 7
             _assert_contact(phone)
             phone.screenshot(path=str(SHOTS / "home-card-mobile.png"), full_page=True)
             phone.close()
