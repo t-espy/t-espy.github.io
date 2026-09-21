@@ -103,10 +103,10 @@
 
             <h2>Where I use this</h2>
             <p>
-                In my software-development factory, <strong>BuildLoop is the automated build/test/fix cycle</strong>: local models handle high-volume implementation and retry loops while scarce frontier-model tokens are reserved for architecture, difficult decisions, and review. The operating metric is <strong>Autonomous Completed Work per Frontier-Model Token</strong>, not agents spawned or tokens generated. The <a class="contact-link" href="methodology.html#agent-coord-board">agent-coord</a> coordination board tracks work and preserves findings across agents and sessions.
+                In my current software-development workflow, <strong><a class="contact-link" href="ratchetloop.html">Ratchetloop</a></strong> is the bounded delivery loop: agents implement in isolated worktrees, deterministic checks gate the result, independent model-family review judges the diff, and the run record preserves what happened. Local models can handle suitable high-volume work while frontier models are reserved for harder reasoning, architecture, and review. The operating metric is <strong>Autonomous Completed Work per Frontier-Model Token</strong>, not agents spawned or tokens generated.
             </p>
             <p>
-                <strong>BuildLoop raises throughput. <a class="contact-link" href="methodology.html#agent-coord-board">agent-coord</a> keeps findings alive. <a class="contact-link" href="/lean-optimizer.html">Strategy Assayer</a> is the evaluation layer so the loop does not promote in-sample noise.</strong>
+                <strong>Ratchetloop makes software delivery auditable. <a class="contact-link" href="/lean-optimizer.html">Strategy Assayer</a> is the domain-specific evaluation layer that keeps higher experiment throughput from turning into faster overfitting.</strong>
             </p>
 
             <div class="project technical-notes-callout">
