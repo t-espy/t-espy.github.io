@@ -5,30 +5,26 @@ const SITE_NAV_LINKS = [
     current: (file) => file === "" || file === "index.html",
   },
   {
+    href: "/work.html",
+    label: "Work",
+    current: (file) =>
+      ["work.html", "ratchetloop.html", "meetup-finder.html", "lean-optimizer.html"].includes(file),
+  },
+  {
     href: "/methodology.html",
-    label: "AI Engineering Methodology",
+    label: "AI Engineering",
     current: (file) => file === "methodology.html",
   },
   {
-    href: "/autonomous-improvement-rate.html",
-    label: "Autonomous Improvement Rate",
+    href: "/writing.html",
+    label: "Writing",
     current: (file) =>
-      file === "autonomous-improvement-rate.html" ||
-      file === "autonomous-improvement-rate-technical.html",
-  },
-  {
-    href: "/meetup-finder.html",
-    label: "Meetup Finder",
-    current: (file) => file === "meetup-finder.html",
-  },
-  {
-    href: "/lean-optimizer.html",
-    label: "Strategy Assayer",
-    current: (file) => file === "lean-optimizer.html",
+      ["writing.html", "autonomous-improvement-rate.html", "autonomous-improvement-rate-technical.html",
+       "qwen38-dgx-spark.html"].includes(file),
   },
   {
     href: "/technical-credentials.html",
-    label: "Technical Credentials",
+    label: "Credentials",
     current: (file) => file === "technical-credentials.html",
   },
 ];
