@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2026 software output - Todd Espy</title>
+    <meta name="description"
+        content="Git-measured software output for 2026: about 500k lines of source added across 34 GitHub repositories, with language and volume breakdown." />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="site-nav.js" defer></script>
+    <script src="site-aside.js" defer></script>
+    <style>
+        td.num,
+        th.num {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .share-bar {
+            display: block;
+            height: 0.45rem;
+            margin-top: 0.35rem;
+            background: #e8e8e8;
+            border-radius: 1px;
+        }
+
+        .share-bar > span {
+            display: block;
+            height: 100%;
+            background: #4a4a4a;
+            border-radius: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <site-nav></site-nav>
+
+    <div class="layout">
+        <main class="content">
+            <div class="banner">
+                <h1>2026 software output</h1>
+                <p>A measured year of source, tests, and docs</p>
+            </div>
+
+            <p>
+                <a class="contact-link" href="index.html">&larr; Back to portfolio</a>
+            </p>
+
+            <p>
+                From 1 January through 21 September 2026 I added on the order of
+                <strong>500,000 lines of source</strong> across
+                <strong>34 GitHub repositories</strong> (5 public, 29 private), at about
+                <strong>50,000 lines per month</strong>. Tests and documentation sit on
+                top of that. The numbers come from git insertions, not from a marketing
+                dashboard.
+            </p>
+
+            <h2>What the number is</h2>
+            <p>
+                Counts are non-merge git insertions since 1 January 2026, classified by
+                path and extension, on local checkouts of every GitHub repo with a 2026
+                push. Public snapshots that copy a private tree
+                (<code>ratchetloop-public</code>, <code>lean-optimizer-public</code>)
+                are counted once. Local clones of the same work are dropped.
+            </p>
+            <p>
+                Insertions count rewrites: a file edited five times contributes five
+                times. That is the honest “produced this year” figure. It is not the
+                same as “500,000 lines sitting in trees today, all still earning their
+                keep.” A few trees also carry vendored or generated bulk; those inflate
+                on-disk size more than they inflate 2026 insertions.
+            </p>
+
+            <h2>Volume</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kind</th>
+                        <th class="num">2026 insertions</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Source</td>
+                        <td class="num">~500k</td>
+                        <td>The working-code claim. About 50k lines per month.</td>
+                    </tr>
+                    <tr>
+                        <td>Tests</td>
+                        <td class="num">~200k</td>
+                        <td>Unit, oracle, and harness tests in the same trees.</td>
+                    </tr>
+                    <tr>
+                        <td>Documentation</td>
+                        <td class="num">~130k</td>
+                        <td>ADRs, contracts, research notes, READMEs.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Together</strong></td>
+                        <td class="num"><strong>~830k</strong></td>
+                        <td>Rounded unique GitHub output for the year to date.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                About 3,100 non-merge commits on those 34 repositories. Another set of
+                local-only strategy labs adds on the order of 50–80k more lines; they
+                are not in the 500k.
+            </p>
+
+            <h2>Languages</h2>
+            <p>
+                Eight programming languages with real volume. Fifteen if you count
+                markup and config. Python is about four-fifths of classified 2026
+                insertions (~750k lines once markup, config, and the local labs are
+                included in the language split).
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Language</th>
+                        <th class="num">Insertions</th>
+                        <th class="num">Share</th>
+                        <th>Where it shows up</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Python</td>
+                        <td class="num">592k</td>
+                        <td class="num">79%
+                            <span class="share-bar" aria-hidden="true"><span style="width:79%"></span></span>
+                        </td>
+                        <td>Optimizer, lab tooling, product slices, factories</td>
+                    </tr>
+                    <tr>
+                        <td>HTML</td>
+                        <td class="num">64k</td>
+                        <td class="num">9%
+                            <span class="share-bar" aria-hidden="true"><span style="width:9%"></span></span>
+                        </td>
+                        <td>Optimizer web UI, this site, generated templates</td>
+                    </tr>
+                    <tr>
+                        <td>C#</td>
+                        <td class="num">39k</td>
+                        <td class="num">5%
+                            <span class="share-bar" aria-hidden="true"><span style="width:5%"></span></span>
+                        </td>
+                        <td>QuantConnect LEAN strategies</td>
+                    </tr>
+                    <tr>
+                        <td>YAML</td>
+                        <td class="num">28k</td>
+                        <td class="num">4%
+                            <span class="share-bar" aria-hidden="true"><span style="width:4%"></span></span>
+                        </td>
+                        <td>Experiment plans and pipeline config</td>
+                    </tr>
+                    <tr>
+                        <td>Shell</td>
+                        <td class="num">8k</td>
+                        <td class="num">1%
+                            <span class="share-bar" aria-hidden="true"><span style="width:1%"></span></span>
+                        </td>
+                        <td>Pin/deploy, ops, CI</td>
+                    </tr>
+                    <tr>
+                        <td>SQL</td>
+                        <td class="num">7k</td>
+                        <td class="num">1%
+                            <span class="share-bar" aria-hidden="true"><span style="width:1%"></span></span>
+                        </td>
+                        <td>Mostly the optimizer</td>
+                    </tr>
+                    <tr>
+                        <td>TypeScript</td>
+                        <td class="num">6k</td>
+                        <td class="num">0.8%
+                            <span class="share-bar" aria-hidden="true"><span style="width:0.8%"></span></span>
+                        </td>
+                        <td>Meetup Finder</td>
+                    </tr>
+                    <tr>
+                        <td>JavaScript</td>
+                        <td class="num">2k</td>
+                        <td class="num">0.3%
+                            <span class="share-bar" aria-hidden="true"><span style="width:0.3%"></span></span>
+                        </td>
+                        <td>Web clients and this site</td>
+                    </tr>
+                    <tr>
+                        <td>CSS</td>
+                        <td class="num">1k</td>
+                        <td class="num">0.2%</td>
+                        <td>This site and dashboards</td>
+                    </tr>
+                    <tr>
+                        <td>Java</td>
+                        <td class="num">~700</td>
+                        <td class="num">&lt;0.1%</td>
+                        <td>Minecraft Fabric mod</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                Resume-style set: Python, C#, TypeScript, JavaScript, Shell, SQL, Java,
+                plus HTML/CSS. YAML and TOML are config.
+            </p>
+
+            <h2>Where the volume sits</h2>
+            <p>
+                Three piles, not thirty-four unrelated hobbies.
+            </p>
+            <ul>
+                <li>
+                    <strong>Evaluation and search.</strong>
+                    <code>lean-optimizer</code> alone is about half of all GitHub
+                    insertions this year (~265k source, ~118k tests, ~52k docs), with a
+                    C# strategy layer around it. The public orchestration-engine slice
+                    is
+                    <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public">lean-optimizer-public</a>.
+                </li>
+                <li>
+                    <strong>Lab and agent tooling.</strong>
+                    Supervisor, delivery pipeline, and coordination:
+                    <code>lab-manager</code>, <code>buildloop</code>,
+                    <code>ratchetloop</code>, <code>agent-coord</code>. The public
+                    pipeline snapshot is
+                    <a class="contact-link" href="https://github.com/t-espy/ratchetloop-public">ratchetloop-public</a>.
+                </li>
+                <li>
+                    <strong>Product slices.</strong>
+                    Market-intelligence software, job-search automation, Meetup Finder,
+                    website and asset factories. Visible output includes
+                    <a class="contact-link" href="https://github.com/t-espy/leetcode-python">leetcode-python</a>
+                    (produced through ratchetloop) and
+                    <a class="contact-link" href="https://github.com/t-espy/langgraph-factory">langgraph-factory</a>.
+                </li>
+            </ul>
+
+            <h2>Public repositories in 2026</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Repository</th>
+                        <th>What it is</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public">lean-optimizer-public</a></td>
+                        <td>Orchestration-engine slice of the strategy evaluator</td>
+                    </tr>
+                    <tr>
+                        <td><a class="contact-link" href="https://github.com/t-espy/ratchetloop-public">ratchetloop-public</a></td>
+                        <td>Local-first pipeline for AI coding agents</td>
+                    </tr>
+                    <tr>
+                        <td><a class="contact-link" href="https://github.com/t-espy/leetcode-python">leetcode-python</a></td>
+                        <td>Interview work sample with oracle tests and CI</td>
+                    </tr>
+                    <tr>
+                        <td><a class="contact-link" href="https://github.com/t-espy/langgraph-factory">langgraph-factory</a></td>
+                        <td>LangGraph multi-agent factory on local LLMs</td>
+                    </tr>
+                    <tr>
+                        <td><a class="contact-link" href="https://github.com/t-espy/t-espy.github.io">t-espy.github.io</a></td>
+                        <td>This site</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>How to read this</h2>
+            <p>
+                A legitimate claim is: on the order of 500,000 lines of source added in
+                2026, at about 50,000 lines per month, with a large share in a
+                production optimizer and the rest across lab tooling and product
+                slices, in Python first and C# second. The supporting tests and
+                write-ups are extra.
+            </p>
+            <p class="repo-note">
+                Survey date 21 September 2026. Method: <code>git log --since=2026-01-01
+                --no-merges --numstat</code> on local checkouts, classified by
+                extension and path.
+            </p>
+        </main>
+    </div>
+</body>
+
+</html>
