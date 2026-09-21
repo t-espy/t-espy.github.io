@@ -6,9 +6,32 @@ function currentFile() {
 const SITE_ASIDE = {
   "": { home: true },
   "index.html": { home: true },
+  "work.html": {
+    related: [
+      { href: "/ratchetloop.html", label: "Ratchetloop" },
+      { href: "/lean-optimizer.html", label: "Strategy Assayer" },
+      { href: "/meetup-finder.html", label: "Meetup Finder" },
+    ],
+  },
+  "ratchetloop.html": {
+    related: [
+      {
+        href: "https://github.com/t-espy/ratchetloop-public",
+        label: "ratchetloop-public",
+        external: true,
+      },
+      {
+        href: "https://github.com/t-espy/leetcode-python",
+        label: "leetcode-python work sample",
+        external: true,
+      },
+      { href: "/methodology.html", label: "AI Engineering methodology" },
+    ],
+  },
   "meetup-finder.html": {
     related: [
-      { href: "/methodology.html", label: "AI Engineering Methodology" },
+      { href: "/work.html", label: "Work portfolio" },
+      { href: "/methodology.html", label: "AI Engineering methodology" },
       {
         href: "https://meetupfinder.com",
         label: "Meetup Finder beta",
@@ -16,18 +39,44 @@ const SITE_ASIDE = {
       },
     ],
   },
+  "lean-optimizer.html": {
+    related: [
+      { href: "/work.html", label: "Work portfolio" },
+      {
+        href: "https://github.com/t-espy/lean-optimizer-public",
+        label: "lean-optimizer-public",
+        external: true,
+      },
+      { href: "/methodology.html", label: "AI Engineering methodology" },
+    ],
+  },
+  "methodology.html": {
+    related: [
+      { href: "/ratchetloop.html", label: "Ratchetloop" },
+      { href: "/work.html", label: "Work portfolio" },
+      { href: "/autonomous-improvement-rate.html", label: "Autonomous Improvement Rate" },
+    ],
+  },
+  "writing.html": {
+    related: [
+      { href: "/methodology.html", label: "AI Engineering methodology" },
+      { href: "/work.html", label: "Work portfolio" },
+    ],
+  },
   "autonomous-improvement-rate.html": {
     related: [
+      { href: "/writing.html", label: "Writing" },
       {
         href: "/autonomous-improvement-rate-technical.html",
         label: "Technical notes",
       },
-      { href: "/methodology.html", label: "AI Engineering Methodology" },
+      { href: "/ratchetloop.html", label: "Ratchetloop" },
       { href: "/lean-optimizer.html", label: "Strategy Assayer" },
     ],
   },
   "autonomous-improvement-rate-technical.html": {
     related: [
+      { href: "/writing.html", label: "Writing" },
       {
         href: "/autonomous-improvement-rate.html",
         label: "Autonomous Improvement Rate",
@@ -36,34 +85,13 @@ const SITE_ASIDE = {
   },
   "qwen38-dgx-spark.html": {
     related: [
+      { href: "/writing.html", label: "Writing" },
       {
         href: "https://github.com/t-espy/langgraph-factory",
         label: "langgraph-factory",
         external: true,
       },
-      {
-        href: "/autonomous-improvement-rate.html",
-        label: "Autonomous Improvement Rate",
-      },
-    ],
-  },
-  "methodology.html": {
-    related: [
-      {
-        href: "/autonomous-improvement-rate.html",
-        label: "Autonomous Improvement Rate",
-      },
-      { href: "/lean-optimizer.html", label: "Strategy Assayer" },
-    ],
-  },
-  "lean-optimizer.html": {
-    related: [
-      {
-        href: "https://github.com/t-espy/lean-optimizer-public",
-        label: "lean-optimizer-public",
-        external: true,
-      },
-      { href: "/methodology.html", label: "AI Engineering Methodology" },
+      { href: "/ratchetloop.html", label: "Ratchetloop" },
     ],
   },
 };
@@ -116,7 +144,7 @@ class SiteAside extends HTMLElement {
     linkedin.rel = "noopener noreferrer";
     linkedin.textContent = "linkedin.com/in/toddespy";
     contactList.append(
-      listItem("Location", document.createTextNode("Atlanta / Remote")),
+      listItem("Work model", document.createTextNode("Remote / Atlanta-area hybrid")),
       listItem("Email", emailSlot),
       listItem("LinkedIn", linkedin),
     );
