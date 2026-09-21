@@ -77,6 +77,7 @@ def main() -> int:
             assert page.locator('a[href="ratchetloop.html"]').count() >= 1
             assert page.locator('a[href="work.html"]').count() >= 1
             assert page.locator('a[href="writing.html"]').count() >= 1
+            assert page.locator('a[href="2026-output.html"]').count() >= 1
             page.screenshot(path=str(SHOTS / "home-card.png"), full_page=True)
 
             page.goto(f"{base}/work.html", wait_until="domcontentloaded")
@@ -86,6 +87,13 @@ def main() -> int:
             assert page.locator(
                 'a[href="https://github.com/t-espy/leetcode-python"]'
             ).count() >= 1
+            assert page.locator('a[href="2026-output.html"]').count() >= 1
+
+            page.goto(f"{base}/2026-output.html", wait_until="domcontentloaded")
+            _assert_nav(page)
+            assert page.locator("h1").inner_text() == "2026 Engineering Output"
+            assert page.locator('.site-nav a[aria-current="page"]').inner_text() == "Work"
+            assert "Lines of code are not a measure" in page.locator("main").inner_text()
 
             page.goto(f"{base}/ratchetloop.html", wait_until="domcontentloaded")
             _assert_nav(page)
