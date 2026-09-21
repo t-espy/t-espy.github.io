@@ -39,9 +39,21 @@ def _assert_contact(page) -> None:
     aside = page.locator("#contact")
     aside.wait_for()
     text = aside.inner_text()
-    assert "Atlanta / Remote" in text
+    assert "Remote / Atlanta-area hybrid" in text
     assert "todd.espy@gmail.com" in text
     assert "linkedin.com/in/toddespy" in text
+
+
+def _assert_nav(page) -> None:
+    nav = page.locator(".site-nav a")
+    assert nav.count() == 5
+    assert nav.all_text_contents() == [
+        "Home",
+        "Work",
+        "AI Engineering",
+        "Writing",
+        "Credentials",
+    ]
 
 
 def main() -> int:
@@ -56,51 +68,77 @@ def main() -> int:
             page = browser.new_page(viewport={"width": 1280, "height": 900})
 
             page.goto(f"{base}/", wait_until="domcontentloaded")
-            assert page.locator(".site-nav a").count() == 6
-            assert page.locator('a[href*="delivery-control-loop.html"]').count() == 0
-            assert page.locator('a[href="/#delivery-control-loop"]').count() == 0
-            assert "github.com/t-espy/delivery-control-loop" not in page.content()
-            assert page.locator("#delivery-control-loop").count() == 0
+            _assert_nav(page)
             _assert_contact(page)
             assert page.locator(".credentials-sidebar").is_visible()
             assert "MSEE, Duke University" in page.locator(
                 ".credentials-sidebar"
             ).inner_text()
+            assert page.locator('a[href="ratchetloop.html"]').count() >= 1
+            assert page.locator('a[href="work.html"]').count() >= 1
+            assert page.locator('a[href="writing.html"]').count() >= 1
             page.screenshot(path=str(SHOTS / "home-card.png"), full_page=True)
 
-            page.locator('a[href="methodology.html#delivery-control-loop"]').click()
-            page.wait_for_url("**/methodology.html#delivery-control-loop")
-            board = page.locator("#delivery-control-loop")
-            board.wait_for()
-            assert "fourth place is a coordination board" in board.inner_text()
+            page.goto(f"{base}/work.html", wait_until="domcontentloaded")
+            _assert_nav(page)
             _assert_contact(page)
-            related = page.locator("#contact h2", has_text="Related")
-            assert related.count() == 1
-            page.screenshot(path=str(SHOTS / "methodology-jump.png"), full_page=True)
+            assert page.locator('a[href="ratchetloop.html"]').count() >= 1
+            assert page.locator(
+                'a[href="https://github.com/t-espy/leetcode-python"]'
+            ).count() >= 1
 
-            page.locator('#delivery-control-loop a[href="lean-optimizer.html"]').click()
-            page.wait_for_url("**/lean-optimizer.html")
-            assert page.locator('a[href="/#delivery-control-loop"]').count() == 0
+            page.goto(f"{base}/ratchetloop.html", wait_until="domcontentloaded")
+            _assert_nav(page)
             _assert_contact(page)
-
-            page.goto(f"{base}/autonomous-improvement-rate.html", wait_until="domcontentloaded")
-            _assert_contact(page)
-            assert page.locator('#contact a[href="/autonomous-improvement-rate-technical.html"]').count() == 1
-            assert page.locator(".credentials-sidebar").count() == 0
-            assert page.locator('a[href="/#delivery-control-loop"]').count() == 0
-
-            page.goto(f"{base}/qwen38-dgx-spark.html", wait_until="domcontentloaded")
-            _assert_contact(page)
-            assert page.locator('#contact a[href="/autonomous-improvement-rate.html"]').count() == 1
+            assert page.locator(
+                'a[href="https://github.com/t-espy/ratchetloop-public"]'
+            ).count() >= 1
+            assert page.locator(
+                'a[href="https://github.com/t-espy/leetcode-python"]'
+            ).count() >= 1
 
             page.goto(
-                f"{base}/technical-credentials.html", wait_until="domcontentloaded"
+                f"{base}/methodology.html#delivery-control-loop",
+                wait_until="domcontentloaded",
             )
+            _assert_nav(page)
+            _assert_contact(page)
+            loop = page.locator("#delivery-control-loop")
+            loop.wait_for()
+            assert "Ratchetloop" in loop.inner_text()
+            assert "durable record" in loop.inner_text()
+            assert page.locator("#contact h2", has_text="Related").count() == 1
+            page.screenshot(path=str(SHOTS / "methodology-jump.png"), full_page=True)
+
+            page.goto(f"{base}/lean-optimizer.html", wait_until="domcontentloaded")
+            _assert_nav(page)
+            _assert_contact(page)
+            assert page.locator('a[href="ratchetloop.html"]').count() >= 1
+
+            page.goto(
+                f"{base}/autonomous-improvement-rate.html",
+                wait_until="domcontentloaded",
+            )
+            _assert_nav(page)
+            _assert_contact(page)
+            assert page.locator(
+                '#contact a[href="/autonomous-improvement-rate-technical.html"]'
+            ).count() == 1
+            assert page.locator(".credentials-sidebar").count() == 0
+
+            page.goto(f"{base}/qwen38-dgx-spark.html", wait_until="domcontentloaded")
+            _assert_nav(page)
+            _assert_contact(page)
+            assert page.locator('#contact a[href="/writing.html"]').count() == 1
+            assert page.locator('#contact a[href="/ratchetloop.html"]').count() == 1
+
+            page.goto(f"{base}/technical-credentials.html", wait_until="domcontentloaded")
+            _assert_nav(page)
             assert page.locator("#contact").count() == 0
 
             phone = browser.new_page(viewport={"width": 390, "height": 844})
             phone.goto(f"{base}/", wait_until="domcontentloaded")
-            assert phone.locator(".site-nav a").count() == 6
+            _assert_nav(phone)
             _assert_contact(phone)
             phone.screenshot(path=str(SHOTS / "home-card-mobile.png"), full_page=True)
             phone.close()
