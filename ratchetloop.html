@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ratchetloop - Auditable AI Software Delivery - Todd Espy</title>
+    <meta name="description" content="Ratchetloop is Todd Espy's local-first, auditable software-delivery pipeline for AI coding agents." />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="site-nav.js" defer></script>
+    <script src="site-aside.js" defer></script>
+</head>
+<body>
+    <site-nav></site-nav>
+    <div class="layout">
+        <main class="content">
+            <div class="banner">
+                <h1>Ratchetloop</h1>
+                <p>Auditable software delivery for AI coding agents</p>
+                <p>Bound the work · verify mechanically · review independently · merge deliberately</p>
+            </div>
+
+            <p>
+                Coding agents can produce useful software quickly. The engineering problem is deciding when their work
+                is safe to trust. Ratchetloop is the control system I built around that problem.
+            </p>
+
+            <div class="project">
+                <pre><code>task → isolated coder → checks → scoped commit → independent review → result.json → human merge</code></pre>
+            </div>
+
+            <h2>What It Does</h2>
+            <p>
+                Give Ratchetloop a bounded change or an idea. A coding agent works in an isolated Git worktree.
+                Deterministic checks judge the resulting tree. Ratchetloop commits only the verified paths, then asks
+                a reviewer from a different model family to judge the diff. The result is a branch and a run record,
+                not an automatic merge.
+            </p>
+            <p>
+                The public snapshot validates Grok, Codex, and Claude providers and includes the source, tests,
+                contract, example task and idea files, model policy, CI, and pinned-runtime deployment scripts.
+            </p>
+
+            <h2>Controls That Matter</h2>
+            <ul>
+                <li><strong>Isolation:</strong> each run gets its own worktree; worker Git transport is disabled.</li>
+                <li><strong>Scope enforcement:</strong> HEAD, Git metadata, and changed paths are checked before commit.</li>
+                <li><strong>Deterministic gates:</strong> task-defined commands must exit successfully before review.</li>
+                <li><strong>Independent review:</strong> reviewer and coder must come from different model families.</li>
+                <li><strong>Bounded review:</strong> at most two rounds; the second is a fix-check, not an endless debate.</li>
+                <li><strong>Crash recovery:</strong> branch, worktree, events, and result files are the resumable state.</li>
+                <li><strong>Evidence:</strong> run records capture disposition, usage, cost when available, changed lines,
+                    test additions, findings, and wall time.</li>
+                <li><strong>Human promotion:</strong> Ratchetloop never merges, pushes, or deploys the target repository.</li>
+            </ul>
+
+            <h2>Why I Built It</h2>
+            <p>
+                The design is a response to failure modes I hit in earlier AI-delivery systems: blocked reviewers being
+                misread as approval, empty checks passing, workers touching the wrong checkout, process groups outliving
+                a run, environment leakage, unbounded review loops, and cost data that could not be reconstructed later.
+                The public
+                <a class="contact-link" href="https://github.com/t-espy/ratchetloop-public/blob/main/docs/FAILURE_MODES.md"
+                    target="_blank" rel="noopener noreferrer">failure-mode record</a>
+                maps those problems to explicit controls.
+            </p>
+
+            <h2>Used in Practice</h2>
+            <p>
+                <a class="contact-link" href="https://github.com/t-espy/leetcode-python" target="_blank"
+                    rel="noopener noreferrer">leetcode-python</a> is a compact public consumer: ten representative
+                algorithm implementations produced through Ratchetloop, then validated with focused unit tests,
+                deterministic reference oracles, independent review, and CI.
+            </p>
+            <p>
+                The same pipeline pattern is used across private software work where the task shape is suitable:
+                bounded change, explicit acceptance criteria, executable checks, independent review, and a human-owned
+                promotion decision.
+            </p>
+
+            <h2>Design Position</h2>
+            <p>
+                Ratchetloop is deliberately small: one Python CLI, files and Git for state, no database, no daemon, and
+                no workflow-engine dependency. More machinery is justified only when the workflow actually requires
+                branching, parallel joins, live scheduling, or another demonstrated need.
+            </p>
+
+            <p class="repo-note">
+                <a class="contact-link" href="https://github.com/t-espy/ratchetloop-public" target="_blank"
+                    rel="noopener noreferrer">Public repository</a> ·
+                <a class="contact-link" href="methodology.html">AI engineering methodology</a> ·
+                <a class="contact-link" href="https://github.com/t-espy/leetcode-python" target="_blank"
+                    rel="noopener noreferrer">Public work sample</a>
+            </p>
+        </main>
+        <site-aside></site-aside>
+    </div>
+</body>
+</html>
