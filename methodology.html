@@ -35,19 +35,20 @@
 
             <h2>The premise</h2>
             <p>
-                I architect; an AI assistant implements. That division works well - until it
-                doesn't, and the ways it fails are specific. A model will assert an API behavior
-                from memory that the vendor's docs contradict. It will re-derive a metric that's
-                already stored. It will lose, between one session and the next, the reason a
-                decision was made, and quietly reopen a settled question. None of these are
-                failures of capability. They're failures of <em>process</em> - and process is
-                the part a human still owns.
+                I use AI agents as implementation workers inside an engineering system whose architecture,
+                acceptance criteria, verification, and promotion rules are explicit. The division is not
+                "human thinks, model types." Agents can plan, implement, diagnose, test, and review. The
+                important boundary is that a worker does not get to define the evidence that proves its own
+                work correct. A model will still assert an API behavior from memory that the vendor's docs
+                contradict, re-derive a metric that's already stored, or lose the reason a decision was made
+                between sessions. Those are process failures, and process is something software can enforce.
             </p>
             <p>
-                What follows isn't a framework or a tool. It's a small set of conventions, each
-                one a response to a failure I actually hit. They're written down in the repo, not
-                held in my head, because the whole point is that they survive a fresh session with
-                a model that has no memory of the last one.
+                What follows started as a set of conventions, each one a response to a failure I actually hit.
+                Some remain documentation rules; others are now implemented directly in
+                <a class="contact-link" href="ratchetloop.html">Ratchetloop</a>, the delivery pipeline I built
+                around isolated work, deterministic checks, independent model-family review, persistent run
+                evidence, and human-controlled promotion.
             </p>
 
             <h2>Decisions are immutable; the record is append-only</h2>
@@ -156,14 +157,13 @@
                 stays scannable and the argument stays available, and neither one rots into the
                 other.
             </p>
-            <p id="agent-coord-board">
-                A fourth place is a coordination board, not a document.
-                <a class="contact-link" href="lean-optimizer.html">agent-coord</a>
-                is the production implementation: a Postgres-backed board that
-                coding agents on separate machines claim, heartbeat, and complete
-                against. A finding posted as a card survives the session that found
-                it. Decision records stay in git; who may act stays on the board.
-                I built it for the Strategy Assayer fleet and run it there.
+            <p id="delivery-control-loop">
+                The same principle now applies to execution state. A delivery run should not depend on a chat
+                transcript or one model's memory of what happened. In
+                <a class="contact-link" href="ratchetloop.html">Ratchetloop</a>, the branch, isolated worktree,
+                append-only event log, checks, review result, and <code>result.json</code> are the durable record.
+                If a worker dies, a later run can inspect and continue from that state. The evidence belongs to
+                the software process, not to the session that produced it.
             </p>
 
             <h2>The artifacts</h2>
@@ -200,23 +200,12 @@
 
             <h2>Where this came from</h2>
             <p>
-                These conventions were forged on a real, demanding project: a stateful evaluation
-                and optimization engine where a wrong assumption doesn't throw an exception, it
-                silently produces a plausible, wrong number. That's the environment that taught me
-                to write the verification rule down. The conventions described here evolved with
-                the later, private version of that engine, which runs well ahead of the public
-                release; the
-                <a class="contact-link" href="lean-optimizer.html">Strategy Assayer page</a>
-                covers the open-source mirror, while this page is about the <em>method</em> that
-                built the private system and several projects beside it.
-            </p>
-            <p class="reference-note">
-                <strong>On scope, plainly:</strong> this is a discipline I've built and validated
-                as a solo architect, with AI assistants as the implementation layer - not a
-                process I've run across a team of human contributors, where immutable records and
-                plan handoffs meet different pressures. I think most of it transfers to a team
-                setting, and the decision-record and verification conventions long predate AI. But
-                I'd rather tell you exactly what's been proven than imply more than it has.
+                These conventions were forged across systems where a wrong assumption can produce a plausible,
+                wrong result rather than an obvious exception. Strategy Assayer made that problem impossible to
+                ignore; product work and agent-delivery tooling generalized the lessons. The method now has both
+                demanding application evidence in
+                <a class="contact-link" href="lean-optimizer.html">Strategy Assayer</a> and a reusable public
+                implementation in <a class="contact-link" href="ratchetloop.html">Ratchetloop</a>.
             </p>
 
         </main>
