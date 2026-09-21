@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Playwright check for nav, shared aside, and agent-coord cross-links.
+"""Playwright check for nav, shared aside, and current portfolio cross-links.
 
 Serves this directory. Uses lean-optimizer's Playwright (not a site dependency).
 
@@ -57,10 +57,10 @@ def main() -> int:
 
             page.goto(f"{base}/", wait_until="domcontentloaded")
             assert page.locator(".site-nav a").count() == 6
-            assert page.locator('a[href*="agent-coord.html"]').count() == 0
-            assert page.locator('a[href="/#agent-coord"]').count() == 0
-            assert "github.com/t-espy/agent-coord" not in page.content()
-            assert page.locator("#agent-coord").count() == 0
+            assert page.locator('a[href*="delivery-control-loop.html"]').count() == 0
+            assert page.locator('a[href="/#delivery-control-loop"]').count() == 0
+            assert "github.com/t-espy/delivery-control-loop" not in page.content()
+            assert page.locator("#delivery-control-loop").count() == 0
             _assert_contact(page)
             assert page.locator(".credentials-sidebar").is_visible()
             assert "MSEE, Duke University" in page.locator(
@@ -68,9 +68,9 @@ def main() -> int:
             ).inner_text()
             page.screenshot(path=str(SHOTS / "home-card.png"), full_page=True)
 
-            page.locator('a[href="methodology.html#agent-coord-board"]').click()
-            page.wait_for_url("**/methodology.html#agent-coord-board")
-            board = page.locator("#agent-coord-board")
+            page.locator('a[href="methodology.html#delivery-control-loop"]').click()
+            page.wait_for_url("**/methodology.html#delivery-control-loop")
+            board = page.locator("#delivery-control-loop")
             board.wait_for()
             assert "fourth place is a coordination board" in board.inner_text()
             _assert_contact(page)
@@ -78,16 +78,16 @@ def main() -> int:
             assert related.count() == 1
             page.screenshot(path=str(SHOTS / "methodology-jump.png"), full_page=True)
 
-            page.locator('#agent-coord-board a[href="lean-optimizer.html"]').click()
+            page.locator('#delivery-control-loop a[href="lean-optimizer.html"]').click()
             page.wait_for_url("**/lean-optimizer.html")
-            assert page.locator('a[href="/#agent-coord"]').count() == 0
+            assert page.locator('a[href="/#delivery-control-loop"]').count() == 0
             _assert_contact(page)
 
             page.goto(f"{base}/autonomous-improvement-rate.html", wait_until="domcontentloaded")
             _assert_contact(page)
             assert page.locator('#contact a[href="/autonomous-improvement-rate-technical.html"]').count() == 1
             assert page.locator(".credentials-sidebar").count() == 0
-            assert page.locator('a[href="/#agent-coord"]').count() == 0
+            assert page.locator('a[href="/#delivery-control-loop"]').count() == 0
 
             page.goto(f"{base}/qwen38-dgx-spark.html", wait_until="domcontentloaded")
             _assert_contact(page)
