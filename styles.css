@@ -571,3 +571,23 @@ table th {
         min-height: 240px;
     }
 }
+
+
+.case-study-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+}
+
+.case-study-image.portrait {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+.case-study-image.landscape {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
