@@ -75,6 +75,7 @@ def main() -> int:
                 ".credentials-sidebar"
             ).inner_text()
             assert page.locator('a[href="ratchetloop.html"]').count() >= 1
+            assert page.locator('a[href="asset-factory.html"]').count() >= 1
             assert page.locator('a[href="work.html"]').count() >= 1
             assert page.locator('a[href="writing.html"]').count() >= 1
             assert page.locator('a[href="2026-output.html"]').count() >= 1
@@ -88,6 +89,16 @@ def main() -> int:
                 'a[href="https://github.com/t-espy/leetcode-python"]'
             ).count() >= 1
             assert page.locator('a[href="2026-output.html"]').count() >= 1
+            assert page.locator('a[href="asset-factory.html"]').count() >= 1
+
+            page.goto(f"{base}/asset-factory.html", wait_until="domcontentloaded")
+            _assert_nav(page)
+            _assert_contact(page)
+            assert page.locator("h1").inner_text() == "Asset Factory"
+            assert page.locator('.site-nav a[aria-current="page"]').inner_text() == "Work"
+            assert "Assets Forge is one brand and output channel" in page.locator("main").inner_text()
+            assert page.locator(".media-placeholder").count() == 9
+            assert page.locator('a[href="https://assetsforge.net"]').count() >= 1
 
             page.goto(f"{base}/2026-output.html", wait_until="domcontentloaded")
             _assert_nav(page)
