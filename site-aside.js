@@ -10,7 +10,19 @@ const SITE_ASIDE = {
     related: [
       { href: "/ratchetloop.html", label: "Ratchetloop" },
       { href: "/lean-optimizer.html", label: "Strategy Assayer" },
+      { href: "/asset-factory.html", label: "Asset Factory" },
       { href: "/meetup-finder.html", label: "Meetup Finder" },
+    ],
+  },
+  "asset-factory.html": {
+    related: [
+      { href: "/work.html", label: "Work portfolio" },
+      { href: "/qwen38-dgx-spark.html", label: "Local model engineering" },
+      {
+        href: "https://assetsforge.net",
+        label: "Assets Forge",
+        external: true,
+      },
     ],
   },
   "ratchetloop.html": {
