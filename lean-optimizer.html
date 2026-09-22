@@ -108,6 +108,11 @@
                 <li>Dashboard review and manually approved promotion packages</li>
                 <li>Post-promotion monitoring from the fill ledger</li>
             </ol>
+            <figure class="media-card">
+                <img class="case-study-image" src="images/lean-optimizer-test-plan.png"
+                    alt="Strategy Assayer test plan showing search space, a benchmark basket, and candidate equity curves" />
+                <figcaption>An experiment plan is a named run: search space, the benchmark basket, and the equity overlay of the candidates against buy-and-hold.</figcaption>
+            </figure>
 
             <h2>Validation Discipline</h2>
             <p>
@@ -119,6 +124,11 @@
                 scored runs, 435 were blocked. Promotion is the exception; preventing attractive but fragile
                 evaluations from shipping is the system's purpose.
             </p>
+            <figure class="media-card">
+                <img class="case-study-image" src="images/lean-optimizer-credibility.png"
+                    alt="Credibility table for gem-rotational with graduated verdicts and out-of-sample metrics" />
+                <figcaption>Walk-forward credibility for one strategy family: graduated verdicts, out-of-sample windows, and baseline-relative Sharpe and Calmar.</figcaption>
+            </figure>
             <p>
                 Scoring is walk-forward and baseline-relative. Every candidate is judged on stitched out-of-sample
                 performance from a walk-forward loop whose re-optimization schedule mirrors how it would actually be
@@ -128,12 +138,25 @@
                 are computed and persisted as diagnostics and guardrails rather than verdict inputs, accumulating
                 until live outcomes allow them to be calibrated against realized results.
             </p>
+            <figure class="media-card">
+                <img class="case-study-image" src="images/lean-optimizer-task.png"
+                    alt="Completed walk-forward task with stitched out-of-sample equity against buy-and-hold" />
+                <figcaption>A finished walk-forward task: stitched out-of-sample equity against the buy-and-hold line, with the search-boundary notes the scorer records.</figcaption>
+            </figure>
             <p>
                 The strongest guardrail is a randomized-control null distribution: the complete walk-forward loop is
                 re-run dozens of times with the signal replaced by seeded random entries, measuring whether the
                 optimization process can manufacture an equally attractive result from pure noise. Distributed across
                 the compute fleet through the shared work queue, a 50-seed null distribution completes in about two
-                minutes, making the test routine rather than prohibitive. Production behavior is then compared
+                minutes, making the test routine rather than prohibitive.
+            </p>
+            <figure class="media-card">
+                <img class="case-study-image" src="images/lean-optimizer-fleet.png"
+                    alt="Fleet page showing gateway status, drain hosts, and recent queue remediations" />
+                <figcaption>The shared queue runs across a drain fleet. Gateway state, worker load, and recent remediations stay on one screen.</figcaption>
+            </figure>
+            <p>
+                Production behavior is then compared
                 against a pre-committed forward expected distribution rather than against in-regime evaluation
                 headlines.
             </p>
@@ -146,6 +169,11 @@
                 orchestrator interleaves throttled data downloads with otherwise-idle research compute, dispatching
                 each task's evaluation once its data is ready.
             </p>
+            <figure class="media-card">
+                <img class="case-study-image" src="images/lean-optimizer-data-pulls.png"
+                    alt="Data Pulls page with backfill controls and a history of captured market snapshots" />
+                <figcaption>Data ingestion is its own queue: preflight, backfill, and the snapshot history later evaluations read.</figcaption>
+            </figure>
             <p>
                 A bounded evaluation steward runs as a separate LLM-guided layer. A deterministic queue runner keeps
                 evaluations running from a curated backlog; the LLM steward periodically reads results, writes
