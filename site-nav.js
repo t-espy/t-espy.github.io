@@ -8,7 +8,7 @@ const SITE_NAV_LINKS = [
     href: "/work.html",
     label: "Work",
     current: (file) =>
-      ["work.html", "ratchetloop.html", "asset-factory.html", "meetup-finder.html", "lean-optimizer.html", "2026-output.html"].includes(file),
+      ["work.html", "ratchetloop.html", "asset-factory.html", "meetup-finder.html", "lean-optimizer.html"].includes(file),
   },
   {
     href: "/methodology.html",
