@@ -51,13 +51,30 @@
                 evidence, and human-controlled promotion.
             </p>
 
-            <h2>Decisions are immutable; the record is append-only</h2>
+            <h2>Durable decisions need a durable record</h2>
             <p>
-                Durable design decisions live in <strong>Architecture Decision Records</strong> - 
-                one numbered file per decision, in Nygard format: context, decision, consequences.
-                The rule that makes them worth keeping is that <em>an accepted ADR is never
-                    edited.</em> To change a decision you write a new record that supersedes the old
-                one and flip a single status line. Nothing else changes.
+                The artifact should fit the project. Large systems with consequential architecture choices use
+                numbered <strong>Architecture Decision Records</strong> in Nygard form: context, decision, and
+                consequences. Smaller tools can use a compact decision register instead. A bounded work sample may
+                need no separate decision record at all if its design, plan, and task contracts already capture the
+                meaningful choices.
+            </p>
+            <p>
+                The invariant is not "every repository has ADRs." It is that a load-bearing decision should survive
+                the session and remain inspectable later, without inventing documentation whose only purpose is to
+                satisfy a process checklist. In a project that uses ADRs, an accepted ADR is never silently rewritten;
+                a later record supersedes it. In a compact decision register, earlier decisions remain visible and
+                later changes are recorded explicitly.
+            </p>
+            <p class="reference-note">
+                The ADR convention itself was adopted after <code>lean-optimizer-public</code> and several earlier
+                repositories had already been released, so I do not retroactively add ADRs merely to make older
+                projects look consistent with a later process. Ratchetloop, for example, uses a compact
+                <a class="contact-link" href="https://github.com/t-espy/ratchetloop-public/blob/main/docs/DECISIONS.md"
+                    target="_blank" rel="noopener noreferrer">decision register</a>; the smaller
+                <a class="contact-link" href="https://github.com/t-espy/leetcode-python" target="_blank"
+                    rel="noopener noreferrer">leetcode-python</a> work sample relies on its design, plan, task files,
+                tests, and run evidence rather than a ceremonial ADR set.
             </p>
             <p>
                 The value isn't documentation for its own sake. It's being able to read what was
@@ -77,11 +94,10 @@
                 session ends.
             </p>
             <p class="reference-note">
-                A guard against the obvious failure mode: <strong>ADR theater is worse than no
-                    ADRs.</strong> The convention names when <em>not</em> to write one - routine
-                choices, bug fixes, style. A record is for decisions that are expensive to
-                reverse, surprising to a future reader, or that rule out an alternative someone
-                would otherwise reach for. When it's unclear, the answer is to ask, not to file.
+                A guard against the obvious failure mode: <strong>decision-record theater is worse than no decision
+                    record.</strong> Routine choices, bug fixes, style, and deliberately simple repositories do not
+                need ceremonial artifacts. A durable record is for decisions that are expensive to reverse,
+                surprising to a future reader, or that rule out an alternative someone would otherwise reach for.
             </p>
 
             <h2>Verify external claims before they harden into documents</h2>
@@ -90,7 +106,7 @@
                     external system behaves from memory when that claim is about to land in a durable
                     document.</strong> APIs, framework defaults, broker constraints, library behavior
                 - fetch the published source, cite the URL inline, and only then write it down.
-                Plans seed code; ADRs commit the codebase to a direction. A wrong assumption in
+                Plans seed code; durable decision records commit the codebase to a direction. A wrong assumption in
                 either one multiplies into wrong implementation.
             </p>
             <p>
@@ -150,12 +166,10 @@
                 </tr>
             </table>
             <p>
-                The repo's hard-rules file carries the terse <em>what</em> - the standing
-                constraints a session must not break. Each rule that has real reasoning behind it
-                points to the decision record that holds the <em>why</em>. The rule is the
-                guardrail; the record is the argument. Keeping them separate means the guardrail
-                stays scannable and the argument stays available, and neither one rots into the
-                other.
+                Where a repository has a hard-rules file, it carries the terse <em>what</em> - the standing
+                constraints a session must not break. Rules with real architectural reasoning point to the durable
+                artifact that holds the <em>why</em>: an ADR, a decision register, a design document, or another
+                project-appropriate record. The guardrail stays scannable; the argument stays available.
             </p>
             <p id="delivery-control-loop">
                 The same principle now applies to execution state. A delivery run should not depend on a chat
@@ -168,33 +182,36 @@
 
             <h2>The artifacts</h2>
             <p>
-                Concretely, this is what lives in a repo run under these conventions. None of it
-                is exotic - the discipline is in keeping it current and letting it actually
-                constrain the work, session after session.
+                The exact files vary by project. The discipline is not a fixed directory layout; it is keeping the
+                important constraints, decisions, plans, tests, and run evidence durable enough to constrain later
+                work.
             </p>
             <table class="credential-table">
                 <tr>
-                    <td>CLAUDE.md</td>
-                    <td>The hard-rules file a fresh session reads first. Standing constraints, terminology,
-                        architecture must-knows, and the gotchas already solved - each load-bearing rule
-                        cross-linked to its decision record.</td>
+                    <td>Hard-rules file</td>
+                    <td>Standing constraints, terminology, architecture must-knows, and known gotchas a fresh agent
+                        session should read before changing the system.</td>
                 </tr>
                 <tr>
-                    <td>docs/adr/</td>
-                    <td>Numbered, immutable decision records in Nygard format, with a maintained index and a
-                        meta-record (ADR-0001) defining the convention itself - when to write one, and when
-                        not to.</td>
+                    <td>Decision record</td>
+                    <td>ADRs for large systems when the choice warrants them; a compact <code>DECISIONS.md</code>,
+                        design document, or other durable record for smaller projects.</td>
                 </tr>
                 <tr>
-                    <td>plans/</td>
-                    <td>Working notes for substantive tasks. Freely edited until first referenced by a commit,
-                        append-only after, each closed with a shipped / abandoned / superseded outcome line.</td>
+                    <td>Plan / task contract</td>
+                    <td>Working specification for substantive changes: objective, acceptance criteria, scope,
+                        executable checks, and the evidence needed to call the work complete.</td>
                 </tr>
                 <tr>
                     <td>tests/</td>
-                    <td>A non-trivial change isn't done until its tests pass. New behavior and bug fixes land
-                        with coverage; bug fixes land with a regression test. The suite is the contract a
-                        model's output has to satisfy.</td>
+                    <td>A non-trivial change is not done until its tests pass. New behavior and bug fixes land with
+                        coverage; bug fixes land with a regression test. The suite is part of the contract the
+                        worker's output has to satisfy.</td>
+                </tr>
+                <tr>
+                    <td>Run evidence</td>
+                    <td>For automated delivery, logs, check results, review findings, commits, provenance, and final
+                        dispositions survive the model session that produced them.</td>
                 </tr>
             </table>
 
