@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asset Factory - Generative AI Production System - Todd Espy</title>
+    <meta name="description"
+        content="Asset Factory is Todd Espy's local-first generative AI production platform for generation, scoring, optimization, curation, packaging, and publishing." />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="site-nav.js" defer></script>
+    <script src="site-aside.js" defer></script>
+</head>
+<body>
+    <site-nav></site-nav>
+    <div class="layout">
+        <main class="content">
+            <div class="banner">
+                <h1>Asset Factory</h1>
+                <p>Generative AI Production &amp; Publishing System</p>
+                <p>Generate · score · optimize · curate · package · publish</p>
+            </div>
+
+            <p>
+                Asset Factory is a local-first multimodal production platform I built to turn generative models into
+                repeatable digital-product workflows. It coordinates image and audio generation, persistent GPU model
+                serving, automated quality scoring, evolutionary optimization, human curation, packaging, metadata
+                generation, and marketplace publishing.
+            </p>
+            <p>
+                <strong>Asset Factory is the system; Assets Forge is one brand and output channel it powers.</strong>
+                The interesting engineering problem is not generating a picture. It is everything required to turn
+                model inference into controlled, reviewable, publishable output.
+            </p>
+
+            <div class="stats">
+                <div class="stat"><span class="stat-value">23</span><span class="stat-label">documented themes</span></div>
+                <div class="stat"><span class="stat-value">991</span><span class="stat-label">theme entries</span></div>
+                <div class="stat"><span class="stat-value">19</span><span class="stat-label">schema migrations</span></div>
+            </div>
+            <p class="reference-note">
+                Scope figures above are from the project's mid-April 2026 documentation snapshot.
+            </p>
+
+            <h2>Operator Workflow</h2>
+            <p>
+                The dashboard exposes the production loop as distinct operating stages: Discover, Scores, Generate,
+                Review, Publish, and Custom. The UI is FastAPI with HTMX and Jinja2 over PostgreSQL-backed production
+                state; pipeline actions route through the API and job-worker layers.
+            </p>
+
+            <div class="media-grid media-grid-wide">
+                <figure class="media-card">
+                    <div class="media-placeholder">
+                        <strong>Discover dashboard screenshot</strong>
+                        <span>images/asset-factory-discover.png</span>
+                    </div>
+                    <figcaption>Theme × style exploration, scoring heatmap, galleries, coverage, and sampler controls.</figcaption>
+                </figure>
+            </div>
+
+            <h2>From Model Inference to Production</h2>
+            <div class="architecture-flow" aria-label="Asset Factory production flow">
+                <span>brief</span><b>→</b><span>generate</span><b>→</b><span>score / QC</span><b>→</b>
+                <span>optimize</span><b>→</b><span>human review</span><b>→</b><span>package</span><b>→</b>
+                <span>metadata</span><b>→</b><span>publish</span>
+            </div>
+            <p>
+                The core LangGraph workflow generates portraits, maps, and audio; checks output; retries failed assets;
+                packages accepted work; and produces listing copy. Checkpoints allow crash-safe resume and selective
+                reruns. A separate persistent model server keeps FLUX warm so production runs do not pay repeated model
+                load costs.
+            </p>
+            <p>
+                The runtime is built around a GPU-constrained machine rather than pretending model capacity is
+                unlimited. A shared memory manager coordinates FLUX, MusicGen, CLIP/CLAP, vision models, and local LLM
+                inference to avoid out-of-memory collisions.
+            </p>
+
+            <h2>Evaluation Rather Than Generate-and-Pray</h2>
+            <p>
+                Every candidate can be scored with multiple independent signals. The current scoring path combines a
+                LAION aesthetic model, HPSv2.1 human-preference scoring, and rsinema composition/color/lighting
+                attributes into a normalized composite score. Prompt alignment and vision review provide additional
+                gates, and failed assets can be regenerated with feedback.
+            </p>
+            <p>
+                The same engineering instinct appears elsewhere in this portfolio: generation or search is not proof.
+                Strategy Assayer separates candidate search from evaluation; Asset Factory separates image generation
+                from scoring, curation, and publication.
+            </p>
+
+            <div class="media-grid media-grid-wide">
+                <figure class="media-card">
+                    <div class="media-placeholder">
+                        <strong>Review dashboard screenshot</strong>
+                        <span>images/asset-factory-review.png</span>
+                    </div>
+                    <figcaption>Human curation: compare scored candidates, select specific assets, exclude or regenerate, and build publishable collections.</figcaption>
+                </figure>
+            </div>
+
+            <h2>Custom Art Studio</h2>
+            <p>
+                Asset Factory later expanded beyond themed asset packs into a Custom Art Studio for interior-decorator
+                workflows. A user can supply a scene prompt and reference image, generate or transform artwork, apply
+                palette matching with Reinhard LAB color transfer, pin seeds for iteration, and preserve project
+                history. Image transforms can route through FLUX Kontext or img2img depending on the project.
+            </p>
+            <p>
+                Custom Studio deliberately bypasses the full LangGraph pipeline for lower-latency interactive work,
+                while still reusing the same model-serving, scoring, review, and publishing infrastructure.
+            </p>
+
+            <div class="media-grid media-grid-wide">
+                <figure class="media-card">
+                    <div class="media-placeholder">
+                        <strong>Custom Art Studio screenshot</strong>
+                        <span>images/asset-factory-custom.png</span>
+                    </div>
+                    <figcaption>Interactive generation and transformation with reference images, style controls, palette transfer, scoring, and project history.</figcaption>
+                </figure>
+            </div>
+
+            <h2>Production Architecture</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Model server</th>
+                        <td>Persistent FastAPI service keeps FLUX warm and exposes generation, IP Adapter, img2img,
+                            Kontext, batch, and depth-map endpoints.</td>
+                    </tr>
+                    <tr>
+                        <th>Pipeline</th>
+                        <td>LangGraph workflow with checkpoints, conditional retry, packaging, and listing generation.</td>
+                    </tr>
+                    <tr>
+                        <th>Evaluation</th>
+                        <td>CLIP/CLAP alignment, LAION aesthetic scoring, HPSv2.1, rsinema attributes, composite ranking,
+                            and vision review.</td>
+                    </tr>
+                    <tr>
+                        <th>Operator UI</th>
+                        <td>FastAPI + HTMX + Jinja2 dashboard for discovery, scoring, generation, review, publishing,
+                            optimization, and custom projects.</td>
+                    </tr>
+                    <tr>
+                        <th>Persistence</th>
+                        <td>PostgreSQL + SQLAlchemy/Alembic for jobs, runs, scores, collections, projects, and publishing state.</td>
+                    </tr>
+                    <tr>
+                        <th>Execution</th>
+                        <td>Priority job worker, cancellation controls, resumable runs, and GPU-aware resource coordination.</td>
+                    </tr>
+                    <tr>
+                        <th>Publishing</th>
+                        <td>Packaging, upscaling, LLM/vision-grounded metadata, and workflows for Fine Art America/Pixels,
+                            itch.io, and The Game Crafter.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Generated Output</h2>
+            <p>
+                The gallery below is meant to show controlled range rather than serve as an art portfolio: different
+                content types, materially different styles, and examples where the production system is doing more than
+                a single text-to-image call.
+            </p>
+            <div class="media-grid generated-gallery">
+                <figure class="media-card">
+                    <div class="media-placeholder portrait"><strong>Character / style A</strong><span>images/asset-factory-art-01.png</span></div>
+                    <figcaption>Character portrait in a distinctive style.</figcaption>
+                </figure>
+                <figure class="media-card">
+                    <div class="media-placeholder portrait"><strong>Same subject / style B</strong><span>images/asset-factory-art-02.png</span></div>
+                    <figcaption>Prefer the same subject in a visibly different style.</figcaption>
+                </figure>
+                <figure class="media-card">
+                    <div class="media-placeholder portrait"><strong>Natural-history example</strong><span>images/asset-factory-art-03.png</span></div>
+                    <figcaption>American Birds or another non-character workflow.</figcaption>
+                </figure>
+                <figure class="media-card">
+                    <div class="media-placeholder landscape"><strong>Landscape example</strong><span>images/asset-factory-art-04.png</span></div>
+                    <figcaption>American West or another landscape / img2img result.</figcaption>
+                </figure>
+                <figure class="media-card">
+                    <div class="media-placeholder portrait"><strong>Style Remix result</strong><span>images/asset-factory-art-05.png</span></div>
+                    <figcaption>A hybrid result produced from cross-style reference guidance.</figcaption>
+                </figure>
+                <figure class="media-card">
+                    <div class="media-placeholder landscape"><strong>Custom Studio result</strong><span>images/asset-factory-art-06.png</span></div>
+                    <figcaption>Prefer a color-matched or transformed result tied to the Custom Studio screenshot.</figcaption>
+                </figure>
+            </div>
+
+            <h2>Productization</h2>
+            <p>
+                The platform has produced actual digital and physical product workflows rather than stopping at model
+                output. Project documentation records published Assets Forge packs and card-deck products, along with
+                Fine Art America/Pixels publishing, metadata generation, upscaling, collection management, and
+                marketplace-specific packaging.
+            </p>
+            <p>
+                The repository remains private because it contains the production implementation, integration details,
+                and operating knowledge. This case study describes the architecture and visible output without
+                publishing that implementation.
+            </p>
+
+            <div class="tags">
+                <span class="tag">Python</span><span class="tag">LangGraph</span><span class="tag">FastAPI</span>
+                <span class="tag">HTMX</span><span class="tag">PostgreSQL</span><span class="tag">FLUX</span>
+                <span class="tag">Qwen</span><span class="tag">MusicGen</span><span class="tag">GPU Orchestration</span>
+                <span class="tag">Aesthetic Scoring</span><span class="tag">Human Review</span>
+                <span class="tag">Publishing Automation</span>
+            </div>
+
+            <p class="repo-note">
+                <a class="contact-link" href="https://assetsforge.net" target="_blank" rel="noopener noreferrer">Assets Forge</a>
+                is one public-facing product brand powered by Asset Factory.
+            </p>
+            <p class="repo-note">
+                <a class="contact-link" href="2026-output.html">2026 Engineering Output</a> — a git-measured view of
+                the source, tests, documentation, repositories, and languages behind this year's AI-assisted
+                engineering work.
+            </p>
+        </main>
+        <site-aside></site-aside>
+    </div>
+</body>
+</html>
