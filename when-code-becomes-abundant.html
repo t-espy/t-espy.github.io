@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>When Code Becomes Abundant - Todd Espy</title>
+    <meta name="description" content="AI is changing what software is worth, what open source means, and what programmers are for." />
+    <link rel="canonical" href="https://t-espy.github.io/when-code-becomes-abundant.html" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="site-nav.js" defer></script>
+    <script src="site-aside.js" defer></script>
+</head>
+<body>
+    <site-nav></site-nav>
+    <div class="layout">
+        <main class="content">
+            <div class="banner">
+                <h1>When Code Becomes Abundant</h1>
+                <p>AI is changing what software is worth, what open source means, and what programmers are for</p>
+            </div>
+
+            <p>For most of the history of the software industry, code was scarce.</p>
+            <p>A large, mature application represented thousands or millions of hours of accumulated engineering work. Adobe Photoshop, Microsoft Excel, AutoCAD, Oracle Database, and countless less famous enterprise applications were valuable partly because reproducing them was extraordinarily expensive.</p>
+            <p>The source code was intellectual property because the source code represented an enormous amount of labor.</p>
+            <p>Open-source software operated under the opposite model. Its great advantage was that anyone could see the code, improve it, fix bugs, and submit those improvements upstream. Developer labor was scarce, so additional competent contributors were valuable.</p>
+            <p>Artificial intelligence is beginning to invert both assumptions.</p>
+            <p><strong>We are approaching a world in which code is abundant.</strong></p>
+            <p>And when code becomes abundant, some surprisingly fundamental things about the software industry change.</p>
+
+            <h2>Code Is Becoming Documentation</h2>
+            <p>Programmers have long joked that “the code is the documentation.” Usually, that was a complaint.</p>
+            <p>Documentation becomes obsolete. Design documents drift away from implementations. Comments lie. Eventually the only authoritative description of what a system actually does is the source code itself.</p>
+            <p>The problem was that humans could not realistically treat a ten-million-line codebase as documentation. Understanding it might require months or years of institutional knowledge.</p>
+            <p>AI changes that.</p>
+            <p>An agent can search enormous repositories, trace call graphs, inspect implementations, infer interfaces, reconstruct architectural relationships, identify invariants, and generate descriptions of behavior.</p>
+            <p>The code increasingly becomes machine-readable documentation.</p>
+            <p>Research on specification-driven development is already moving in the complementary direction. Instead of treating manually written code as the primary artifact, specifications can become the authoritative artifact from which agents generate and verify implementations.</p>
+            <p>Put the two directions together:</p>
+            <p style="text-align:center;"><strong>Code → specification<br />Specification → code</strong></p>
+            <p>That is a profound change. And source code may not be the boundary.</p>
+
+            <h2>The Binary Is Becoming Documentation Too</h2>
+            <p>A compiled executable contains less information than its original source. Compilation strips away names, comments, abstractions, types, and much of the structure that made the program comprehensible to humans.</p>
+            <p>But it cannot strip away everything. Ultimately, the computer still has to execute the program.</p>
+            <p>Traditional reverse engineering has therefore always been possible. It has simply been expensive. Skilled engineers armed with tools such as IDA, Ghidra, debuggers, profilers, and decompilers can reconstruct surprisingly sophisticated understanding from binaries.</p>
+            <p>AI attacks the expensive part: human attention.</p>
+            <p>This is no longer theoretical research. Columbia's <a class="contact-link" href="https://daplab.cs.columbia.edu/benchmarks/sre-bench/">SRE-Bench</a> was explicitly created to measure whether AI agents can understand software when they receive compiled binaries but no source code. Its programs were created privately to avoid the possibility that models had simply encountered their source during training.</p>
+            <p>Other researchers are combining traditional decompilers with multiple AI agents and automated behavioral validation. Open-source tools are appearing that combine Ghidra, LLMs, independent checking agents, build-and-test gates, and behavioral parity analysis to reconstruct functions from binaries.</p>
+            <p>None of this means arbitrary commercial applications can be perfectly regenerated from their binaries today. Real applications are vastly larger, legal restrictions matter, anti-analysis techniques exist, and semantic equivalence is difficult to establish.</p>
+            <p>But the direction is hard to miss.</p>
+            <p style="text-align:center;"><strong>Executable → decompilation → behavioral analysis → recovered specification → independent implementation → differential testing</strong></p>
+            <p>Every stage is becoming increasingly automatable.</p>
+            <p>Once that pipeline becomes sufficiently reliable, a proprietary executable becomes something software vendors have rarely had to think of it as: <strong>a machine-readable description of their product.</strong></p>
+
+            <h2>That Changes the Economics of Proprietary Software</h2>
+            <p>Imagine a specialized enterprise application developed over twenty years.</p>
+            <p>Perhaps it has 500 customers paying $100,000 per year. That produces a $50 million annual business.</p>
+            <p>The application may not contain a revolutionary algorithm. Its moat may simply be accumulated functionality: thousands of screens, workflows, business rules, import formats, integrations, reports, edge cases, and fixes.</p>
+            <p>Historically, reproducing it might have required 100 engineers and several years. That historical implementation cost protected the vendor.</p>
+            <p>Now imagine that eventually an AI system can analyze the application, recover its observable requirements, construct an enormous structured specification, generate an independent implementation, and continuously test the new implementation against the original.</p>
+            <p>Suppose that turns a $50 million, five-year reimplementation project into a $1 million, six-month project.</p>
+            <p>The incumbent's economics have changed radically.</p>
+            <p>This doesn't mean copyright disappears. Copyright, patents, trademarks, trade secrets, contractual restrictions, and laws governing reverse engineering remain important. Nor does functional similarity automatically make a competing implementation lawful.</p>
+            <p>The important point is economic rather than legal: <strong>the historical cost of implementing software may cease to provide much protection.</strong></p>
+            <p>A company that spent thirty years discovering what customers needed has encoded much of that accumulated knowledge into its product. An AI competitor may increasingly be able to observe the result without paying the same discovery and implementation costs.</p>
+            <p>That makes distributing the implementation itself increasingly uncomfortable.</p>
+
+            <h2>The Retreat to the Cloud</h2>
+            <p>Software companies already have powerful reasons to prefer SaaS: recurring revenue, centralized deployment, telemetry, piracy prevention, rapid updates, and tighter customer relationships.</p>
+            <p>AI-assisted reverse engineering adds another: <strong>don't give customers the implementation.</strong></p>
+            <p>If the valuable algorithms execute on the vendor's servers, competitors can observe inputs and outputs but cannot directly inspect instruction streams, constants, internal data structures, libraries, control flow, and implementation details.</p>
+            <p>The natural architecture becomes:</p>
+            <p style="text-align:center;"><strong>Thin client → network API → proprietary implementation</strong></p>
+            <p>rather than:</p>
+            <p style="text-align:center;"><strong>Customer → proprietary executable</strong></p>
+            <p>For applications requiring local GPUs, low latency, offline operation, industrial control, or large local datasets, the division may be more complicated. Commodity functionality can execute locally while differentiating functionality remains server-side.</p>
+            <p>But the incentive is clear.</p>
+            <p>Ironically, that creates an opportunity for AI-native competitors. Customers frequently dislike subscriptions, mandatory accounts, cloud dependencies, and sending their data to vendors.</p>
+            <p>If AI makes recreating mature functionality dramatically cheaper, a challenger can offer precisely what the incumbent is retreating from: <strong>runs locally, own your files, no subscription, no cloud dependency.</strong></p>
+            <p>The incumbent moves toward the cloud to protect its implementation. The challenger uses cheap AI-generated implementation as a competitive weapon.</p>
+
+            <h2>Then Open Source Encounters the Opposite Problem</h2>
+            <p>Open source traditionally assumes that outside code contributions are valuable. That assumption makes sense when competent programming labor is scarce.</p>
+            <p>But what happens when producing a plausible pull request costs essentially nothing?</p>
+            <p>We are beginning to find out.</p>
+            <p>GitHub is already discussing how maintainers should deal with contribution queues containing substantial amounts of agent-generated work. Google has changed its Open Source Software Vulnerability Reward Program after a massive increase in AI-generated reports, including hallucinated vulnerabilities and reports with negligible real security impact.</p>
+            <p>This exposes the new economics.</p>
+            <p>Generating the report is cheap. Determining whether the report is correct is expensive.</p>
+            <p>Generating the patch is cheap. Determining whether the patch belongs in a production system is expensive.</p>
+            <p>An anonymous contributor can spend five dollars of inference generating a 20,000-line change. A maintainer may have to spend two days determining whether it is safe.</p>
+            <p>The contributor has externalized the expensive part of the transaction.</p>
+            <p>At sufficient scale, this becomes a denial-of-service attack on maintainership.</p>
+
+            <h2>Open Source May Become Operationally Closed</h2>
+            <p>That doesn't mean open source disappears. It means we need to distinguish two concepts that historically traveled together: <strong>the right to inspect and modify source</strong> and <strong>the ability to contribute code upstream.</strong></p>
+            <p>The first can remain completely open. The second may become heavily gated.</p>
+            <p>Large projects may increasingly require contributor reputation, automated pre-review, reproducible tests, provenance, maintainer sponsorship, or demonstrated evidence before a change ever consumes scarce human attention.</p>
+            <p>And eventually there is an even more interesting model.</p>
+            <p>Instead of saying <strong>“Send us a patch,”</strong> the project says <strong>“Send us a problem.”</strong></p>
+            <p>Submit a failing test. Submit a reproducible bug. Submit a benchmark regression. Submit a security exploit. Submit an interoperability case. Submit a proposed behavioral specification. Submit evidence that something should change.</p>
+            <p>Then the project's own trusted agents generate the implementation.</p>
+            <p>The community contributes <strong>knowledge and evidence</strong>. The project controls <strong>code synthesis</strong>.</p>
+            <p>Open source remains open legally while becoming increasingly controlled operationally.</p>
+
+            <h2>The Proprietary/Open-Source Paradox</h2>
+            <p>This creates a strange symmetry.</p>
+            <div class="project">
+                <p style="text-align:center;"><strong>For proprietary software, AI makes code too valuable to expose.<br /><br />For open-source software, AI makes code too cheap to accept indiscriminately.</strong></p>
+            </div>
+            <p>Those sound contradictory, but they're consequences of the same underlying phenomenon.</p>
+            <p>The economic value is migrating away from the act of writing code.</p>
+            <p>For proprietary vendors, the valuable thing becomes the knowledge embodied in the implementation, the proprietary data behind it, the service infrastructure, distribution, integrations, customer relationships, and continuing innovation.</p>
+            <p>For open-source projects, the valuable thing becomes maintainer judgment, architectural coherence, trusted governance, acceptance criteria, and control over the canonical artifact.</p>
+            <p>Both are responses to code becoming abundant.</p>
+
+            <h2>The End of “AI Slop”</h2>
+            <p>Today we hear constantly about AI-generated “slop.” Much of the criticism is justified.</p>
+            <p>An inexperienced developer can ask an agent to create an application, repeatedly prompt it until the application appears to work, and deploy something whose architecture, security, failure behavior, and maintainability nobody understands.</p>
+            <p>But that may be a transitional phenomenon.</p>
+            <p>Compilers once eliminated large categories of assembly-language mistakes. Garbage collection eliminated many memory-management failures. Strong type systems eliminated other categories of defects.</p>
+            <p>AI development systems can potentially raise the floor much further because they can inspect semantic and architectural behavior.</p>
+            <p>The important threshold isn't when AI becomes incapable of producing bad code. Humans have never crossed that threshold either.</p>
+            <p>The threshold comes when the normal AI development system doesn't merely generate a change. It generates the change, compiles it, tests it, fuzzes it, checks its dependencies, examines security properties, measures performance, verifies architectural constraints, exercises boundary conditions, and rejects its own work when those checks fail.</p>
+            <p>The unit of production stops being code.</p>
+            <p><strong>It becomes a validated change.</strong></p>
+            <p>At that point, attitudes toward AI-generated software may reverse surprisingly quickly.</p>
+            <p>Today the question is: <strong>“Was this code written by AI?”</strong></p>
+            <p>Eventually the suspicious question may be: <strong>“You wrote this manually? What verified it?”</strong></p>
+            <p>Hand-written, unverified code may someday look the way hand-written assembly does today: occasionally necessary, sometimes brilliant, but an unusual decision requiring justification.</p>
+
+            <h2>Code Was Never the Real Product</h2>
+            <p>This brings software engineering back to something we have always known but frequently ignored.</p>
+            <p>Customers don't actually want code. They want behavior.</p>
+            <p>The purpose of a payroll system isn't its Java classes. The purpose of Photoshop isn't its C++. The purpose of a trading system isn't its Python.</p>
+            <p>The code is an implementation of an intended behavior.</p>
+            <p>When implementation was expensive, we naturally organized the industry around producing and protecting implementation.</p>
+            <p>When implementation becomes cheap, attention moves elsewhere.</p>
+            <p>What should the system do? Under what conditions? What must never happen? What evidence demonstrates correctness? Which behaviors matter? Which tradeoffs are acceptable? Who decides when the artifact is good enough?</p>
+            <p>These are specification and validation questions.</p>
+            <p>The old software lifecycle looked approximately like this:</p>
+            <p style="text-align:center;"><strong>Requirements → humans → code → tests → product</strong></p>
+            <p>The emerging lifecycle looks more like:</p>
+            <p style="text-align:center;"><strong>Intent → specification → agents → implementation → automated validation → evidence → human judgment</strong></p>
+            <p>The implementation is still necessary. It just isn't necessarily the scarce part.</p>
+
+            <h2>What Becomes Valuable?</h2>
+            <p>If this transition continues, the durable assets of a software organization increasingly become:</p>
+            <ul>
+                <li><strong>Requirements.</strong> Deep understanding of the problem worth solving.</li>
+                <li><strong>Specifications.</strong> Precise descriptions of intended behavior and constraints.</li>
+                <li><strong>Validation.</strong> The ability to determine reliably whether an implementation satisfies those specifications.</li>
+                <li><strong>Evidence and provenance.</strong> Knowing why the system behaves as it does, where requirements came from, what generated an artifact, and what demonstrated its correctness.</li>
+                <li><strong>Data.</strong> Proprietary information that cannot simply be regenerated.</li>
+                <li><strong>Distribution and relationships.</strong> Access to customers and integration into their workflows.</li>
+                <li><strong>Judgment.</strong> Deciding which problems matter and which solutions should be trusted.</li>
+            </ul>
+            <p>Those things are much harder to generate than another implementation of a known specification.</p>
+            <p>This may also explain why specification-driven development is attracting renewed attention just as coding agents become powerful. The discipline isn't appearing despite increasingly capable models. It is appearing <strong>because of them</strong>. As implementation gets cheaper, ambiguity upstream becomes increasingly visible as the bottleneck.</p>
+
+            <h2>Software After Code Scarcity</h2>
+            <p>We aren't there yet.</p>
+            <p>Binary reverse engineering remains imperfect. Coding agents still make serious mistakes. Specifications remain incomplete. Formal verification is difficult. AI-generated contributions really can be slop. Human engineering judgment remains essential.</p>
+            <p>But those are statements about the current position on a capability curve, not necessarily fundamental barriers.</p>
+            <p>The important question is therefore not whether today's agent can perfectly reconstruct Photoshop, maintain Linux, or autonomously build a million-line enterprise system.</p>
+            <p>The important question is what happens if the cost of these activities continues falling.</p>
+            <p>The software industry was constructed around a basic economic fact: <strong>producing good code is expensive.</strong></p>
+            <p>Licensing models, engineering organizations, open-source contribution models, intellectual-property strategies, career ladders, development methodologies, and software-company valuations all grew in an environment where that statement was true.</p>
+            <p>We are entering an environment where it may increasingly be false.</p>
+            <p>And when a previously scarce resource becomes abundant, industries don't merely become more productive.</p>
+            <p><strong>They reorganize around whatever is scarce next.</strong></p>
+            <p>For software, that increasingly looks like specification, evidence, validation, proprietary knowledge, and judgment.</p>
+            <p>The code doesn't disappear. It becomes infrastructure.</p>
+            <p>And perhaps the strangest outcome of the AI coding revolution will be that, after spending seventy years building an industry around writing code, <strong>writing the code becomes one of the least interesting parts of building software.</strong></p>
+
+            <p class="repo-note">Todd Espy · October 2026</p>
+        </main>
+        <site-aside></site-aside>
+    </div>
+</body>
+</html>
