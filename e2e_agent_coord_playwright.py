@@ -51,7 +51,7 @@ def _assert_nav(page) -> None:
         "Home",
         "Work",
         "AI Engineering",
-        "Writing",
+        "Field Notes",
         "Credentials",
     ]
 

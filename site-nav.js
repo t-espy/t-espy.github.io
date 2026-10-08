@@ -17,10 +17,10 @@ const SITE_NAV_LINKS = [
   },
   {
     href: "/writing.html",
-    label: "Writing",
+    label: "Field Notes",
     current: (file) =>
-      ["writing.html", "autonomous-improvement-rate.html", "autonomous-improvement-rate-technical.html",
-       "qwen38-dgx-spark.html"].includes(file),
+      ["writing.html", "when-code-becomes-abundant.html", "autonomous-improvement-rate.html",
+       "autonomous-improvement-rate-technical.html", "qwen38-dgx-spark.html"].includes(file),
   },
   {
     href: "/technical-credentials.html",

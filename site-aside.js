@@ -77,7 +77,7 @@ const SITE_ASIDE = {
   },
   "autonomous-improvement-rate.html": {
     related: [
-      { href: "/writing.html", label: "Writing" },
+      { href: "/writing.html", label: "Field Notes" },
       {
         href: "/autonomous-improvement-rate-technical.html",
         label: "Technical notes",
@@ -88,7 +88,7 @@ const SITE_ASIDE = {
   },
   "autonomous-improvement-rate-technical.html": {
     related: [
-      { href: "/writing.html", label: "Writing" },
+      { href: "/writing.html", label: "Field Notes" },
       {
         href: "/autonomous-improvement-rate.html",
         label: "Autonomous Improvement Rate",
@@ -97,7 +97,7 @@ const SITE_ASIDE = {
   },
   "qwen38-dgx-spark.html": {
     related: [
-      { href: "/writing.html", label: "Writing" },
+      { href: "/writing.html", label: "Field Notes" },
       {
         href: "https://github.com/t-espy/langgraph-factory",
         label: "langgraph-factory",
