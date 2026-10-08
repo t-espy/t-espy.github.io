@@ -157,6 +157,7 @@ class SiteAside extends HTMLElement {
     linkedin.textContent = "linkedin.com/in/toddespy";
     contactList.append(
       listItem("Work model", document.createTextNode("Remote / Atlanta-area hybrid")),
+      listItem("Availability", document.createTextNode("Open to remote contract and permanent roles")),
       listItem("Email", emailSlot),
       listItem("LinkedIn", linkedin),
     );

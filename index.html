@@ -85,6 +85,7 @@
 
                 <div class="project">
                     <h2><a class="contact-link" href="ratchetloop.html">Ratchetloop - Auditable AI Software Delivery</a></h2>
+                    <p><strong>In plain terms:</strong> AI agents write the code, independent checks and a second AI from a different model family review it, and a person decides what ships.</p>
                     <p>
                         A local-first software-delivery pipeline for AI coding agents. A bounded task goes to a coder
                         in an isolated Git worktree, deterministic checks validate the change, a different model family
@@ -111,6 +112,7 @@
                 <div class="project">
                     <h2><a class="contact-link" href="lean-optimizer.html">Strategy Assayer - Computational Research &amp;
                             Evaluation Platform</a></h2>
+                    <p><strong>In plain terms:</strong> it separates results that are real from results that are luck, so decisions are not made on noise.</p>
                     <p>
                         The largest system I have built independently: a research platform that separates search from
                         proof. It combines a parallel experiment engine with tiered evaluation, walk-forward holdout,
@@ -118,20 +120,11 @@
                         and hash-stamped provenance.
                     </p>
                     <p>
-                        A 679,140-point parameter space converged in 611 evaluations in under three minutes against an
-                        ~88-hour exhaustive-grid extrapolation. The private platform has produced 25,000+ experiment
-                        plans, 86,000 walk-forward windows, and 5.2 million evaluation runs. Systematic trading is the
+                        A 679,140-point parameter space converged in under three minutes against an
+                        ~88-hour exhaustive-grid extrapolation. Systematic trading is the
                         current workload; the engineering problem is general computational research and trustworthy
                         evaluation at scale.
                     </p>
-                    <div class="stats">
-                        <div class="stat"><span class="stat-value">25,000+</span><span class="stat-label">experiment
-                                plans</span></div>
-                        <div class="stat"><span class="stat-value">86,000</span><span class="stat-label">walk-forward
-                                windows</span></div>
-                        <div class="stat"><span class="stat-value">5.2M</span><span class="stat-label">evaluation
-                                runs</span></div>
-                    </div>
                     <div class="tags">
                         <span class="tag">Python</span><span class="tag">C# / .NET</span><span class="tag">Docker</span>
                         <span class="tag">Optuna</span><span class="tag">Experiment Orchestration</span>
@@ -147,6 +140,7 @@
                 <div class="project">
                     <h2><a class="contact-link" href="asset-factory.html">Asset Factory - Generative AI Production &amp;
                             Publishing</a></h2>
+                    <p><strong>In plain terms:</strong> it turns AI image and audio generation into a repeatable workflow that produces finished, sellable products, with a person approving the output.</p>
                     <p>
                         A local-first multimodal production platform that turns model inference into a controlled
                         product workflow: persistent GPU model serving, image and audio generation, multi-signal
@@ -155,8 +149,7 @@
                     </p>
                     <p>
                         The operator dashboard spans Discover, Scores, Generate, Review, Publish, and a Custom Art
-                        Studio. By mid-April 2026 the project documentation recorded 23 themes, 991 theme entries, and
-                        19 schema migrations. Assets Forge is one public-facing brand powered by the private platform.
+                        Studio. Content is organized by theme and style, each with its own product types and pricing profile. Assets Forge is one public-facing brand powered by the private platform.
                     </p>
                     <div class="tags">
                         <span class="tag">Python</span><span class="tag">LangGraph</span>
@@ -173,15 +166,17 @@
 
                 <div class="project">
                     <h2><a class="contact-link" href="meetup-finder.html">Meetup Finder - AI-Native Product Delivery</a></h2>
+                    <p><strong>In plain terms:</strong> a group enters where everyone is, and the app suggests a fair place to meet, with no sign-up.</p>
                     <p>
                         A deployed mobile web product built as a compact demonstration of architecture-first,
                         AI-assisted delivery: product and privacy boundaries first, independent model review of the
                         design, agent-assisted implementation, automated tests, real-device validation, and deployment.
                     </p>
                     <p>
-                        The first working implementation followed the initial design the same afternoon. The project is
-                        useful evidence of the other side of the portfolio: not infrastructure for its own sake, but a
-                        complete product moving from idea to a live beta.
+                        The design starts from three privacy boundaries: no accounts, no app install, and no location
+                        tracking. It computes the meeting point itself rather than calling paid map services. Those
+                        constraints are the architecture, and the result is a complete product that went from idea to
+                        a live beta.
                     </p>
                     <div class="tags">
                         <span class="tag">TypeScript</span><span class="tag">Playwright</span>
@@ -195,27 +190,36 @@
                     </p>
                 </div>
 
+                <p><a class="contact-link" href="work.html">View the broader project portfolio →</a></p>
+
+                <h2>Enterprise Contact Center &amp; Conversational AI</h2>
                 <div class="project">
-                    <h2><a class="contact-link" href="https://github.com/t-espy/leetcode-python" target="_blank"
-                            rel="noopener noreferrer">Python Algorithm Interview Work Sample</a></h2>
                     <p>
-                        Ten representative algorithm patterns implemented through Ratchetloop, with focused unit tests,
-                        deterministic reference-oracle validation, independent cross-model review, and GitHub Actions.
-                        It is intentionally a software-engineering work sample rather than a completion exercise.
+                        Much of my enterprise career sits where telephony, speech recognition, and enterprise back ends
+                        meet: the systems that answer a large organization's phones and chat channels.
                     </p>
+                    <ul>
+                        <li><strong>Kaiser Permanente:</strong> technical lead on a configurable VoiceXML call-handling
+                            framework for roughly 100,000 calls per hour, with CTI screen pops, regional customization,
+                            and HIPAA constraints. The initial delivery led to multiyear contract extensions.</li>
+                        <li><strong>State agencies and healthcare:</strong> Dialogflow, NICE CXone, NICE inContact, and
+                            Genesys integrations with bot-to-agent handoff, delivered through public-sector security
+                            review. A FAQ-bot proof of concept helped retain a $5M annual contract.</li>
+                        <li><strong>Walmart:</strong> IVR for the primary customer-support number on NICE inContact,
+                            with an on-site, zero-disruption migration.</li>
+                        <li><strong>Speech systems:</strong> an email-by-phone platform serving 50,000+ daily users,
+                            VoiceXML conformance testing for the VoiceXML Forum, and five granted speech-to-text
+                            patents.</li>
+                    </ul>
                     <div class="tags">
-                        <span class="tag">Python</span><span class="tag">Algorithms</span>
-                        <span class="tag">pytest</span><span class="tag">Oracle Testing</span>
-                        <span class="tag">Ratchetloop</span><span class="tag">GitHub Actions</span>
+                        <span class="tag">VoiceXML</span><span class="tag">Dialogflow</span>
+                        <span class="tag">NICE CXone</span><span class="tag">NICE inContact</span>
+                        <span class="tag">Genesys</span><span class="tag">ASR</span><span class="tag">CTI</span>
                     </div>
                     <p class="repo-note">
-                        <a class="contact-link" href="https://github.com/t-espy/leetcode-python" target="_blank"
-                            rel="noopener noreferrer">github.com/t-espy/leetcode-python</a> ·
-                        <a class="contact-link" href="ratchetloop.html">See the delivery system behind it</a>
+                        <a class="contact-link" href="/technical-credentials.html">Patents, publications, and recognition</a>
                     </p>
                 </div>
-
-                <p><a class="contact-link" href="work.html">View the broader project portfolio →</a></p>
 
                 <h2 id="field-notes">Field Notes</h2>
                 <div class="project">
@@ -262,15 +266,15 @@
                             technical report based on Duke M.S. thesis research.</li>
                         <li><strong>Granted intellectual property:</strong> co-inventor on five speech-recognition
                             patents across U.S., European, and Chinese grants.</li>
-                        <li><strong>Industry recognition:</strong> lead-development work on two systems recognized by
-                            <em>Speech Technology Magazine</em> as Most Innovative Solutions.</li>
+                        <li><strong>Industry recognition:</strong> principal developer of the Davey Tree voice application and a
+                            contributing developer on Verizon's National Operations Voice Portal, each recognized by
+                            <em>Speech Technology Magazine</em> as a Most Innovative Solution.</li>
                     </ul>
                     <p>
                         Supporting references are in
                         <a class="contact-link" href="/technical-credentials.html">Technical Credentials</a>.
                     </p>
                 </div>
-                <p class="repo-note">Generated output stats available on request.</p>
 </main>
         </div>
 
@@ -305,7 +309,7 @@
                 <ul style="list-style: none; padding-left: 0;">
                     <li>5 granted patents</li>
                     <li>IEEE / NASA publications</li>
-                    <li>Speech Technology Magazine - 2× Innovative Solution Award</li>
+                    <li>Speech Technology Magazine - Most Innovative Solutions (Davey Tree, Verizon)</li>
                     <li>VoiceXML Forum Certified Developer</li>
                 </ul>
             </aside>
