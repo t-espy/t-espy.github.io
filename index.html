@@ -26,7 +26,7 @@
             <div class="banner">
                 <h1>Todd Espy</h1>
                 <p>Principal Software Architect | AI-Assisted Engineering</p>
-                <p>AI-driven software delivery and enterprise AI architecture</p>
+                <p>Building software with AI for organizations that can't afford it to fail</p>
             </div>
 
             <main class="content">
@@ -39,15 +39,15 @@
                     never let the agent grade its own work.
                 </p>
                 <p>
-                    Recent work includes <a class="contact-link" href="ratchetloop.html">Ratchetloop</a>, an auditable
-                    software-delivery pipeline for coding agents; <a class="contact-link"
-                        href="lean-optimizer.html">Strategy Assayer</a>, an evaluation and provenance platform; and
-                    <a class="contact-link" href="meetup-finder.html">Meetup Finder</a>, a deployed product built with
-                    an architecture-first, multi-model delivery process.
+                    Recent work includes <a class="contact-link" href="ratchetloop.html">Ratchetloop</a>, where AI agents
+                    write code and independent checks review it; <a class="contact-link"
+                        href="lean-optimizer.html">Strategy Assayer</a>, which tests whether a result is real or luck;
+                    and <a class="contact-link" href="meetup-finder.html">Meetup Finder</a>, a live app that finds a
+                    fair place for a group to meet.
                 </p>
                 <p>
-                    That work sits on top of a long production-engineering track record across enterprise and
-                    public-sector systems, including Verizon, Kaiser Permanente, Walmart, and state government.
+                    Before this, I built production systems for enterprise and public-sector clients, including
+                    Verizon, Kaiser Permanente, Walmart, and state government.
                     Published research, five granted speech-recognition patents, industry recognition, and AWS ML / AI
                     certifications are documented in
                     <a class="contact-link" href="/technical-credentials.html">Technical Credentials</a>.
@@ -61,8 +61,8 @@
                     <p>
                         A local-first software-delivery pipeline for AI coding agents. A bounded task goes to a coder
                         in an isolated Git worktree, deterministic checks validate the change, a different model family
-                        reviews the diff, and Ratchetloop leaves a branch plus an evidence-rich run record for a human
-                        merge decision.
+                        reviews the diff, and Ratchetloop leaves a branch and a full record of what happened, so a person
+                        can decide whether to merge it.
                     </p>
                     <div class="tags">
                         <span class="tag">Python</span><span class="tag">AI Agents</span>
@@ -79,8 +79,8 @@
                 <h2>Enterprise &amp; Public-Sector Delivery</h2>
                 <div class="project">
                     <p>
-                        Production systems for large organizations under real scale, security, and compliance
-                        constraints. Delivered at Verizon, 2012 to 2024.
+                        Phone and chat systems for large organizations with strict security and compliance rules.
+                        Delivered at Verizon, 2012 to 2024.
                     </p>
                     <ul>
                         <li><strong>Kaiser Permanente:</strong> technical lead on a configurable VoiceXML call-handling
@@ -90,7 +90,7 @@
                             Genesys integrations with bot-to-agent handoff, delivered through public-sector security
                             review. A FAQ-bot proof of concept helped retain a $5M annual contract.</li>
                         <li><strong>Walmart:</strong> IVR for the primary customer-support number on NICE inContact,
-                            with an on-site, zero-disruption migration.</li>
+                            moved to the new platform on site without interrupting service.</li>
                         <li><strong>Speech systems:</strong> an email-by-phone platform serving 50,000+ daily users,
                             VoiceXML conformance testing for the VoiceXML Forum, and five granted speech-to-text
                             patents.</li>
@@ -111,12 +111,11 @@
                             Evaluation Platform</a></h2>
                     <p><strong>In plain terms:</strong> it separates results that are real from results that are luck, so decisions are not made on noise.</p>
                     <p>
-                        The largest system I have built independently: a research platform that separates search from
-                        proof. It combines a parallel experiment engine with tiered evaluation, walk-forward holdout,
-                        randomized controls, null distributions, multiple-trial correction, blocking promotion gates,
-                        and hash-stamped provenance. A 679,140-point parameter space converged in under three minutes
-                        against an ~88-hour exhaustive-grid extrapolation. The same engine applies to any workload
-                        where results must survive review.
+                        The largest system I have built on my own. It runs thousands of experiments in parallel, then
+                        puts the best ones through harder tests (held-out data, random controls, and corrections for
+                        trying many ideas at once) before any result is trusted. A 679,140-point search finished in
+                        under three minutes instead of an estimated 88 hours. The same approach fits any problem where
+                        a promising result has to hold up.
                     </p>
                     <div class="tags">
                         <span class="tag">Python</span><span class="tag">C# / .NET</span><span class="tag">Docker</span>
@@ -131,13 +130,12 @@
                 </div>
 
                 <div class="project">
-                    <h2><a class="contact-link" href="meetup-finder.html">Meetup Finder - AI-Native Product Delivery</a></h2>
+                    <h2><a class="contact-link" href="meetup-finder.html">Meetup Finder - A Fair Place to Meet, No Sign-Up</a></h2>
                     <p><strong>In plain terms:</strong> a group enters where everyone is, and the app suggests a fair place to meet, with no sign-up.</p>
                     <p>
                         The design starts from three privacy boundaries: no accounts, no app install, and no location
                         tracking. It computes the meeting point itself rather than calling paid map services. Those
-                        constraints are the architecture, and the result is a complete product that went from idea to
-                        a live beta.
+                        three rules shaped everything else, and the app went from idea to a live beta.
                     </p>
                     <div class="tags">
                         <span class="tag">TypeScript</span><span class="tag">Playwright</span>
@@ -166,24 +164,22 @@
                     <h3><a class="contact-link" href="methodology.html">A Discipline for Building Production Software with
                             AI Agents</a></h3>
                     <p>
-                        The engineering method behind the work: explicit architecture, durable decisions, verified
-                        external claims, bounded agents, deterministic gates, independent review, and evidence that
-                        survives the session that produced it.
+                        How I keep AI agents building the right thing: decisions written down, facts checked before
+                        they're relied on, tight limits on each agent, and review by something other than the agent.
                     </p>
                 </div>
                 <div class="project">
                     <h3><a class="contact-link" href="qwen38-dgx-spark.html">Putting Qwen3.8-27B to Work on a DGX Spark</a></h3>
                     <p>
-                        Engineering experiments on model routing, speculative decoding, harness overhead, output
-                        strategy, and what classes of real software work can move from frontier agents to local compute.
+                        Experiments on how much real software work a local model on a desktop AI machine can take
+                        over from paid cloud models.
                     </p>
                 </div>
                 <div class="project">
                     <h3><a class="contact-link" href="autonomous-improvement-rate.html">Autonomous Improvement Rate</a></h3>
                     <p>
-                        A framework for reasoning about iterative autonomous systems in terms of throughput,
-                        information gained per iteration, and how effectively the system retains and exploits what it
-                        learns.
+                        How to tell whether a self-improving system is actually getting better: how fast it runs, how
+                        much each attempt teaches it, and how well it holds on to what it learns.
                     </p>
                 </div>
                 <p><a class="contact-link" href="writing.html">View field notes →</a></p>
@@ -196,7 +192,7 @@
                         <li><strong>Published research:</strong> IEEE fuzzy-logic control paper; NASA conference and
                             international workshop publications on genetic algorithms; U.S. Department of Energy
                             technical report based on Duke M.S. thesis research.</li>
-                        <li><strong>Granted intellectual property:</strong> co-inventor on five speech-recognition
+                        <li><strong>Patents:</strong> co-inventor on five speech-recognition
                             patents across U.S., European, and Chinese grants.</li>
                         <li><strong>Industry recognition:</strong> principal developer of the Davey Tree voice application and a
                             contributing developer on Verizon's National Operations Voice Portal, each recognized by
