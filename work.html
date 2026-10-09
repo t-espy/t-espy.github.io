@@ -24,29 +24,219 @@
         <main class="content">
             <div class="banner">
                 <h1>Work</h1>
-                <p>Software architecture, AI-assisted engineering, computational systems, and shipped products</p>
+                <p>Capabilities, and the projects and results behind them</p>
             </div>
 
             <p>
-                The common thread is not a single domain. It is building systems that make hard work explicit,
-                testable, reviewable, and operable. Some projects are public, some expose a curated public slice,
-                and some remain private because the implementation or design is product IP.
+                Grouped by kind of work rather than by date. Some projects are public, some show a public slice,
+                and some stay private because the design is product IP or the data belongs to a client.
+            </p>
+            <p class="repo-note">
+                <a class="contact-link" href="#ai-engineering">AI-assisted engineering</a> ·
+                <a class="contact-link" href="#enterprise">Enterprise architecture &amp; leadership</a> ·
+                <a class="contact-link" href="#contact-center">Contact center &amp; conversational AI</a> ·
+                <a class="contact-link" href="#research">Computational research</a> ·
+                <a class="contact-link" href="#genai">Generative AI &amp; GPU platforms</a> ·
+                <a class="contact-link" href="#products">Products &amp; business automation</a>
             </p>
 
-            <h2>AI Engineering Systems</h2>
+            <h2 id="ai-engineering">AI-Assisted Engineering &amp; Agent Systems</h2>
 
             <div class="project">
                 <h3><a class="contact-link" href="ratchetloop.html">Ratchetloop</a></h3>
                 <p>
-                    Auditable software delivery for AI coding agents: isolated worktrees, deterministic checks,
-                    scoped commits, independent model-family review, resumable runs, run records, and human merge
-                    control.
+                    Auditable software delivery for AI coding agents. A coding agent works in an isolated Git
+                    worktree, deterministic checks validate the change, a different model family reviews it, and a
+                    person makes the merge decision. On one day, fifteen work items went through it from build to
+                    merge, including changes to its own code.
                 </p>
                 <p class="repo-note">
+                    <a class="contact-link" href="ratchetloop.html">Case study</a> ·
                     <a class="contact-link" href="https://github.com/t-espy/ratchetloop-public" target="_blank"
-                        rel="noopener noreferrer">Public repository</a>
+                        rel="noopener noreferrer">Public repository</a> ·
+                    <a class="contact-link" href="methodology.html">The method behind it</a>
                 </p>
             </div>
+
+            <div class="project">
+                <h3><a class="contact-link" href="https://github.com/t-espy/langgraph-factory" target="_blank"
+                        rel="noopener noreferrer">langgraph-factory</a></h3>
+                <p>
+                    Multi-agent code generation on local models: a planning model owns the architecture and a coding
+                    model generates and repairs, with a recovery ladder that tries cheap mechanical fixes before
+                    spending model calls. No API keys or per-token cost. A sample run produced a working 24-file
+                    blog platform in 266 seconds.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3><a class="contact-link" href="https://github.com/t-espy/leetcode-python" target="_blank"
+                        rel="noopener noreferrer">Python Algorithm Interview Work Sample</a></h3>
+                <p>
+                    Ten representative algorithm patterns built through Ratchetloop and validated with focused unit
+                    tests, deterministic reference-oracle tests, cross-model review, and GitHub Actions.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>AI coding agents in daily practice</h3>
+                <p>
+                    Claude Code, Codex CLI, Cursor, GitHub Copilot, and other agents used daily and matched to the
+                    task, plus MCP servers and CLI tools built for agent workflows. Hands-on onboarding of other
+                    engineers to agentic development, and AI-assisted development inside a current enterprise
+                    client's official GitHub Copilot pilot, under its review and compliance rules.
+                </p>
+            </div>
+
+            <h2 id="enterprise">Enterprise Architecture &amp; Leadership</h2>
+
+            <div class="project">
+                <h3>Verizon, 2012 to 2024</h3>
+                <p>
+                    Senior consultant and lead engineer delivering customer-experience systems for Fortune 100 and
+                    public-sector clients, working directly with client teams, executives, and security reviewers.
+                </p>
+                <ul>
+                    <li>Designed SolVE, a project-estimating and cost-validation tool tied to Salesforce
+                        opportunities. It was adopted across Professional Services and later handed to internal IT.</li>
+                    <li>Led delivery of a web application for the New Jersey Department of Transportation that brought
+                        in six-figure new revenue, plus API services connecting web, IVR, and chatbot clients to
+                        back-end systems and SAP.</li>
+                    <li>Led in-house development of mobile apps and an SDK (iOS, Android, WebRTC) for a new Verizon
+                        product, saving six figures in outside costs.</li>
+                    <li>Led a large team building an enterprise VoiceXML IVR with Java middleware for a healthcare
+                        client, and a small team delivering a custom billing system for a hosted call-center client.</li>
+                    <li>Ran discovery directly with clients, pushed back when the request did not match the need, and
+                        explained tradeoffs to engineering and business decision-makers. Verizon Ovation Award, 2014.</li>
+                </ul>
+                <p class="repo-note">
+                    Kaiser Permanente, state agency, and Walmart work is under
+                    <a class="contact-link" href="#contact-center">Contact center &amp; conversational AI</a>.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>Current enterprise contract</h3>
+                <p>
+                    Production Azure Functions in C#/.NET for a large enterprise client, shipped through Azure DevOps
+                    pipelines and the client's change control, working against Oracle and SQL Server.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>Intellivoice: email by phone</h3>
+                <p>
+                    Led the product end to end: hired the team, built the development setup, chose the hardware and
+                    software, and directed delivery through on-site installation. It reached 50,000+ daily users, and
+                    its success led Premiere Technologies to acquire the company.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>Speech-technology leadership</h3>
+                <p>
+                    Director-level roles at speech-technology companies: launched a speech solutions group, led
+                    application development teams, built a reusable VoiceXML application framework, and led sales
+                    engineering for speech-to-text products.
+                </p>
+            </div>
+
+            <h2 id="contact-center">Contact Center &amp; Conversational AI</h2>
+
+            <div class="project">
+                <h3>Kaiser Permanente IVR framework</h3>
+                <p>
+                    Technical lead on a configurable VoiceXML call-handling framework for roughly 100,000 calls per
+                    hour, with regional customization, CTI screen pops, speech self-service, and high availability
+                    under HIPAA constraints. The initial delivery led to multiyear contract extensions.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>Conversational AI for state agencies and healthcare</h3>
+                <p>
+                    Directed evaluation and integration of Google Dialogflow CX and ES with NICE CXone, NICE
+                    inContact, and Genesys: intent design, intent coverage generated from source documents, ASR
+                    tuning, bot-to-agent handoff, automated intent testing, and delivery through public-sector
+                    security review. A FAQ-bot proof of concept helped retain a $5M annual contract.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>Walmart customer support IVR</h3>
+                <p>
+                    Designed and deployed the IVR for Walmart's primary customer-support number on NICE inContact,
+                    and moved it to the new platform on site without interrupting service.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>NICE CXone and conversational-AI bots</h3>
+                <p>
+                    Inbound and outbound IVR scripting on NICE CXone Studio, connected to Omilia conversational-AI
+                    bots for self-service and bot-to-agent handoff, for a current enterprise client.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>Speech platforms and standards</h3>
+                <p>
+                    Led VoiceXML 2.0, 2.1, and SRGS conformance testing for the VoiceXML Forum across five voice
+                    platforms, including Genesys and Nuance. Built speech-to-text dictation solutions and the
+                    measurement methods behind them, the work that produced five granted patents. Principal developer
+                    of the Davey Tree voice field-reporting application, a <em>Speech Technology Magazine</em> Most
+                    Innovative Solution.
+                </p>
+                <p class="repo-note">
+                    <a class="contact-link" href="technical-credentials.html">Patents and award references</a>
+                </p>
+            </div>
+
+            <h2 id="research">Computational Research &amp; Evaluation</h2>
+
+            <div class="project">
+                <h3><a class="contact-link" href="lean-optimizer.html">Strategy Assayer</a></h3>
+                <p>
+                    A large-scale computational research and evaluation platform with parallel experiment execution,
+                    directed search, walk-forward testing, control arms, provenance, and blocking promotion
+                    gates. Systematic trading is the current workload; the underlying
+                    architecture is a general research and evaluation system.
+                </p>
+                <p class="repo-note">
+                    <a class="contact-link" href="lean-optimizer.html">Case study</a>
+                </p>
+            </div>
+
+            <div class="project">
+                <h3><a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank"
+                        rel="noopener noreferrer">lean-optimizer-public</a></h3>
+                <p>
+                    The optimization core of Strategy Assayer, published to read and run on its own. A 679,140-point
+                    parameter search estimated at 88 hours as an exhaustive grid finished in 2 minutes 40 seconds,
+                    head to head on the same strategy, ranges, and data. Two gains compound: compile-once caching
+                    with persistent .NET workers (about 1.8x throughput) and an incremental genetic algorithm.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>GPU forecasting platform</h3>
+                <p>
+                    Data ingestion, feature engineering, training, and backtesting with an XGBoost and LSTM ensemble,
+                    with GPU memory managed through TensorFlow and CuPy.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>Early applied AI: fuzzy logic, neural networks, genetic algorithms</h3>
+                <p>
+                    At Togai InfraLogic, an early applied-AI company: a fuzzy-logic airbag controller, built with
+                    Autoliv, that beat BMW's production controller in simulation; a genetic algorithm that tunes
+                    fuzzy controllers automatically; and about a year with Siemens' fuzzy-logic research group in
+                    Munich. Published through IEEE, NASA, and the U.S. Department of Energy.
+                </p>
+            </div>
+
+            <h2 id="genai">Generative AI &amp; GPU Platforms</h2>
 
             <div class="project">
                 <h3><a class="contact-link" href="asset-factory.html">Asset Factory</a></h3>
@@ -61,50 +251,43 @@
             </div>
 
             <div class="project">
-                <h3><a class="contact-link" href="https://github.com/t-espy/langgraph-factory" target="_blank"
-                        rel="noopener noreferrer">langgraph-factory</a></h3>
+                <h3>On-premises inference platform</h3>
                 <p>
-                    Multi-agent code generation with local models, explicit planning, build-fix loops, bounded tools,
-                    and automated recovery. A sample run produced a 24-file blog platform in 266 seconds on local
-                    inference.
-                </p>
-            </div>
-
-            <div class="project">
-                <h3><a class="contact-link" href="https://github.com/t-espy/leetcode-python" target="_blank"
-                        rel="noopener noreferrer">Python Algorithm Interview Work Sample</a></h3>
-                <p>
-                    Ten representative algorithm patterns built through Ratchetloop and validated with focused unit
-                    tests, deterministic reference-oracle tests, cross-model review, and GitHub Actions.
-                </p>
-            </div>
-
-            <h2>Computational &amp; Evaluation Systems</h2>
-
-            <div class="project">
-                <h3><a class="contact-link" href="lean-optimizer.html">Strategy Assayer</a></h3>
-                <p>
-                    A large-scale computational research and evaluation platform with parallel experiment execution,
-                    directed search, walk-forward testing, control arms, provenance, and blocking promotion
-                    gates. Systematic trading is the current workload; the underlying
-                    architecture is a general research and evaluation system.
+                    A local model-serving stack on an NVIDIA DGX Spark for cost control and data custody: several
+                    open models served side by side, shared GPU memory management, multi-model worker pools, and
+                    regression-gated model promotion. Every GPU project on this page runs on it.
                 </p>
                 <p class="repo-note">
-                    <a class="contact-link" href="https://github.com/t-espy/lean-optimizer-public" target="_blank"
-                        rel="noopener noreferrer">Public orchestration-engine slice</a>
+                    <a class="contact-link" href="qwen38-dgx-spark.html">Field note: putting a local model to work</a>
                 </p>
             </div>
 
-            <h2>Products &amp; Applications</h2>
+            <div class="project">
+                <h3>Clinical-note workflow trial</h3>
+                <p>
+                    Speech transcription, AI formatting of medical notes, and an open-source electronic health record
+                    platform in one workflow. Stored-record accuracy improved 57% in the trial environment.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>Serverless RAG on AWS</h3>
+                <p>
+                    A personal project alongside the AWS certifications: FastAPI, React, Amazon Bedrock, Lambda, and
+                    API Gateway with AWS SAM, plus embedding and clustering workflows for grouping similar inputs.
+                </p>
+            </div>
+
+            <h2 id="products">Products &amp; Business Automation</h2>
 
             <div class="project">
                 <h3><a class="contact-link" href="meetup-finder.html">Meetup Finder</a></h3>
                 <p>
-                    A deployed mobile web product and case study in architecture-first AI-assisted delivery:
-                    requirements and privacy boundaries, adversarial design review, implementation, automated tests,
-                    device validation, and deployment.
+                    A group enters where everyone is, and the app suggests a fair place to meet. No accounts, no app
+                    install, no location tracking, and no paid map services.
                 </p>
                 <p class="repo-note">
+                    <a class="contact-link" href="meetup-finder.html">Case study</a> ·
                     <a class="contact-link" href="https://meetupfinder.com" target="_blank"
                         rel="noopener noreferrer">Live beta</a>
                 </p>
@@ -113,16 +296,22 @@
             <div class="project">
                 <h3><a class="contact-link" href="https://www.route-forge.com" target="_blank"
                         rel="noopener noreferrer">Route Forge</a></h3>
-                <p>Multi-stop route-planning software delivered as a live web application.</p>
+                <p>
+                    Multi-tenant route-planning SaaS: efficient routes for 10+ stops with adjustable time at each
+                    stop, live traffic, and arrival estimates. Built as three apps (planner, storefront, and API with
+                    sign-in) sharing one login, on Next.js, TypeScript, Supabase, and Stripe.
+                </p>
             </div>
 
             <div class="project">
                 <h3><a class="contact-link" href="https://groundworksites.net" target="_blank"
                         rel="noopener noreferrer">Groundwork Sites</a></h3>
-                <p>AI-assisted website delivery system and live service.</p>
+                <p>
+                    A small-business website pipeline from lead to live site: lead discovery, site generation from
+                    templates, Stripe payment, automatic domain registration and DNS, deployment, and a customer
+                    self-service portal with role-based access.
+                </p>
             </div>
-
-            <h2>Geospatial Data Engineering &amp; Decision Support</h2>
 
             <div class="project">
                 <h3>Real Estate Market Intelligence</h3>
@@ -139,19 +328,19 @@
                 </p>
             </div>
 
-            <h2>Production Engineering Track Record</h2>
             <div class="project">
+                <h3>Earlier business systems</h3>
                 <p>
-                    Earlier production work includes enterprise and public-sector systems built at Verizon for Kaiser
-                    Permanente, Walmart, state government, and other clients. Before Verizon: speech-recognition and
-                    voice systems, service architecture, and the Davey Tree voice application (principal developer),
-                    recognized by <em>Speech Technology Magazine</em> as a Most Innovative Solution.
-                </p>
-                <p>
-                    See <a class="contact-link" href="technical-credentials.html">Technical Credentials</a> for
-                    publications, patents, certifications, and supporting references.
+                    A data-entry system whose rollout drove a leasing business's growth and profitable sale, a
+                    point-of-sale and inventory system for a cellular retailer, and mobile and voice apps for
+                    consumer devices.
                 </p>
             </div>
+
+            <p>
+                Publications, patents, certifications, and award references are in
+                <a class="contact-link" href="technical-credentials.html">Technical Credentials</a>.
+            </p>
 </main>
         <site-aside></site-aside>
     </div>
