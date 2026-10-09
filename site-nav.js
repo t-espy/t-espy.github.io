@@ -12,7 +12,7 @@ const SITE_NAV_LINKS = [
   },
   {
     href: "/methodology.html",
-    label: "AI Engineering",
+    label: "Method",
     current: (file) => file === "methodology.html",
   },
   {

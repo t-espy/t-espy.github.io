@@ -37,13 +37,13 @@ const SITE_ASIDE = {
         label: "leetcode-python work sample",
         external: true,
       },
-      { href: "/methodology.html", label: "AI Engineering methodology" },
+      { href: "/methodology.html", label: "Method" },
     ],
   },
   "meetup-finder.html": {
     related: [
       { href: "/work.html", label: "Work portfolio" },
-      { href: "/methodology.html", label: "AI Engineering methodology" },
+      { href: "/methodology.html", label: "Method" },
       {
         href: "https://meetupfinder.com",
         label: "Meetup Finder beta",
@@ -59,7 +59,7 @@ const SITE_ASIDE = {
         label: "lean-optimizer-public",
         external: true,
       },
-      { href: "/methodology.html", label: "AI Engineering methodology" },
+      { href: "/methodology.html", label: "Method" },
     ],
   },
   "methodology.html": {
@@ -71,7 +71,7 @@ const SITE_ASIDE = {
   },
   "writing.html": {
     related: [
-      { href: "/methodology.html", label: "AI Engineering methodology" },
+      { href: "/methodology.html", label: "Method" },
       { href: "/work.html", label: "Work portfolio" },
     ],
   },
