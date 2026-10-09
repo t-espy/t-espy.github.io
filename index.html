@@ -47,40 +47,6 @@
                     <a class="contact-link" href="/technical-credentials.html">Technical Credentials</a>.
                 </p>
 
-                <h2>What I Build</h2>
-
-                <div class="project">
-                    <h3>Production Software</h3>
-                    <p>
-                        Web applications, APIs, workflow systems, integrations, automation, cloud services, and the
-                        supporting test and deployment machinery required to operate them.
-                    </p>
-                </div>
-
-                <div class="project">
-                    <h3>AI-Assisted Engineering Systems</h3>
-                    <p>
-                        Coding-agent pipelines, deterministic validation gates, independent model review, local-model
-                        routing, run provenance, and the controls that turn fast generation into inspectable software.
-                    </p>
-                </div>
-
-                <div class="project">
-                    <h3>Computational &amp; Evaluation Platforms</h3>
-                    <p>
-                        High-throughput experiment engines, optimization, reproducible evaluation, provenance, and
-                        promotion systems where a plausible result is not enough and evidence has to survive review.
-                    </p>
-                </div>
-
-                <div class="project">
-                    <h3>Architecture &amp; Modernization</h3>
-                    <p>
-                        Turning manual processes, legacy systems, and loosely connected tools into explicit,
-                        maintainable software systems with clear interfaces, evidence, and operating boundaries.
-                    </p>
-                </div>
-
                 <h2>Selected Work</h2>
 
                 <div class="project">
@@ -91,11 +57,6 @@
                         in an isolated Git worktree, deterministic checks validate the change, a different model family
                         reviews the diff, and Ratchetloop leaves a branch plus an evidence-rich run record for a human
                         merge decision.
-                    </p>
-                    <p>
-                        The public implementation supports resumable runs, scoped commits, process cleanup, usage and
-                        velocity accounting, idea-to-plan-to-code execution, and validated Grok, Codex, and Claude
-                        providers. It intentionally does not merge, push, or deploy the target repository.
                     </p>
                     <div class="tags">
                         <span class="tag">Python</span><span class="tag">AI Agents</span>
@@ -147,13 +108,9 @@
                         The largest system I have built independently: a research platform that separates search from
                         proof. It combines a parallel experiment engine with tiered evaluation, walk-forward holdout,
                         randomized controls, null distributions, multiple-trial correction, blocking promotion gates,
-                        and hash-stamped provenance.
-                    </p>
-                    <p>
-                        A 679,140-point parameter space converged in under three minutes against an
-                        ~88-hour exhaustive-grid extrapolation. Systematic trading is the
-                        current workload; the engineering problem is general computational research and trustworthy
-                        evaluation at scale.
+                        and hash-stamped provenance. A 679,140-point parameter space converged in under three minutes
+                        against an ~88-hour exhaustive-grid extrapolation. The same engine applies to any workload
+                        where results must survive review.
                     </p>
                     <div class="tags">
                         <span class="tag">Python</span><span class="tag">C# / .NET</span><span class="tag">Docker</span>
@@ -168,40 +125,8 @@
                 </div>
 
                 <div class="project">
-                    <h2><a class="contact-link" href="asset-factory.html">Asset Factory - Generative AI Production &amp;
-                            Publishing</a></h2>
-                    <p><strong>In plain terms:</strong> it turns AI image and audio generation into a repeatable workflow that produces finished, sellable products, with a person approving the output.</p>
-                    <p>
-                        A local-first multimodal production platform that turns model inference into a controlled
-                        product workflow: persistent GPU model serving, image and audio generation, multi-signal
-                        quality scoring, evolutionary optimization, human curation, packaging, metadata generation,
-                        and marketplace publishing.
-                    </p>
-                    <p>
-                        The operator dashboard spans Discover, Scores, Generate, Review, Publish, and a Custom Art
-                        Studio. Content is organized by theme and style, each with its own product types and pricing profile. Assets Forge is one public-facing brand powered by the private platform.
-                    </p>
-                    <div class="tags">
-                        <span class="tag">Python</span><span class="tag">LangGraph</span>
-                        <span class="tag">FastAPI</span><span class="tag">HTMX</span>
-                        <span class="tag">PostgreSQL</span><span class="tag">FLUX</span>
-                        <span class="tag">GPU Orchestration</span><span class="tag">Aesthetic Scoring</span>
-                    </div>
-                    <p class="repo-note">
-                        <a class="contact-link" href="asset-factory.html">Read the case study</a> ·
-                        <a class="contact-link" href="https://assetsforge.net" target="_blank"
-                            rel="noopener noreferrer">Assets Forge</a>
-                    </p>
-                </div>
-
-                <div class="project">
                     <h2><a class="contact-link" href="meetup-finder.html">Meetup Finder - AI-Native Product Delivery</a></h2>
                     <p><strong>In plain terms:</strong> a group enters where everyone is, and the app suggests a fair place to meet, with no sign-up.</p>
-                    <p>
-                        A deployed mobile web product built as a compact demonstration of architecture-first,
-                        AI-assisted delivery: product and privacy boundaries first, independent model review of the
-                        design, agent-assisted implementation, automated tests, real-device validation, and deployment.
-                    </p>
                     <p>
                         The design starts from three privacy boundaries: no accounts, no app install, and no location
                         tracking. It computes the meeting point itself rather than calling paid map services. Those
