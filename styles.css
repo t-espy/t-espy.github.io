@@ -591,3 +591,50 @@ table th {
     aspect-ratio: 4 / 3;
     object-fit: cover;
 }
+
+/* Work page: scannable summary and section navigation */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+h2[id],
+.page-summary {
+    scroll-margin-top: 1rem;
+}
+
+.page-summary {
+    margin: 1.5rem 0 2.5rem;
+    padding: 1rem 1.25rem 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.page-summary h2 {
+    margin-top: 0;
+    border-bottom: none;
+}
+
+.page-summary ul {
+    padding-left: 1.2rem;
+}
+
+.page-summary li {
+    margin-bottom: 0.6rem;
+}
+
+.page-summary li > a {
+    font-weight: 600;
+}
+
+.back-to-top {
+    text-align: right;
+    font-size: 0.9rem;
+    margin: -1rem 0 1rem;
+}
