@@ -20,7 +20,8 @@ const SITE_NAV_LINKS = [
     label: "Field Notes",
     current: (file) =>
       ["writing.html", "when-code-becomes-abundant.html", "autonomous-improvement-rate.html",
-       "autonomous-improvement-rate-technical.html", "qwen38-dgx-spark.html"].includes(file),
+       "autonomous-improvement-rate-technical.html", "qwen38-dgx-spark.html",
+       "ipad-voice-development.html"].includes(file),
   },
   {
     href: "/technical-credentials.html",
